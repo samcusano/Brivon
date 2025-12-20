@@ -5,15 +5,25 @@ import { cn } from '@/lib/utils';
 import { Plus, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export function AssistantHub({ onStartChat }: { onStartChat: () => void }) {
-  const { activeSourceIds, sources, setSourcePanelOpen } = useStore();
+export function AssistantHub({ onStartChat }: { onStartChat: (query: string) => void }) {
+  const { activeSourceIds, sources, setSourcePanelOpen, createConversation, addMessage } = useStore();
   const [input, setInput] = React.useState('');
 
   const activeSources = sources.filter(s => activeSourceIds.includes(s.id));
 
   const handleSubmit = () => {
     if (input.trim()) {
-      onStartChat();
+      // Create new conversation
+      const conversationId = createConversation(input.slice(0, 50), activeSourceIds);
+      
+      // Add user message
+      addMessage({
+        role: 'user',
+        content: input,
+      });
+      
+      // Trigger system message and navigate
+      onStartChat(input);
     }
   };
 

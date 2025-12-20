@@ -27,6 +27,14 @@ export interface Message {
   timestamp: number;
 }
 
+export interface Conversation {
+  id: string;
+  title: string;
+  messages: Message[];
+  createdAt: number;
+  sourceIds: string[];
+}
+
 export interface QueueItem {
   id: string;
   question: string;
@@ -39,6 +47,12 @@ interface AppState {
   // Chat
   messages: Message[];
   addMessage: (message: Omit<Message, 'id' | 'timestamp'>) => void;
+  
+  // Conversations
+  conversations: Conversation[];
+  currentConversationId: string | null;
+  setCurrentConversation: (id: string) => void;
+  createConversation: (title: string, sourceIds: string[]) => string;
   
   // Sources
   sources: Source[];
@@ -73,9 +87,41 @@ export const useStore = create<AppState>((set, get) => ({
       timestamp: Date.now(),
     }
   ],
-  addMessage: (msg) => set((state) => ({
-    messages: [...state.messages, { ...msg, id: Math.random().toString(36).slice(2), timestamp: Date.now() }]
-  })),
+  addMessage: (msg) => set((state) => {
+    const newMessage = { ...msg, id: Math.random().toString(36).slice(2), timestamp: Date.now() };
+    const updatedMessages = [...state.messages, newMessage];
+    
+    // Also update current conversation if exists
+    if (state.currentConversationId) {
+      const updatedConversations = state.conversations.map(conv => 
+        conv.id === state.currentConversationId 
+          ? { ...conv, messages: updatedMessages }
+          : conv
+      );
+      return { messages: updatedMessages, conversations: updatedConversations };
+    }
+    return { messages: updatedMessages };
+  }),
+
+  conversations: [],
+  currentConversationId: null,
+  setCurrentConversation: (id) => set({ currentConversationId: id }),
+  createConversation: (title, sourceIds) => {
+    const conversationId = Math.random().toString(36).slice(2);
+    const newConversation: Conversation = {
+      id: conversationId,
+      title,
+      messages: [],
+      createdAt: Date.now(),
+      sourceIds,
+    };
+    set((state) => ({
+      conversations: [...state.conversations, newConversation],
+      currentConversationId: conversationId,
+      messages: []
+    }));
+    return conversationId;
+  },
 
   sources: [
     { id: 's1', type: 'document', name: 'Q3-Financial-Report.pdf', status: 'connected', lastUsed: '2 mins ago' },

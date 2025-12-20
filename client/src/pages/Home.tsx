@@ -47,11 +47,16 @@ function SidebarNav({ active, setActive }: { active: string, setActive: (id: str
 }
 
 export default function Home() {
-  const { messages, sources, systemMessageVisible, setSystemMessageVisible, addMessage } = useStore();
+  const { messages, sources, systemMessageVisible, setSystemMessageVisible, addMessage, currentConversationId, conversations } = useStore();
   const [activeTab, setActiveTab] = React.useState('assistant');
   const [showExtractor, setShowExtractor] = React.useState(false);
   const [showChat, setShowChat] = React.useState(false);
   const bottomRef = React.useRef<HTMLDivElement>(null);
+  
+  // Get current conversation messages if in a conversation
+  const displayMessages = currentConversationId 
+    ? conversations.find(c => c.id === currentConversationId)?.messages || []
+    : messages;
 
   // Trigger extractor when a new document is added (simulated)
   const prevSourcesCount = React.useRef(sources.length);
@@ -68,7 +73,7 @@ export default function Home() {
 
   React.useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [displayMessages]);
 
   // Simulate system message completion
   React.useEffect(() => {
@@ -80,8 +85,22 @@ export default function Home() {
     }
   }, [systemMessageVisible, setSystemMessageVisible]);
 
-  const handleStartChat = () => {
+  const handleStartChat = (query: string) => {
+    // Add system message to show processing steps
+    setSystemMessageVisible(true);
     setShowChat(true);
+    
+    // Simulate assistant response after a delay
+    setTimeout(() => {
+      addMessage({
+        role: 'assistant',
+        content: `Based on your query about "${query}", I've analyzed the available sources and found relevant information. Here are the strongest pieces of evidence from your sources [1][2].`,
+        citations: [
+          { id: 'c1', sourceId: 's1', excerpt: 'Relevant information from Financial Report...', page: 1 },
+          { id: 'c2', sourceId: 's2', excerpt: 'Supporting data from Salesforce CRM...', page: undefined }
+        ]
+      });
+    }, 3000);
   };
 
   return (
@@ -91,14 +110,14 @@ export default function Home() {
     >
       {activeTab === 'assistant' && (
         <div className="flex flex-col min-h-full w-full">
-          {!showChat && messages.length === 1 ? (
+          {!showChat && !currentConversationId ? (
             <AssistantHub onStartChat={handleStartChat} />
           ) : (
             <>
               <div className="flex-1 p-4 md:p-8 space-y-6 overflow-y-auto">
                  <div className="h-4 md:h-12 max-w-5xl mx-auto w-full" />
                  <div className="max-w-5xl mx-auto w-full space-y-6">
-                   {messages.map((msg) => (
+                   {displayMessages.map((msg) => (
                      <ChatMessage key={msg.id} message={msg} />
                    ))}
                  </div>

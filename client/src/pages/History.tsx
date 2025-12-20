@@ -3,17 +3,34 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { QuestionQueue } from '@/components/bulk/QuestionQueue';
-import { Clock, MessageSquare, ListTodo } from 'lucide-react';
+import { Clock, MessageSquare, ListTodo, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useStore } from '@/hooks/useStore';
 
 export default function History() {
   const [activeTab, setActiveTab] = React.useState('conversations');
+  const { conversations, setCurrentConversation } = useStore();
 
-  const mockConversations = [
-    { id: '1', title: 'Project Alpha Analysis', date: 'Today at 2:45 PM', preview: 'What is the total revenue for Q3 2024?' },
-    { id: '2', title: 'Q3 Financial Review', date: 'Yesterday at 10:30 AM', preview: 'Identify any legal risks mentioned...' },
-    { id: '3', title: 'Competitor Research', date: '2 days ago', preview: 'List all competitors mentioned in the strategy...' },
-  ];
+  const formatDate = (timestamp: number) => {
+    const now = new Date();
+    const date = new Date(timestamp);
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    return date.toLocaleDateString();
+  };
+
+  const handleSelectConversation = (id: string) => {
+    setCurrentConversation(id);
+    // Navigate back to assistant tab
+    window.location.hash = '#assistant';
+  };
 
   return (
     <div className="flex flex-col min-h-full max-w-5xl mx-auto w-full p-4 md:p-8">
@@ -40,24 +57,39 @@ export default function History() {
         <TabsContent value="conversations" className="mt-0 flex-1">
           <ScrollArea className="h-full -mx-8 px-8">
             <div className="space-y-3 pb-8">
-              {mockConversations.map((conv, idx) => (
-                <motion.div
-                  key={conv.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="p-4 rounded-lg border border-border/50 bg-card hover:bg-secondary/30 cursor-pointer transition-colors"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-medium text-foreground">{conv.title}</h3>
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {conv.date}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">{conv.preview}</p>
-                </motion.div>
-              ))}
+              {conversations.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <MessageSquare className="w-8 h-8 text-muted-foreground/40 mb-3" />
+                  <p className="text-sm text-muted-foreground">No conversations yet</p>
+                  <p className="text-xs text-muted-foreground/60">Start a new conversation in the Assistant tab</p>
+                </div>
+              ) : (
+                conversations.map((conv, idx) => {
+                  const preview = conv.messages.find(m => m.role === 'user')?.content.slice(0, 60) || 'Empty conversation';
+                  return (
+                    <motion.button
+                      key={conv.id}
+                      onClick={() => handleSelectConversation(conv.id)}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 }}
+                      className="w-full p-4 rounded-lg border border-border/50 bg-card hover:bg-secondary/30 cursor-pointer transition-colors text-left group"
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <h3 className="font-medium text-foreground group-hover:text-primary">{conv.title}</h3>
+                        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {formatDate(conv.createdAt)}
+                          </span>
+                          <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground">{preview}...</p>
+                    </motion.button>
+                  );
+                })
+              )}
             </div>
           </ScrollArea>
         </TabsContent>
