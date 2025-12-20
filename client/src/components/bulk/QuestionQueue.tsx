@@ -76,16 +76,6 @@ export function QuestionQueue() {
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-        <motion.div 
-          className="h-full bg-primary"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5 }}
-        />
-      </div>
-
       {/* Filters */}
       <div className="flex items-center gap-2 border-b border-border/50 pb-4">
         <Button 
