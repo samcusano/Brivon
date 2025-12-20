@@ -49,8 +49,8 @@ export function ChatMessage({ message }: { message: Message }) {
         )}
       >
         <div className={cn(
-           "text-base leading-relaxed font-sans",
-           isUser ? "text-foreground text-sm" : "text-foreground/90"
+           "text-sm leading-relaxed font-sans",
+           isUser ? "text-foreground" : "text-foreground/90"
         )}>
            {renderContent(message.content)}
         </div>
