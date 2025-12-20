@@ -74,9 +74,9 @@ export function AssistantHub({ onStartChat }: { onStartChat: (query: string) => 
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-4"
+          className="mb-8"
         >
-          <h1 className="text-4xl font-heading font-semibold text-foreground mb-2">Ask Zania</h1>
+          <h1 className="text-3xl font-heading font-semibold text-foreground mb-2">Ask Zania</h1>
           <p className="text-muted-foreground">Quickly search, analyze, or understand materials.</p>
         </motion.div>
 
