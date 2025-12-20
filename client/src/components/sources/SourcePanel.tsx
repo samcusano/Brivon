@@ -4,24 +4,14 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
-  X, Upload, Globe, Database, Cpu, FileText,
-  ChevronRight, ArrowRight, Dot
+  X, Upload, Globe, Plus,
+  Check
 } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { motion } from 'framer-motion';
 
 export function SourcePanel() {
   const { isSourcePanelOpen, setSourcePanelOpen, sources, activeSourceIds, toggleSource, addSource } = useStore();
-  
-  // Mock sources for display
-  const displaySources = [
-    { id: 'lex', name: 'LexisNexis', icon: FileText, color: 'bg-red-500' },
-    { id: 'web', name: 'Web search', icon: Globe },
-    { id: 'edgar', name: 'EDGAR', icon: Database },
-    { id: 'aus', name: 'Australia', icon: FileText },
-    { id: 'aut', name: 'Austria', icon: FileText },
-    { id: 'bel', name: 'Belgium', icon: FileText },
-  ];
 
   const onDrop = React.useCallback((acceptedFiles: File[]) => {
     acceptedFiles.forEach(file => {
@@ -75,30 +65,20 @@ export function SourcePanel() {
               </div>
             </button>
 
-            {/* Add from iManage */}
+            {/* Add from Integration */}
             <button className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-transparent">
               <div className="flex items-center gap-3">
-                <div className="w-4 h-4 rounded-full bg-primary/80" />
-                <span className="text-sm font-medium">Add from iManage</span>
+                <div className="w-4 h-4 rounded-full bg-blue-500" />
+                <span className="text-sm font-medium">Add from integration</span>
               </div>
             </button>
 
             {/* Add from Vault Project */}
-            <button className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-transparent flex items-center justify-between">
+            <button className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-transparent">
               <div className="flex items-center gap-3">
-                <FileText className="w-4 h-4 text-muted-foreground" />
+                <Upload className="w-4 h-4 text-muted-foreground" />
                 <span className="text-sm font-medium">Add from Vault project</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </button>
-
-            {/* Add from Knowledge Base */}
-            <button className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-transparent flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Database className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Add from Knowledge base</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </button>
           </div>
 
@@ -109,23 +89,19 @@ export function SourcePanel() {
           <div className="space-y-2">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1">Sources</p>
             
-            {displaySources.map((source, idx) => (
-              <motion.button
-                key={source.id}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.03 }}
-                onClick={() => {}}
-                className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-transparent flex items-center gap-3"
-              >
-                {source.color ? (
-                  <div className={cn("w-2 h-2 rounded-full", source.color)} />
-                ) : (
-                  <source.icon className="w-4 h-4 text-muted-foreground" />
-                )}
-                <span className="text-sm font-medium">{source.name}</span>
-              </motion.button>
-            ))}
+            {/* Web Search Source */}
+            <motion.button
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-transparent flex items-center gap-3"
+            >
+              {activeSourceIds.includes('web-search') ? (
+                <Check className="w-4 h-4 text-green-500 font-bold" />
+              ) : (
+                <Globe className="w-4 h-4 text-muted-foreground" />
+              )}
+              <span className="text-sm font-medium">Web search</span>
+            </motion.button>
           </div>
 
           {/* Uploaded Documents */}
@@ -141,12 +117,11 @@ export function SourcePanel() {
                     onClick={() => toggleSource(source.id)}
                     className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-transparent flex items-center gap-3"
                   >
-                    <input
-                      type="checkbox"
-                      checked={activeSourceIds.includes(source.id)}
-                      onChange={() => {}}
-                      className="w-4 h-4"
-                    />
+                    {activeSourceIds.includes(source.id) ? (
+                      <Check className="w-4 h-4 text-green-500 font-bold" />
+                    ) : (
+                      <div className="w-4 h-4 rounded border border-muted-foreground/30" />
+                    )}
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium truncate">{source.name}</p>
                     </div>
@@ -155,6 +130,14 @@ export function SourcePanel() {
               </div>
             </>
           )}
+
+          {/* Add Sources CTA */}
+          <div className="mt-auto pt-4">
+            <button className="w-full p-3 rounded-lg text-left hover:bg-secondary/50 transition-colors border border-border/50 flex items-center justify-center gap-2">
+              <Plus className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">Add sources</span>
+            </button>
+          </div>
         </div>
       </ScrollArea>
     </motion.div>
