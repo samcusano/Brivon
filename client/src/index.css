@@ -57,39 +57,41 @@
 }
 
 :root {
-  /* Soft beige (#F5EFE6) - Base Background */
-  --background: 38 46% 93%;
-  /* Dark text (#31263B) - Text */
-  --foreground: 271 22% 19%;
+  /* Warm Ivory (#F6F3EE) - Base Background */
+  --background: 25 77% 96%;
+  /* Charcoal Brown (#2F2A26) - Primary Text */
+  --foreground: 20 10% 18%;
 
-  /* White for cards to pop against beige */
-  --card: 0 0% 100%;
-  --card-foreground: 271 22% 19%;
+  /* Light Sand (#EFE9E2) - Cards and surfaces */
+  --card: 28 58% 94%;
+  --card-foreground: 20 10% 18%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 271 22% 19%;
+  --popover: 28 58% 94%;
+  --popover-foreground: 20 10% 18%;
 
-  /* Warm caramel (#D8BFA4) - Primary Accent */
-  --primary: 31 39% 74%;
-  --primary-foreground: 271 22% 10%;
+  /* Soft Sage (#B7C3B0) - Accent */
+  --primary: 91 18% 69%;
+  --primary-foreground: 20 10% 18%;
 
-  /* Soft Highlight (#31263b17) - Muted/Secondary */
-  --secondary: 271 22% 96%; /* Very light purple/gray for secondary areas */
-  --secondary-foreground: 271 22% 19%;
+  /* Very light sage for secondary areas */
+  --secondary: 91 20% 92%;
+  --secondary-foreground: 20 10% 18%;
 
-  --muted: 38 20% 88%;
-  --muted-foreground: 271 10% 40%;
+  /* Light Sand tint for muted areas */
+  --muted: 28 58% 92%;
+  --muted-foreground: 24 12% 57%;
 
-  /* Muted terracotta (#C29984) - Accent */
-  --accent: 20 35% 64%;
-  --accent-foreground: 0 0% 100%;
+  /* Soft Sage (#B7C3B0) - Accent */
+  --accent: 91 18% 69%;
+  --accent-foreground: 20 10% 18%;
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 38 20% 85%;
-  --input: 38 20% 85%;
-  --ring: 31 39% 74%;
+  /* Soft Taupe (#D6CEC5) - Borders */
+  --border: 26 30% 83%;
+  --input: 26 30% 83%;
+  --ring: 91 18% 69%;
 
   --radius: 0.75rem;
 
@@ -99,54 +101,54 @@
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
   
-  --sidebar: 38 46% 93%;
-  --sidebar-foreground: 271 22% 19%;
-  --sidebar-primary: 31 39% 74%;
-  --sidebar-primary-foreground: 271 22% 10%;
-  --sidebar-accent: 38 20% 88%;
-  --sidebar-accent-foreground: 271 22% 19%;
-  --sidebar-border: 38 20% 85%;
-  --sidebar-ring: 31 39% 74%;
+  --sidebar: 25 77% 96%;
+  --sidebar-foreground: 20 10% 18%;
+  --sidebar-primary: 91 18% 69%;
+  --sidebar-primary-foreground: 20 10% 18%;
+  --sidebar-accent: 28 58% 94%;
+  --sidebar-accent-foreground: 20 10% 18%;
+  --sidebar-border: 26 30% 83%;
+  --sidebar-ring: 91 18% 69%;
 }
 
 .dark {
-  /* Inverted palette for dark mode - keeping warm undertones */
-  --background: 271 20% 10%;
-  --foreground: 38 30% 90%;
+  /* Dark mode with sage accents */
+  --background: 25 15% 15%;
+  --foreground: 25 20% 90%;
 
-  --card: 271 20% 14%;
-  --card-foreground: 38 30% 90%;
+  --card: 25 20% 22%;
+  --card-foreground: 25 20% 90%;
 
-  --popover: 271 20% 14%;
-  --popover-foreground: 38 30% 90%;
+  --popover: 25 20% 22%;
+  --popover-foreground: 25 20% 90%;
 
-  --primary: 31 39% 60%;
-  --primary-foreground: 271 20% 10%;
+  --primary: 91 18% 55%;
+  --primary-foreground: 25 15% 15%;
 
-  --secondary: 271 20% 18%;
-  --secondary-foreground: 38 30% 90%;
+  --secondary: 25 20% 28%;
+  --secondary-foreground: 25 20% 90%;
 
-  --muted: 271 20% 18%;
-  --muted-foreground: 271 10% 60%;
+  --muted: 25 20% 28%;
+  --muted-foreground: 25 15% 55%;
 
-  --accent: 20 35% 50%;
-  --accent-foreground: 0 0% 100%;
+  --accent: 91 18% 55%;
+  --accent-foreground: 25 15% 15%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 271 20% 20%;
-  --input: 271 20% 20%;
-  --ring: 31 39% 60%;
+  --border: 25 20% 30%;
+  --input: 25 20% 30%;
+  --ring: 91 18% 55%;
   
-  --sidebar: 271 20% 10%;
-  --sidebar-foreground: 38 30% 90%;
-  --sidebar-primary: 31 39% 60%;
-  --sidebar-primary-foreground: 271 20% 10%;
-  --sidebar-accent: 271 20% 18%;
-  --sidebar-accent-foreground: 38 30% 90%;
-  --sidebar-border: 271 20% 20%;
-  --sidebar-ring: 31 39% 60%;
+  --sidebar: 25 15% 15%;
+  --sidebar-foreground: 25 20% 90%;
+  --sidebar-primary: 91 18% 55%;
+  --sidebar-primary-foreground: 25 15% 15%;
+  --sidebar-accent: 25 20% 28%;
+  --sidebar-accent-foreground: 25 20% 90%;
+  --sidebar-border: 25 20% 30%;
+  --sidebar-ring: 91 18% 55%;
 }
 
 @layer base {
