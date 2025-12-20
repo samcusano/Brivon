@@ -65,7 +65,7 @@ export function SystemMessage({ isCollapsed }: { isCollapsed: boolean }) {
                         animate={{ scale: 1 }}
                         className="flex-shrink-0"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <CheckCircle2 className="w-4 h-4 text-foreground" />
                       </motion.div>
                     ) : (
                       <div className="flex-shrink-0">

@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 import { AddSourceDialog } from './AddSourceDialog';
 
 export function SourcePanel() {
-  const { isSourcePanelOpen, setSourcePanelOpen, sources, activeSourceIds, toggleSource, addSource } = useStore();
+  const { isSourcePanelOpen, setSourcePanelOpen, sources, activeSourceIds, toggleSource, addSource, removeSource } = useStore();
   const [showAddDialog, setShowAddDialog] = React.useState(false);
 
   const onDrop = React.useCallback((acceptedFiles: File[]) => {
@@ -114,20 +114,28 @@ export function SourcePanel() {
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1">Uploaded</p>
                 
                 {sources.filter(s => s.type === 'document').map((source) => (
-                  <button
+                  <div
                     key={source.id}
-                    onClick={() => toggleSource(source.id)}
-                    className="w-full p-2 rounded text-left hover:bg-secondary/50 transition-colors text-sm flex items-center gap-2"
+                    className="w-full p-2 rounded text-left hover:bg-secondary/50 transition-colors text-sm flex items-center gap-2 group"
                   >
-                    {activeSourceIds.includes(source.id) ? (
-                      <Check className="w-3.5 h-3.5 text-accent font-bold" />
-                    ) : (
-                      <div className="w-3.5 h-3.5 rounded border border-muted-foreground/30" />
-                    )}
-                    <div className="flex-1 min-w-0">
+                    <button
+                      onClick={() => toggleSource(source.id)}
+                      className="flex items-center gap-2 flex-1 min-w-0"
+                    >
+                      {activeSourceIds.includes(source.id) ? (
+                        <Check className="w-3.5 h-3.5 text-foreground font-bold flex-shrink-0" />
+                      ) : (
+                        <div className="w-3.5 h-3.5 rounded border border-muted-foreground/30 flex-shrink-0" />
+                      )}
                       <p className="font-medium truncate">{source.name}</p>
-                    </div>
-                  </button>
+                    </button>
+                    <button
+                      onClick={() => removeSource(source.id)}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-auto"
+                    >
+                      <X className="w-3.5 h-3.5 text-muted-foreground hover:text-foreground" />
+                    </button>
+                  </div>
                 ))}
               </div>
             </>
