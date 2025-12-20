@@ -1,0 +1,147 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "sans-serif",
+      "count": 97
+    },
+    {
+      "family": "ui-sans-serif",
+      "count": 52
+    },
+    {
+      "family": "system-ui",
+      "count": 52
+    },
+    {
+      "family": "Apple Color Emoji",
+      "count": 52
+    },
+    {
+      "family": "Segoe UI Emoji",
+      "count": 52
+    },
+    {
+      "family": "Segoe UI Symbol",
+      "count": 52
+    },
+    {
+      "family": "Noto Color Emoji",
+      "count": 52
+    },
+    {
+      "family": "Cinetype",
+      "count": 50
+    },
+    {
+      "family": "Cinetype Mono",
+      "count": 18
+    },
+    {
+      "family": "ui-monospace",
+      "count": 18
+    }
+  ],
+  "colors": {
+    "primary": "#717A94",
+    "accent": "#43394C",
+    "background": "#FFFCFC",
+    "textPrimary": "#43394C",
+    "link": "#43394C"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Cinetype",
+      "heading": "PP Formula SemiExtended"
+    },
+    "fontStacks": {
+      "body": [
+        "Cinetype",
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji",
+        "sans-serif"
+      ],
+      "heading": [
+        "PP Formula SemiExtended",
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji"
+      ],
+      "paragraph": [
+        "Cinetype",
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "60px",
+      "h2": "16px",
+      "body": "24px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "3px"
+  },
+  "components": {
+    "input": {
+      "background": "transparent",
+      "textColor": "#01011B",
+      "borderColor": null,
+      "borderRadius": "7px",
+      "borderRadiusCorners": {
+        "topLeft": "7px",
+        "topRight": "7px",
+        "bottomRight": "7px",
+        "bottomLeft": "7px"
+      },
+      "shadow": "rgb(255, 255, 255) 0px 0px 0px 1px inset"
+    }
+  },
+  "images": {
+    "logo": "File saved at: attached_assets/logo.svg",
+    "favicon": "File saved at: attached_assets/favicon.png",
+    "ogImage": "File saved at: attached_assets/ogImage.png"
+  },
+  "__framework_hints": [
+    "Gatsby 5.13.7"
+  ],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Strong indicators: header logo linking to homepage, header location, visible, highest logo on page, reasonable size, SVG format. Score: 105 (clear winner by 46 points)",
+    "confidence": 0.9
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": -1,
+      "text": "N/A",
+      "reasoning": "LLM failed"
+    },
+    "secondary": {
+      "index": -1,
+      "text": "N/A",
+      "reasoning": "LLM failed"
+    },
+    "confidence": 0
+  },
+  "confidence": {
+    "buttons": 0,
+    "colors": 0,
+    "overall": 0
+  }
+}
