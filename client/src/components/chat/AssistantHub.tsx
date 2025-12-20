@@ -2,7 +2,7 @@ import React from 'react';
 import { useStore } from '@/hooks/useStore';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Plus, ArrowRight, Wand2, Sparkles, Search, MessageCircle } from 'lucide-react';
+import { Plus, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function AssistantHub({ onStartChat }: { onStartChat: () => void }) {
@@ -26,10 +26,6 @@ export function AssistantHub({ onStartChat }: { onStartChat: () => void }) {
 
   const actions = [
     { label: 'Files and sources', icon: Plus, onClick: () => setSourcePanelOpen(true) },
-    { label: 'Prompts', icon: ArrowRight },
-    { label: 'Customize', icon: Wand2 },
-    { label: 'Improve', icon: Sparkles },
-    { label: 'Deep research', icon: Search },
   ];
 
   return (
