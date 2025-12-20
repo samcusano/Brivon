@@ -17,6 +17,7 @@ export interface Citation {
   sourceId: string;
   excerpt: string;
   page?: number;
+  confidence?: 'high' | 'mixed' | 'limited';
 }
 
 export interface Message {

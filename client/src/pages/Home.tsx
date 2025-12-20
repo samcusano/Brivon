@@ -96,8 +96,8 @@ export default function Home() {
         role: 'assistant',
         content: `Based on your query about "${query}", I've analyzed the available sources and found relevant information. Here are the strongest pieces of evidence from your sources [1][2].`,
         citations: [
-          { id: 'c1', sourceId: 's1', excerpt: 'Relevant information from Financial Report...', page: 1 },
-          { id: 'c2', sourceId: 's2', excerpt: 'Supporting data from Salesforce CRM...', page: undefined }
+          { id: 'c1', sourceId: 's1', excerpt: 'Q3 2024 showed 15% revenue growth compared to previous quarter, driven by expanded market reach...', page: 1, confidence: 'high' },
+          { id: 'c2', sourceId: 's2', excerpt: 'Key operational metrics indicate strong performance across all regions with notable improvements...', page: undefined, confidence: 'mixed' }
         ]
       });
     }, 3000);

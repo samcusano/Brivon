@@ -41,9 +41,46 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col relative min-w-0 bg-background/50">
+      <main className="flex-1 flex flex-col relative min-w-0 bg-background overflow-hidden">
+        {/* Background Layers */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Paper Texture Layer */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.02]" preserveAspectRatio="none">
+            <defs>
+              <filter id="noise">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
+              </filter>
+            </defs>
+            <rect width="100%" height="100%" fill="#666" filter="url(#noise)" />
+          </svg>
+          
+          {/* Grid Pattern Layer */}
+          <div 
+            className="absolute inset-0 opacity-[0.12]"
+            style={{
+              backgroundImage: `
+                linear-gradient(0deg, transparent 24%, rgba(208, 208, 208, 0.4) 25%, rgba(208, 208, 208, 0.4) 26%, transparent 27%, transparent 74%, rgba(208, 208, 208, 0.4) 75%, rgba(208, 208, 208, 0.4) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(208, 208, 208, 0.4) 25%, rgba(208, 208, 208, 0.4) 26%, transparent 27%, transparent 74%, rgba(208, 208, 208, 0.4) 75%, rgba(208, 208, 208, 0.4) 76%, transparent 77%, transparent)
+              `,
+              backgroundSize: '45px 45px'
+            }}
+          />
+          
+          {/* Point Grid Overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.25]"
+            style={{
+              backgroundImage: `radial-gradient(circle, rgba(160, 160, 160, 0.5) 0.5px, transparent 0.5px)`,
+              backgroundSize: '45px 45px'
+            }}
+          />
+          
+          {/* Subtle Radial Gradient */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.03)_100%)]" />
+        </div>
+
         {/* Mobile Header */}
-        <header className="h-16 flex md:hidden items-center px-4 border-b border-border bg-background z-10">
+        <header className="h-16 flex md:hidden items-center px-4 border-b border-border bg-background z-10 relative">
           <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}>
             <Menu className="h-5 w-5" />
           </Button>
@@ -56,9 +93,9 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
         </header>
 
         {/* Content Area */}
-        <div className="flex-1 overflow-y-auto relative scroll-smooth">
+        <div className="flex-1 overflow-y-auto relative scroll-smooth z-0">
            {/* Gradient Overlay for depth */}
-           <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-50" />
+           <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary/3 via-transparent to-transparent opacity-40" />
            {children}
         </div>
       </main>
