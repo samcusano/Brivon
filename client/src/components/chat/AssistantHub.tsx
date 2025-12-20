@@ -45,25 +45,6 @@ export function AssistantHub({ onStartChat }: { onStartChat: (query: string) => 
       className="flex flex-col items-center justify-center min-h-full w-full px-4 py-8"
     >
       <div className="w-full max-w-3xl space-y-8">
-        {/* Active Sources Pills */}
-        {activeSources.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-wrap gap-2"
-          >
-            {activeSources.map((source) => (
-              <div
-                key={source.id}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 border border-border/50 text-sm font-medium text-foreground"
-              >
-                <span className={cn("w-2 h-2 rounded-full", source.status === 'connected' ? "bg-green-500" : "bg-gray-400")} />
-                {source.name}
-              </div>
-            ))}
-          </motion.div>
-        )}
-
         {/* Main Input */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,13 +52,35 @@ export function AssistantHub({ onStartChat }: { onStartChat: (query: string) => 
           transition={{ delay: 0.1 }}
           className="space-y-6"
         >
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask Zania anything..."
-            className="w-full min-h-[120px] text-sm bg-muted/60 border border-border/30 rounded-xl p-6 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none font-sans text-foreground placeholder:text-sm placeholder:text-muted-foreground/50"
-          />
+          <div className="relative">
+            {/* Active Sources Pills - Top Left Corner */}
+            {activeSources.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute top-4 left-4 flex flex-wrap gap-2 pointer-events-none z-10"
+              >
+                {activeSources.map((source) => (
+                  <div
+                    key={source.id}
+                    className="flex items-center gap-2 px-2 py-1 rounded-full bg-secondary/70 border border-border/50 text-xs font-medium text-foreground"
+                  >
+                    <span className={cn("w-1.5 h-1.5 rounded-full", source.status === 'connected' ? "bg-green-500" : "bg-gray-400")} />
+                    {source.name}
+                  </div>
+                ))}
+              </motion.div>
+            )}
+            
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Ask Zania anything..."
+              className="w-full min-h-[120px] text-sm bg-muted/60 border border-border/30 rounded-xl p-6 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none font-sans text-foreground placeholder:text-sm placeholder:text-muted-foreground/50"
+              style={{ paddingTop: activeSources.length > 0 ? '50px' : '24px' }}
+            />
+          </div>
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-3 items-center">
