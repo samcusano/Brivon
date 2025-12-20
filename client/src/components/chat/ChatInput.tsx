@@ -2,11 +2,11 @@ import React from 'react';
 import { useStore } from '@/hooks/useStore';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { ArrowUp, Paperclip, Globe, Database, Cpu } from 'lucide-react';
+import { ArrowUp, Plus, Globe, Database, Cpu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function ChatInput() {
-  const { addMessage, activeSourceIds, sources } = useStore();
+  const { addMessage, activeSourceIds, sources, setSourcePanelOpen } = useStore();
   const [input, setInput] = React.useState('');
 
   const activeSourceCount = activeSourceIds.length;
@@ -87,8 +87,13 @@ export function ChatInput() {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                <Paperclip className="w-5 h-5" />
+             <Button 
+                variant="ghost" 
+                onClick={() => setSourcePanelOpen(true)}
+                className="text-muted-foreground hover:text-foreground hover:bg-secondary/30 gap-2 px-3"
+             >
+                <Plus className="w-5 h-5" />
+                <span className="text-sm hidden sm:inline">Files and sources</span>
              </Button>
              
              <Button 
