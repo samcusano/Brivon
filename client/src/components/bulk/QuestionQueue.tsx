@@ -50,32 +50,6 @@ export function QuestionQueue() {
 
   return (
     <div className="flex flex-col h-full max-w-5xl mx-auto w-full p-4 md:p-8 space-y-6">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-           <h2 className="text-2xl font-heading font-semibold">Question Queue</h2>
-           <p className="text-muted-foreground">Managing {stats.total} bulk questions from uploaded documents.</p>
-        </div>
-        
-        <div className="flex items-center gap-3">
-           <Button variant="outline" size="sm">
-             <Download className="w-4 h-4 mr-2" />
-             Export CSV
-           </Button>
-           {isProcessingQueue ? (
-             <Button variant="destructive" size="sm" onClick={stopQueueProcessing}>
-               <Pause className="w-4 h-4 mr-2" />
-               Pause Processing
-             </Button>
-           ) : (
-             <Button onClick={startQueueProcessing} disabled={stats.pending === 0} size="sm">
-               <Play className="w-4 h-4 mr-2" />
-               {stats.pending === 0 ? 'All Done' : 'Start Processing'}
-             </Button>
-           )}
-        </div>
-      </div>
-
       {/* Filters */}
       <div className="flex items-center gap-2 border-b border-border/50 pb-4">
         <Button 
