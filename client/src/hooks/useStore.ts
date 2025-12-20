@@ -91,7 +91,7 @@ export const useStore = create<AppState>((set, get) => ({
   addSource: (source) => set((state) => ({ sources: [...state.sources, source] })),
   removeSource: (id) => set((state) => ({ sources: state.sources.filter((s) => s.id !== id) })),
 
-  isSourcePanelOpen: true,
+  isSourcePanelOpen: false,
   setSourcePanelOpen: (open) => set({ isSourcePanelOpen: open }),
 
   queue: [],
