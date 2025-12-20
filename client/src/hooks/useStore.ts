@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type SourceType = 'document' | 'api' | 'memory' | 'web';
+export type SourceType = 'document' | 'api' | 'memory' | 'web' | 'url';
 
 export interface Source {
   id: string;
@@ -9,6 +9,7 @@ export interface Source {
   status: 'connected' | 'disconnected' | 'syncing';
   lastUsed?: string;
   details?: string;
+  url?: string;
 }
 
 export interface Citation {

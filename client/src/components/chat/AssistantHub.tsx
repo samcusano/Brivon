@@ -9,7 +9,7 @@ export function AssistantHub({ onStartChat }: { onStartChat: () => void }) {
   const { activeSourceIds, sources, setSourcePanelOpen } = useStore();
   const [input, setInput] = React.useState('');
 
-  const activeSources = sources.filter(s => activeSourceIds.includes(s.id)).slice(0, 2);
+  const activeSources = sources.filter(s => activeSourceIds.includes(s.id));
 
   const handleSubmit = () => {
     if (input.trim()) {
@@ -70,7 +70,7 @@ export function AssistantHub({ onStartChat }: { onStartChat: () => void }) {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask Zania anything..."
-            className="w-full min-h-[120px] text-2xl bg-secondary/30 border border-border/30 rounded-xl p-6 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none font-sans text-foreground placeholder:text-muted-foreground/50"
+            className="w-full min-h-[120px] text-2xl bg-muted/60 border border-border/30 rounded-xl p-6 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none font-sans text-foreground placeholder:text-sm placeholder:text-muted-foreground/50"
           />
 
           {/* Action Buttons */}

@@ -98,14 +98,15 @@ function CitationPill({ citation, index }: { citation: Citation, index: number }
   const source = sources.find(s => s.id === citation.sourceId);
   
   // Color coding based on source type
-  const typeColors = {
+  const typeColors: { [key: string]: string } = {
     document: "bg-blue-100 text-blue-800 hover:bg-blue-200 border-blue-200", // Soft Blue
     api: "bg-purple-100 text-purple-800 hover:bg-purple-200 border-purple-200", // Soft Purple
     web: "bg-green-100 text-green-800 hover:bg-green-200 border-green-200", // Soft Green
     memory: "bg-orange-100 text-orange-800 hover:bg-orange-200 border-orange-200", // Soft Orange
+    url: "bg-cyan-100 text-cyan-800 hover:bg-cyan-200 border-cyan-200", // Soft Cyan for URLs
   };
 
-  const colorClass = source ? typeColors[source.type] : "bg-gray-100 text-gray-800";
+  const colorClass = source ? (typeColors[source.type] || "bg-gray-100 text-gray-800") : "bg-gray-100 text-gray-800";
 
   return (
     <HoverCard>
@@ -139,6 +140,7 @@ function getSourceIcon(type: string) {
     case 'api': return <Database className="w-3 h-3" />;
     case 'web': return <Globe className="w-3 h-3" />;
     case 'memory': return <Cpu className="w-3 h-3" />;
+    case 'url': return <Globe className="w-3 h-3" />;
     default: return <FileText className="w-3 h-3" />;
   }
 }

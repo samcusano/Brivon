@@ -10,8 +10,9 @@ import { useStore } from '@/hooks/useStore';
 import Vault from '@/pages/Vault';
 import HistoryPage from '@/pages/History';
 import { Button } from '@/components/ui/button';
-import { Layers, BookOpen, History } from 'lucide-react';
+import { Layers, BookOpen } from 'lucide-react';
 import { AssistantIcon } from '@/components/icons/AssistantIcon';
+import { HistoryIcon } from '@/components/icons/HistoryIcon';
 import { cn } from '@/lib/utils';
 
 // Sidebar Navigation
@@ -20,7 +21,7 @@ function SidebarNav({ active, setActive }: { active: string, setActive: (id: str
     { id: 'assistant', label: 'Assistant', icon: AssistantIcon },
     { id: 'vault', label: 'Vault', icon: Layers },
     { id: 'library', label: 'Library', icon: BookOpen },
-    { id: 'history', label: 'History', icon: History },
+    { id: 'history', label: 'History', icon: HistoryIcon },
   ];
 
   return (

@@ -9,9 +9,11 @@ import {
 } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { motion } from 'framer-motion';
+import { AddSourceDialog } from './AddSourceDialog';
 
 export function SourcePanel() {
   const { isSourcePanelOpen, setSourcePanelOpen, sources, activeSourceIds, toggleSource, addSource } = useStore();
+  const [showAddDialog, setShowAddDialog] = React.useState(false);
 
   const onDrop = React.useCallback((acceptedFiles: File[]) => {
     acceptedFiles.forEach(file => {
@@ -66,7 +68,7 @@ export function SourcePanel() {
             </button>
 
             {/* Add Source */}
-            <button className="w-full p-2 rounded text-left hover:bg-secondary/50 transition-colors text-sm">
+            <button onClick={() => setShowAddDialog(true)} className="w-full p-2 rounded text-left hover:bg-secondary/50 transition-colors text-sm">
               <div className="flex items-center gap-2">
                 <Plus className="w-3.5 h-3.5 text-muted-foreground" />
                 <span className="font-medium">Add source</span>
@@ -132,6 +134,8 @@ export function SourcePanel() {
           )}
         </div>
       </ScrollArea>
+
+      <AddSourceDialog open={showAddDialog} onOpenChange={setShowAddDialog} />
     </motion.div>
   );
 }
