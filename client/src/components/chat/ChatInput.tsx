@@ -6,7 +6,7 @@ import { ArrowUp, Plus, Globe, Database, Cpu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function ChatInput() {
-  const { addMessage, activeSourceIds, sources, setSourcePanelOpen } = useStore();
+  const { addMessage, activeSourceIds, sources, setSourcePanelOpen, setSystemMessageVisible } = useStore();
   const [input, setInput] = React.useState('');
 
   const activeSourceCount = activeSourceIds.length;
@@ -22,6 +22,9 @@ export function ChatInput() {
       content: input,
     });
 
+    // Show system message
+    setSystemMessageVisible(true);
+
     // Simulate response after delay
     setTimeout(() => {
       addMessage({
@@ -33,7 +36,7 @@ export function ChatInput() {
           { id: 'c3', sourceId: 's3', excerpt: 'Competitor X launched a new enterprise tier at 20% lower cost.' },
         ]
       });
-    }, 1500);
+    }, 5200);
 
     setInput('');
   };

@@ -11,6 +11,7 @@ import {
 
 export function ChatMessage({ message }: { message: Message }) {
   const isUser = message.role === 'user';
+  const isSystem = message.role === 'system';
   const { sources } = useStore();
 
   // Helper to render content with citations
@@ -47,12 +48,14 @@ export function ChatMessage({ message }: { message: Message }) {
         isUser ? "flex-row-reverse" : "flex-row"
       )}
     >
-      <div className={cn(
-        "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-sm",
-        isUser ? "bg-foreground text-background" : "bg-primary/20 text-primary-foreground"
-      )}>
-        {isUser ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
-      </div>
+      {!isSystem && (
+        <div className={cn(
+          "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-sm",
+          isUser ? "bg-foreground text-background" : "bg-primary/20 text-primary-foreground"
+        )}>
+          {isUser ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
+        </div>
+      )}
 
       <div className={cn(
         "flex-1 max-w-[85%]",

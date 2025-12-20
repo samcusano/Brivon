@@ -20,7 +20,7 @@ export interface Citation {
 
 export interface Message {
   id: string;
-  role: 'user' | 'assistant';
+  role: 'user' | 'assistant' | 'system';
   content: string;
   citations?: Citation[];
   timestamp: number;
@@ -57,6 +57,10 @@ interface AppState {
   isProcessingQueue: boolean;
   startQueueProcessing: () => void;
   stopQueueProcessing: () => void;
+  
+  // System State
+  systemMessageVisible: boolean;
+  setSystemMessageVisible: (visible: boolean) => void;
 }
 
 export const useStore = create<AppState>((set, get) => ({
@@ -108,4 +112,7 @@ export const useStore = create<AppState>((set, get) => ({
   isProcessingQueue: false,
   startQueueProcessing: () => set({ isProcessingQueue: true }),
   stopQueueProcessing: () => set({ isProcessingQueue: false }),
+
+  systemMessageVisible: false,
+  setSystemMessageVisible: (visible) => set({ systemMessageVisible: visible }),
 }));
