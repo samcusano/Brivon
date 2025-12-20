@@ -2,11 +2,11 @@ import React from 'react';
 import { useStore } from '@/hooks/useStore';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { ArrowUp, Plus, Globe, Database, Cpu } from 'lucide-react';
+import { ArrowUp, Plus, Globe, Database, Cpu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function ChatInput() {
-  const { addMessage, activeSourceIds, sources, setSourcePanelOpen, setSystemMessageVisible } = useStore();
+  const { addMessage, activeSourceIds, sources, setSourcePanelOpen, setSystemMessageVisible, toggleSource } = useStore();
   const [input, setInput] = React.useState('');
 
   const activeSourceCount = activeSourceIds.length;
@@ -56,15 +56,21 @@ export function ChatInput() {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute top-4 left-4 flex flex-wrap gap-2 pointer-events-none z-10"
+            className="absolute top-4 left-4 flex flex-wrap gap-2 z-10"
           >
             {activeSources.map((source) => (
               <div
                 key={source.id}
                 className="flex items-center gap-2 px-2 py-1 rounded-full bg-secondary/70 border border-border/50 text-xs font-medium text-foreground"
               >
-                <span className={cn("w-1.5 h-1.5 rounded-full", source.status === 'connected' ? "bg-green-500" : "bg-gray-400")} />
                 {source.name}
+                <button
+                  onClick={() => toggleSource(source.id)}
+                  className="ml-1 hover:opacity-70 transition-opacity"
+                  aria-label={`Remove ${source.name}`}
+                >
+                  <X className="w-3 h-3" />
+                </button>
               </div>
             ))}
           </motion.div>
