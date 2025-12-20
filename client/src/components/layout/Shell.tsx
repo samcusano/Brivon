@@ -3,6 +3,7 @@ import { useStore } from '@/hooks/useStore';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { PanelRight, Menu } from 'lucide-react';
+import logoImage from '@assets/image_1766197243611.png';
 
 interface ShellProps {
   children: React.ReactNode;
@@ -23,8 +24,7 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
         !isMobileMenuOpen && "-translate-x-full"
       )}>
         <div className="h-16 flex items-center px-6 border-b border-border/50">
-          <div className="w-8 h-8 bg-primary rounded-lg mr-3 flex items-center justify-center text-primary-foreground font-bold font-heading">Z</div>
-          <span className="font-heading font-semibold text-lg tracking-tight">Zania</span>
+          <img src={logoImage} alt="Zania logo" className="h-8 w-auto" />
         </div>
         <div className="flex-1 overflow-y-auto py-4">
           {sidebar}
