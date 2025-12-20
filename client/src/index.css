@@ -175,13 +175,10 @@
     background-image:
       /* Paper Texture */
       url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" result="noise"/></filter><rect width="100%" height="100%" fill="%23666" filter="url(%23noise)" opacity="0.02"/></svg>'),
-      /* Grid Pattern */
-      linear-gradient(0deg, transparent 24%, rgba(160, 160, 160, 0.12) 25%, rgba(160, 160, 160, 0.12) 26%, transparent 27%, transparent 74%, rgba(160, 160, 160, 0.12) 75%, rgba(160, 160, 160, 0.12) 76%, transparent 77%, transparent),
-      linear-gradient(90deg, transparent 24%, rgba(160, 160, 160, 0.12) 25%, rgba(160, 160, 160, 0.12) 26%, transparent 27%, transparent 74%, rgba(160, 160, 160, 0.12) 75%, rgba(160, 160, 160, 0.12) 76%, transparent 77%, transparent),
-      /* Point Grid */
-      radial-gradient(circle, rgba(140, 140, 140, 0.3) 0.75px, transparent 0.75px);
-    background-size: 100% 100%, 45px 45px, 45px 45px, 45px 45px;
-    background-position: 0 0, 0 0, 0 0, 0 0;
+      /* Dot Grid Pattern */
+      radial-gradient(circle, rgba(140, 140, 140, 0.25) 1.2px, transparent 1.2px);
+    background-size: 100% 100%, 45px 45px;
+    background-position: 0 0, 0 0;
     background-attachment: fixed;
   }
 }
