@@ -3,6 +3,7 @@ import { Shell } from '@/components/layout/Shell';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { ChatMessage } from '@/components/chat/ChatMessage';
 import { SystemMessage } from '@/components/chat/SystemMessage';
+import { AssistantHub } from '@/components/chat/AssistantHub';
 import { SourcePanel } from '@/components/sources/SourcePanel';
 import { QuestionExtractor } from '@/components/bulk/QuestionExtractor';
 import { useStore } from '@/hooks/useStore';
@@ -44,9 +45,10 @@ function SidebarNav({ active, setActive }: { active: string, setActive: (id: str
 }
 
 export default function Home() {
-  const { messages, sources, systemMessageVisible, setSystemMessageVisible } = useStore();
+  const { messages, sources, systemMessageVisible, setSystemMessageVisible, addMessage } = useStore();
   const [activeTab, setActiveTab] = React.useState('assistant');
   const [showExtractor, setShowExtractor] = React.useState(false);
+  const [showChat, setShowChat] = React.useState(false);
   const bottomRef = React.useRef<HTMLDivElement>(null);
 
   // Trigger extractor when a new document is added (simulated)
@@ -76,25 +78,41 @@ export default function Home() {
     }
   }, [systemMessageVisible, setSystemMessageVisible]);
 
+  const handleStartChat = () => {
+    setShowChat(true);
+  };
+
   return (
     <Shell
       sidebar={<SidebarNav active={activeTab} setActive={setActiveTab} />}
       panel={<SourcePanel />}
     >
       {activeTab === 'assistant' && (
-        <div className="flex flex-col min-h-full max-w-5xl mx-auto w-full">
-          <div className="flex-1 p-4 md:p-8 space-y-6">
-             <div className="h-4 md:h-12" />
-             {messages.map((msg) => (
-               <ChatMessage key={msg.id} message={msg} />
-             ))}
-             {systemMessageVisible && <SystemMessage isCollapsed={false} />}
-             <div ref={bottomRef} />
-          </div>
+        <div className="flex flex-col min-h-full w-full">
+          {!showChat && messages.length === 1 ? (
+            <AssistantHub onStartChat={handleStartChat} />
+          ) : (
+            <>
+              <div className="flex-1 p-4 md:p-8 space-y-6 overflow-y-auto">
+                 <div className="h-4 md:h-12 max-w-5xl mx-auto w-full" />
+                 <div className="max-w-5xl mx-auto w-full space-y-6">
+                   {messages.map((msg) => (
+                     <ChatMessage key={msg.id} message={msg} />
+                   ))}
+                 </div>
+                 {systemMessageVisible && (
+                   <div className="max-w-5xl mx-auto w-full">
+                     <SystemMessage isCollapsed={false} />
+                   </div>
+                 )}
+                 <div ref={bottomRef} />
+              </div>
 
-          <div className="sticky bottom-0 bg-gradient-to-t from-background via-background to-transparent pt-10 pb-6 z-10">
-             <ChatInput />
-          </div>
+              <div className="sticky bottom-0 bg-gradient-to-t from-background via-background to-transparent pt-10 pb-6 z-10">
+                 <ChatInput />
+              </div>
+            </>
+          )}
         </div>
       )}
 
