@@ -50,67 +50,54 @@ export function ChatInput() {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 pb-8 pt-4">
-      <div className="relative group rounded-2xl bg-card shadow-lg ring-1 ring-black/5 focus-within:ring-2 focus-within:ring-primary/50 transition-all duration-300">
+      <div className="relative">
+        {/* Active Sources Pills - Top Left Corner */}
+        {activeSources.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute top-4 left-4 flex flex-wrap gap-2 pointer-events-none z-10"
+          >
+            {activeSources.map((source) => (
+              <div
+                key={source.id}
+                className="flex items-center gap-2 px-2 py-1 rounded-full bg-secondary/70 border border-border/50 text-xs font-medium text-foreground"
+              >
+                <span className={cn("w-1.5 h-1.5 rounded-full", source.status === 'connected' ? "bg-green-500" : "bg-gray-400")} />
+                {source.name}
+              </div>
+            ))}
+          </motion.div>
+        )}
+        
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Ask Zania anything..."
-          className="w-full min-h-[120px] p-6 bg-transparent border-none resize-none focus:outline-none text-lg text-foreground placeholder:text-muted-foreground/50 font-sans leading-relaxed"
-          style={{ fieldSizing: 'content' } as any}
+          className="w-full min-h-[120px] text-sm bg-muted/60 border border-border/30 rounded-xl p-6 focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none font-sans text-foreground placeholder:text-sm placeholder:text-muted-foreground/50"
+          style={{ paddingTop: activeSources.length > 0 ? '50px' : '24px' }}
         />
-        
-        {/* Footer Area */}
-        <div className="flex items-center justify-between px-4 pb-4 mt-2">
-          {/* Active Sources Indicator */}
-          <div className="flex items-center gap-2 overflow-x-auto max-w-[60%] no-scrollbar">
-            <AnimatePresence>
-              {activeSources.slice(0, 3).map((source) => (
-                <motion.div
-                  key={source.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/50 text-xs font-medium text-secondary-foreground whitespace-nowrap border border-black/5"
-                >
-                  <span className={cn("w-1.5 h-1.5 rounded-full", source.status === 'connected' ? "bg-green-500" : "bg-gray-400")} />
-                  {source.name}
-                </motion.div>
-              ))}
-              {activeSources.length > 3 && (
-                <div className="text-xs text-muted-foreground pl-1">
-                  +{activeSources.length - 3} more
-                </div>
-              )}
-              {activeSources.length === 0 && (
-                <span className="text-xs text-muted-foreground italic pl-1">No sources selected</span>
-              )}
-            </AnimatePresence>
-          </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-3">
-             <Button 
-                variant="ghost" 
-                onClick={() => setSourcePanelOpen(true)}
-                className="text-muted-foreground hover:text-foreground hover:bg-secondary/30 gap-2 px-3"
-             >
-                <Plus className="w-5 h-5" />
-                <span className="text-sm hidden sm:inline">Files and sources</span>
-             </Button>
-             
-             <Button 
-                onClick={() => handleSubmit()}
-                disabled={!input.trim()}
-                className={cn(
-                  "rounded-full px-6 transition-all duration-300",
-                  input.trim() ? "bg-foreground text-background hover:bg-foreground/90 shadow-md translate-y-0" : "bg-muted text-muted-foreground cursor-not-allowed"
-                )}
-             >
-                <span className="mr-2">Ask Zania</span>
-                <ArrowUp className="w-4 h-4" />
-             </Button>
-          </div>
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-3 items-center p-6 pt-0">
+          <Button 
+            variant="ghost" 
+            onClick={() => setSourcePanelOpen(true)}
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/30 border border-border/30 rounded-lg px-3 py-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span className="text-sm">Files and sources</span>
+          </Button>
+
+          {/* Ask Zania Button */}
+          <Button
+            onClick={() => handleSubmit()}
+            disabled={!input.trim()}
+            className="ml-auto bg-foreground text-background hover:bg-foreground/90 rounded-lg px-6 py-2"
+          >
+            <span className="text-sm font-semibold">Ask Zania</span>
+          </Button>
         </div>
       </div>
       
