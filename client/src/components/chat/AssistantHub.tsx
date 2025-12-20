@@ -77,7 +77,7 @@ export function AssistantHub({ onStartChat }: { onStartChat: (query: string) => 
           className="mb-8"
         >
           <h1 className="text-3xl font-heading font-semibold text-foreground mb-2">Ask Zania</h1>
-          <p className="text-muted-foreground">Quickly search, analyze, or understand materials.</p>
+          <p className="text-muted-foreground">Quickly search, analyze, or understand materials from all your sources</p>
         </motion.div>
 
         {/* Main Input */}
