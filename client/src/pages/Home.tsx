@@ -10,13 +10,14 @@ import { useStore } from '@/hooks/useStore';
 import Vault from '@/pages/Vault';
 import HistoryPage from '@/pages/History';
 import { Button } from '@/components/ui/button';
-import { FileText, Layers, BookOpen, History } from 'lucide-react';
+import { Layers, BookOpen, History } from 'lucide-react';
+import { AssistantIcon } from '@/components/icons/AssistantIcon';
 import { cn } from '@/lib/utils';
 
 // Sidebar Navigation
 function SidebarNav({ active, setActive }: { active: string, setActive: (id: string) => void }) {
   const navItems = [
-    { id: 'assistant', label: 'Assistant', icon: FileText },
+    { id: 'assistant', label: 'Assistant', icon: AssistantIcon },
     { id: 'vault', label: 'Vault', icon: Layers },
     { id: 'library', label: 'Library', icon: BookOpen },
     { id: 'history', label: 'History', icon: History },
