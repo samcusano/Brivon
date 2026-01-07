@@ -39,8 +39,6 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
     { label: 'Dashboard', icon: LayoutGrid, href: '/dashboard' },
     { label: 'All agents', icon: UsersIcon, href: '/agents' },
     { label: 'Search', icon: Search, href: '/search' },
-    { label: 'Notifications', icon: Bell, href: '/notifications', badge: 3 },
-    { label: 'Profile', icon: UserCircle, href: '/profile' },
   ];
 
   const quickFilters = [
@@ -83,11 +81,6 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
                 >
                   <item.icon className={cn("w-4 h-4", location === item.href ? "text-primary" : "opacity-70 group-hover:opacity-100")} />
                   <span className="text-sm">{item.label}</span>
-                  {item.badge && (
-                    <span className="ml-auto bg-destructive text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
-                      {item.badge}
-                    </span>
-                  )}
                 </Button>
               </Link>
             ))}
