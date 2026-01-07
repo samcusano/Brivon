@@ -147,22 +147,6 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden relative">
-        {/* Top bar for mobile or contextual actions */}
-        <header className="h-14 flex items-center justify-between px-8 border-b border-[#B7C3B0]/20 bg-white/20 backdrop-blur-sm sticky top-0 z-30">
-          <div className="flex items-center gap-4">
-             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(true)}>
-               <Menu className="w-5 h-5" />
-             </Button>
-             <div className="text-sm font-bold opacity-40">Zania / {location.slice(1).charAt(0).toUpperCase() + location.slice(2)}</div>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="h-9 w-9 text-[#2F2A26]/60" onClick={() => setSourcePanelOpen(!isSourcePanelOpen)}>
-              <PanelRight className="h-5 w-5" />
-            </Button>
-          </div>
-        </header>
-
         <div className="flex-1 overflow-y-auto no-scrollbar relative z-10 bg-white/10 backdrop-blur-sm shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)]">
           {children}
         </div>
