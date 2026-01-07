@@ -63,11 +63,8 @@ export default function AgentActivity() {
     <Shell>
       <div className="p-8 max-w-7xl mx-auto space-y-12 pb-20">
         <header className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[#B7C3B0]">
-            <Activity className="w-3 h-3" /> System Heartbeat
-          </div>
           <div className="flex items-center justify-between">
-            <h1 className="text-4xl font-black tracking-tight text-[#2F2A26]">Agent Activity</h1>
+            <h1 className="text-4xl font-black tracking-tight text-[#2F2A26]">All Agents</h1>
             <div className="flex items-center gap-4">
               <div className="flex flex-col items-end">
                 <span className="text-[10px] font-bold text-[#B7C3B0] uppercase">Compute Load</span>
