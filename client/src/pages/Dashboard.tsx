@@ -76,8 +76,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent className="flex justify-between items-center py-4 overflow-x-auto no-scrollbar">
               <div className="flex items-center gap-8 min-w-max">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl border border-primary/20">🤖</div>
+                <div className="flex items-center">
                   <div>
                     <span className="text-2xl font-black text-primary">12</span>
                     <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Active Agents</p>
