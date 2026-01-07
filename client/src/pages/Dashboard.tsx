@@ -100,8 +100,7 @@ export default function Dashboard() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-heading font-bold text-foreground flex items-center gap-2">
-              <ShieldAlert className="w-5 h-5 text-destructive" />
-              Priority Queue
+              Queue
             </h2>
 
             <div className="flex items-center gap-2">
