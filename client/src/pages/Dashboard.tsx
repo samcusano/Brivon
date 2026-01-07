@@ -3,6 +3,14 @@ import { Shell } from '@/components/layout/Shell';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { 
   AlertCircle, 
   CheckCircle2, 
@@ -154,55 +162,91 @@ export default function Dashboard() {
             </div>
           </div>
           
-          <div className="space-y-4">
-            {[
-              { id: 'VENDOR-0847', name: 'Acme Corp', issue: 'SOC 2 cert expired 14 days ago', rec: 'Recommend offboarding', conf: 92, sla: '6 hours remaining', priority: 'CRITICAL', color: 'destructive' },
-              { id: 'VENDOR-0231', name: 'SecureData Inc', issue: 'New breach disclosed (CISA alert)', rec: 'Request incident report', conf: 78, sla: 'Due Tomorrow', priority: 'HIGH', color: 'amber-600' },
-              { id: 'POLICY-0092', name: 'GDPR Update', issue: 'EU data retention rules changed', rec: 'Update 12 policies', conf: 65, sla: 'Due Next week', priority: 'MEDIUM', color: 'green-600' }
-            ].map((item, idx) => (
-              <Card key={idx} className="hover:shadow-lg transition-all border-l-4 group" style={{ borderLeftColor: item.color === 'destructive' ? 'var(--destructive)' : item.color === 'amber-600' ? '#d97706' : '#16a34a' }}>
-                <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <Badge variant="outline" className="text-[10px] font-bold">{item.id}</Badge>
-                        <h3 className="font-bold text-lg">{item.name}</h3>
+          <div className="bg-white rounded-xl border border-border/50 shadow-sm overflow-hidden">
+            <Table>
+              <TableHeader className="bg-muted/30">
+                <TableRow className="hover:bg-transparent border-b border-border/50">
+                  <TableHead className="w-[120px] text-[10px] font-black uppercase tracking-widest py-4">ID</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Entity / Issue</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Priority</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">SLA / Status</TableHead>
+                  <TableHead className="text-right text-[10px] font-black uppercase tracking-widest py-4">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[
+                  { id: 'VENDOR-0847', name: 'Acme Corp', issue: 'SOC 2 cert expired 14 days ago', rec: 'Recommend offboarding', conf: 92, sla: '6 hours remaining', priority: 'CRITICAL', color: 'destructive' },
+                  { id: 'VENDOR-0231', name: 'SecureData Inc', issue: 'New breach disclosed (CISA alert)', rec: 'Request incident report', conf: 78, sla: 'Due Tomorrow', priority: 'HIGH', color: 'amber-600' },
+                  { id: 'POLICY-0092', name: 'GDPR Update', issue: 'EU data retention rules changed', rec: 'Update 12 policies', conf: 65, sla: 'Due Next week', priority: 'MEDIUM', color: 'green-600' },
+                  { id: 'ENTITY-1142', name: 'FinTech Solutions', issue: 'Abnormal API usage pattern', rec: 'Verify identity', conf: 88, sla: '12 hours remaining', priority: 'HIGH', color: 'amber-600' },
+                  { id: 'VENDOR-0552', name: 'CloudScale', issue: 'Sub-processor change', rec: 'Review impact', conf: 72, sla: 'Due In 3 days', priority: 'LOW', color: 'slate-500' }
+                ].map((item, idx) => (
+                  <TableRow key={idx} className="group hover:bg-muted/20 transition-colors">
+                    <TableCell className="py-4">
+                      <Badge variant="outline" className="text-[10px] font-bold bg-background shadow-sm">{item.id}</Badge>
+                    </TableCell>
+                    <TableCell className="py-4">
+                      <div className="space-y-1">
+                        <div className="font-bold text-foreground">{item.name}</div>
+                        <div className="text-sm text-muted-foreground line-clamp-1">{item.issue}</div>
+                        <div className="flex items-center gap-1.5 text-[10px] text-primary/70 font-bold uppercase tracking-wider">
+                          <span className="w-1 h-1 rounded-full bg-primary/40" />
+                          {item.rec}
+                        </div>
                       </div>
-                      <p className="text-foreground/80 font-medium">{item.issue}</p>
-                    </div>
-                    <Badge className={cn(
-                      item.priority === 'CRITICAL' ? 'bg-destructive/10 text-destructive border-destructive/20' : 
-                      item.priority === 'HIGH' ? 'bg-amber-100 text-amber-700 border-amber-200' : 
-                      'bg-green-100 text-green-700 border-green-200'
-                    )}>
-                      {item.priority}
-                    </Badge>
-                  </div>
-
-                  <div className="bg-secondary/30 p-4 rounded-lg mb-4 flex items-center gap-3">
-                    <div className="p-2 bg-background rounded-md border border-border/50">
-                      <span className="text-lg">🤖</span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold">{item.rec}</p>
-                      <p className="text-xs text-muted-foreground">AI Confidence: {item.conf}%</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex gap-4 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {item.sla}</span>
-                      <span className="flex items-center gap-1"><Users className="w-3 h-3" /> Assigned: You</span>
-                    </div>
-                    <Link href={`/finding/${item.id}`}>
-                      <Button variant="outline" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                        Review Finding <ArrowRight className="ml-2 w-4 h-4" />
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    </TableCell>
+                    <TableCell className="py-4">
+                      <Badge className={cn(
+                        "text-[10px] font-black",
+                        item.priority === 'CRITICAL' ? 'bg-destructive/10 text-destructive border-destructive/20' : 
+                        item.priority === 'HIGH' ? 'bg-amber-100 text-amber-700 border-amber-200' : 
+                        item.priority === 'MEDIUM' ? 'bg-green-100 text-green-700 border-green-200' :
+                        'bg-slate-100 text-slate-700 border-slate-200'
+                      )}>
+                        {item.priority}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="py-4">
+                      <div className="flex flex-col gap-1">
+                        <span className="flex items-center gap-1.5 text-xs font-medium text-foreground/80">
+                          <Clock className="w-3 h-3 text-muted-foreground" /> {item.sla}
+                        </span>
+                        <div className="w-24 h-1 bg-muted rounded-full overflow-hidden">
+                          <div 
+                            className={cn(
+                              "h-full rounded-full transition-all",
+                              item.priority === 'CRITICAL' ? 'bg-destructive' : 'bg-primary'
+                            )} 
+                            style={{ width: `${item.conf}%` }} 
+                          />
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-right py-4">
+                      <Link href={`/finding/${item.id}`}>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary hover:text-primary-foreground">
+                          <ArrowRight className="w-4 h-4" />
+                        </Button>
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            
+            <div className="flex items-center justify-between px-6 py-4 bg-muted/10 border-t border-border/50">
+              <p className="text-xs text-muted-foreground font-medium">
+                Showing <span className="text-foreground font-bold">5</span> of <span className="text-foreground font-bold">42</span> findings
+              </p>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" className="h-8 text-xs font-bold uppercase tracking-widest disabled:opacity-30" disabled>
+                  Prev
+                </Button>
+                <Button variant="outline" size="sm" className="h-8 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-colors">
+                  Next
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
