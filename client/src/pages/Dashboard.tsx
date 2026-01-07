@@ -177,8 +177,8 @@ export default function Dashboard() {
                 {[
                   { id: 'VENDOR-0847', name: 'Acme Corp', issue: 'SOC 2 cert expired 14 days ago', rec: 'Recommend offboarding', conf: 92, sla: '6 hours remaining', priority: 'CRITICAL', color: 'destructive' },
                   { id: 'VENDOR-0231', name: 'SecureData Inc', issue: 'New breach disclosed (CISA alert)', rec: 'Request incident report', conf: 78, sla: 'Due Tomorrow', priority: 'HIGH', color: 'amber-600' },
-                  { id: 'POLICY-0092', name: 'GDPR Update', issue: 'EU data retention rules changed', rec: 'Update 12 policies', conf: 65, sla: 'Due Next week', priority: 'MEDIUM', color: 'green-600' },
                   { id: 'ENTITY-1142', name: 'FinTech Solutions', issue: 'Abnormal API usage pattern', rec: 'Verify identity', conf: 88, sla: '12 hours remaining', priority: 'HIGH', color: 'amber-600' },
+                  { id: 'POLICY-0092', name: 'GDPR Update', issue: 'EU data retention rules changed', rec: 'Update 12 policies', conf: 65, sla: 'Due Next week', priority: 'MEDIUM', color: 'green-600' },
                   { id: 'VENDOR-0552', name: 'CloudScale', issue: 'Sub-processor change', rec: 'Review impact', conf: 72, sla: 'Due In 3 days', priority: 'LOW', color: 'slate-500' }
                 ].map((item, idx) => (
                   <TableRow key={idx} className="group hover:bg-muted/20 transition-colors">
