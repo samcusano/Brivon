@@ -3,14 +3,47 @@ import { Shell } from '@/components/layout/Shell';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { AlertCircle, CheckCircle2, Clock, ShieldAlert, ArrowRight, Users, LayoutGrid } from 'lucide-react';
+import { 
+  AlertCircle, 
+  CheckCircle2, 
+  Clock, 
+  ShieldAlert, 
+  ArrowRight, 
+  Users, 
+  LayoutGrid,
+  ChevronDown,
+  Layers
+} from 'lucide-react';
 import { Link } from 'wouter';
 import { cn } from '@/lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 export default function Dashboard() {
+  const quickFilters = [
+    { label: 'My Decisions', icon: Users, color: 'text-primary' },
+    { label: 'Urgent (< 24h)', icon: Clock, color: 'text-destructive' },
+    { label: 'Awaiting Input', icon: AlertCircle, color: 'text-amber-500' },
+    { label: 'Recent Completions', icon: CheckCircle2, color: 'text-green-500' },
+  ];
+
+  const riskFilters = [
+    { label: 'Vendor Risk' },
+    { label: 'Compliance' },
+    { label: 'Security' },
+    { label: 'Internal Controls' },
+  ];
+
   return (
     <Shell>
       <div className="p-8 max-w-7xl mx-auto space-y-8">
+        {/* Statistics section remains same */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="bg-card/50 backdrop-blur-sm border-border/50">
             <CardHeader className="pb-2">
@@ -63,11 +96,42 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        <div className="space-y-4">
-          <h2 className="text-xl font-heading font-bold text-foreground flex items-center gap-2">
-            <ShieldAlert className="w-5 h-5 text-destructive" />
-            Priority Queue
-          </h2>
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-heading font-bold text-foreground flex items-center gap-2">
+              <ShieldAlert className="w-5 h-5 text-destructive" />
+              Priority Queue
+            </h2>
+
+            <div className="flex items-center gap-3">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="h-9 px-4 gap-2 border-border/50 bg-white/50 hover:bg-white transition-all shadow-sm">
+                    <Layers className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm font-medium text-foreground/80">My Decisions</span>
+                    <ChevronDown className="w-3.5 h-3.5 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2 py-1.5">Queue Filters</DropdownMenuLabel>
+                  {quickFilters.map((filter, i) => (
+                    <DropdownMenuItem key={i} className="gap-2 px-2 py-2 cursor-pointer">
+                      <filter.icon className={cn("w-4 h-4", filter.color)} />
+                      <span className="font-medium text-sm">{filter.label}</span>
+                    </DropdownMenuItem>
+                  ))}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2 py-1.5">Risk Type</DropdownMenuLabel>
+                  {riskFilters.map((filter, i) => (
+                    <DropdownMenuItem key={i} className="gap-2 px-2 py-2 cursor-pointer">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <span className="font-medium text-sm">{filter.label}</span>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
           
           <div className="space-y-4">
             {[

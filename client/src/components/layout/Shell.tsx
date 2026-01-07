@@ -21,7 +21,7 @@ import {
   LogOut,
   Filter
 } from 'lucide-react';
-import logoImage from '@assets/logo.svg';
+import logoImage from '@assets/image_1766197243611.png';
 import { Link, useLocation } from 'wouter';
 
 interface ShellProps {
@@ -85,40 +85,6 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
               </Link>
             ))}
           </nav>
-
-          {/* Quick Filters */}
-          <div className="px-6">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.15em] text-[#2F2A26]/40 mb-3 flex items-center gap-2">
-              <Filter className="w-3 h-3" /> Queue Filters
-            </h3>
-            <nav className="space-y-1">
-              {quickFilters.map((filter, idx) => (
-                <button
-                  key={idx}
-                  className="w-full flex items-center gap-3 px-2 py-2 text-xs font-semibold text-[#2F2A26]/60 hover:text-[#2F2A26] hover:bg-[#B7C3B0]/10 rounded-md transition-all group"
-                >
-                  <filter.icon className={cn("w-3.5 h-3.5 opacity-60 group-hover:opacity-100", filter.color)} />
-                  {filter.label}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          {/* Risk Type Filters */}
-          <div className="px-6 pb-8">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.15em] text-[#2F2A26]/40 mb-3">By Risk Type</h3>
-            <nav className="space-y-1">
-              {riskFilters.map((filter, idx) => (
-                <button
-                  key={idx}
-                  className="w-full flex items-center gap-3 px-2 py-2 text-xs font-semibold text-[#2F2A26]/60 hover:text-[#2F2A26] hover:bg-[#B7C3B0]/10 rounded-md transition-all"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#B7C3B0]" />
-                  {filter.label}
-                </button>
-              ))}
-            </nav>
-          </div>
         </div>
 
         {/* User Profile Footer */}
