@@ -2,7 +2,7 @@ import React from 'react';
 import { useStore } from '@/hooks/useStore';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { PanelRight, Menu, ChevronDown, Users, Globe, MessageSquare, LayoutGrid } from 'lucide-react';
+import { PanelRight, Menu, ChevronDown, Users as UsersIcon, Globe, MessageSquare, LayoutGrid } from 'lucide-react';
 import logoImage from '@assets/image_1766197243611.png';
 import { Link, useLocation } from 'wouter';
 
@@ -18,9 +18,9 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
   const [location] = useLocation();
 
   const navItems = [
-    { label: 'All agents', icon: LayoutGrid, active: true },
-    { label: 'All roles', icon: Users },
-    { label: 'All users', icon: Users },
+    { label: 'All agents', icon: LayoutGrid, href: '/agents' },
+    { label: 'All roles', icon: UsersIcon },
+    { label: 'All users', icon: UsersIcon },
     { label: 'All sources', icon: Globe },
     { label: 'All feedback', icon: MessageSquare },
   ];
@@ -30,25 +30,26 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
       {/* Top Header Navigation */}
       <header className="h-14 flex items-center px-4 border-b border-border bg-background/50 backdrop-blur-md z-30 sticky top-0">
         <div className="flex items-center gap-6 flex-1">
-          <Link href="/">
+          <Link href="/dashboard">
             <img src={logoImage} alt="Zania logo" className="h-6 w-auto cursor-pointer hover:opacity-80 transition-opacity" />
           </Link>
           
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item, idx) => (
-              <Button
-                key={idx}
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  "h-9 px-3 gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 font-normal",
-                  item.active && "text-foreground font-medium"
-                )}
-              >
-                <item.icon className="w-4 h-4" />
-                <span>{item.label}</span>
-                <ChevronDown className="w-3 h-3 opacity-50" />
-              </Button>
+              <Link key={idx} href={item.href || '#'}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "h-9 px-3 gap-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 font-normal",
+                    location === item.href && "text-foreground font-medium bg-secondary/30"
+                  )}
+                >
+                  <item.icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                  <ChevronDown className="w-3 h-3 opacity-50" />
+                </Button>
+              </Link>
             ))}
           </div>
         </div>

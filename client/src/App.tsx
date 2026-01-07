@@ -8,10 +8,19 @@ import Home from "@/pages/Home";
 import Vault from "@/pages/Vault";
 import History from "@/pages/History";
 
+import Dashboard from "./pages/Dashboard";
+import FindingDetail from "./pages/FindingDetail";
+import AgentActivity from "./pages/AgentActivity";
+import EntityProfile from "./pages/EntityProfile";
+
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/finding/:id" component={FindingDetail} />
+      <Route path="/agents" component={AgentActivity} />
+      <Route path="/entity/:id" component={EntityProfile} />
       <Route path="/vault" component={Vault} />
       <Route path="/history" component={History} />
       <Route component={NotFound} />

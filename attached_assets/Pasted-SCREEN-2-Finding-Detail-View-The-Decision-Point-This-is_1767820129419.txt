@@ -1,0 +1,137 @@
+SCREEN 2: Finding Detail View (The Decision Point)
+This is where users spend 80% of their time when acting.
+┌──────────────────────────────────────────────────────────┐
+│ ← Back to Queue          VENDOR-0847: Acme Corp          │
+├──────────────────────────────────────────────────────────┤
+│ ┌─ FINDING SUMMARY ─────────────────────────────────────┐│
+│ │ ⚠️ SOC 2 Type II Certification Expired                ││
+│ │                                                        ││
+│ │ Status: CRITICAL                                       ││
+│ │ Detected: Jan 3, 2026 (4 days ago)                    ││
+│ │ Last reviewed: Never                                   ││
+│ │ SLA: 6 hours remaining (High-risk vendor threshold)    ││
+│ └────────────────────────────────────────────────────────┘│
+│                                                            │
+│ ┌─ AI ANALYSIS ──────────────────────────────────────────┐│
+│ │ 🤖 Agent: VendorRiskMonitor-07                         ││
+│ │ 📊 Confidence: 92% (HIGH)                              ││
+│ │                                                         ││
+│ │ RECOMMENDATION: Suspend vendor access and initiate     ││
+│ │ offboarding per Policy TPRM-004                        ││
+│ │                                                         ││
+│ │ REASONING:                                              ││
+│ │ • Cert expired 14 days ago (threshold: 7 days)         ││
+│ │ • Vendor processes PII/PHI (HIPAA scope)               ││
+│ │ • No extension request received                        ││
+│ │ • Policy TPRM-004 §3.2: "Immediate suspension for      ││
+│ │   expired compliance certs on critical vendors"        ││
+│ │                                                         ││
+│ │ [Why 92% confidence?] ← expandable                     ││
+│ └────────────────────────────────────────────────────────┘│
+│                                                            │
+│ ┌─ EVIDENCE ─────────────────────────────────────────────┐│
+│ │ 📄 SOC2_AcmeCorp_2024.pdf (Expired: Dec 20, 2025)      ││
+│ │    [View Document] Last checked: Jan 3, 2026           ││
+│ │                                                         ││
+│ │ 📧 Email thread: RE: Cert renewal (3 messages)         ││
+│ │    [View Thread] Last: Dec 18, 2025 from vendor        ││
+│ │                                                         ││
+│ │ 📋 Vendor profile: Acme Corp (Tier 1 - Critical)       ││
+│ │    [View Full Profile] Last updated: Nov 2025          ││
+│ │                                                         ││
+│ │ 📚 Policy: TPRM-004 Third-Party Risk Management        ││
+│ │    [View Policy] Version 2.3 (Effective: Jan 2025)     ││
+│ └────────────────────────────────────────────────────────┘│
+│                                                            │
+│ ┌─ CONTEXT ──────────────────────────────────────────────┐│
+│ │ Vendor Details:                                         ││
+│ │ • Risk tier: CRITICAL (processes 50K patient records)  ││
+│ │ • Services: Medical billing, claims processing         ││
+│ │ • Contract value: $2.4M/year                           ││
+│ │ • Renewal date: March 2026                             ││
+│ │ • Last audit: Passed (June 2025)                       ││
+│ │ • Open findings: 0                                     ││
+│ │                                                         ││
+│ │ Similar cases (Agent learning):                        ││
+│ │ • 3 vendors suspended for expired certs (avg 12 days)  ││
+│ │ • 2 granted extensions (both submitted requests)       ││
+│ └────────────────────────────────────────────────────────┘│
+│                                                            │
+│ ┌─ YOUR DECISION ────────────────────────────────────────┐│
+│ │                                                         ││
+│ │ ⭕ Accept AI recommendation: Suspend & offboard        ││
+│ │    [ ] Notify vendor                                   ││
+│ │    [ ] Create offboarding ticket (auto-assigned)       ││
+│ │    [ ] Alert business owner (Sarah Chen, Billing Ops)  ││
+│ │                                                         ││
+│ │ ⭕ Override with different action:                     ││
+│ │    [Dropdown: Grant 30-day extension ▼]                ││
+│ │    [Dropdown: Request updated cert ▼]                  ││
+│ │    [Dropdown: Transfer to different vendor ▼]          ││
+│ │    [Dropdown: Mark as false positive ▼]                ││
+│ │    [Dropdown: Escalate to Risk Committee ▼]            ││
+│ │                                                         ││
+│ │    If override, justification required:                ││
+│ │    ┌────────────────────────────────────────────────┐  ││
+│ │    │ [Text area]                                    │  ││
+│ │    │ Explain your reasoning for audit trail...     │  ││
+│ │    └────────────────────────────────────────────────┘  ││
+│ │                                                         ││
+│ │ ⭕ Need more information:                              ││
+│ │    [Dropdown: Ask agent to... ▼]                       ││
+│ │    • Re-check vendor portal for updated cert           ││
+│ │    • Contact vendor directly (draft email)             ││
+│ │    • Review contract for extension clauses             ││
+│ │    • Check if cert renewal is in progress              ││
+│ │                                                         ││
+│ │ ⭕ Escalate to manager:                                ││
+│ │    Reason: [Dropdown ▼] Add note: [____]              ││
+│ │                                                         ││
+│ │ [Cancel] ──────────────────────────── [Submit Decision]││
+│ └────────────────────────────────────────────────────────┘│
+└──────────────────────────────────────────────────────────┘
+Key Design Decisions:
+
+Information hierarchy:
+
+Summary first (what's wrong)
+AI analysis second (what the system thinks)
+Evidence third (prove it to me)
+Context fourth (business implications)
+Decision last (now act)
+
+
+Confidence explanation:
+
+Shows percentage upfront
+"Why 92%?" is expandable to show: "Based on 47 similar cases, policy match confidence 98%, evidence quality 94%, vendor context 85%"
+
+
+Evidence is directly accessible:
+
+Click to view PDFs, emails, policies inline
+No need to leave this screen to verify
+Timestamps on everything (when was this checked?)
+
+
+AI reasoning is explicit:
+
+Bullet points, not paragraphs
+Cites specific policies and thresholds
+Shows the logic chain
+
+
+Decision options are structured but flexible:
+
+Radio buttons force a choice
+Accept is easy (fewest clicks)
+Override requires work (dropdown + justification) - intentional friction for audit
+"Need more info" lets agent do more work before deciding
+Escalate is always available
+
+
+Audit trail built-in:
+
+Every override requires justification
+Timestamps everywhere
+Who/what/when/why captured automatically
