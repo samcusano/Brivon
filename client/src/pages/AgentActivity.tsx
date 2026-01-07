@@ -15,7 +15,8 @@ import {
   Cpu,
   Clock,
   ArrowUpRight,
-  Settings as SettingsIcon
+  Settings as SettingsIcon,
+  Filter
 } from 'lucide-react';
 import { 
   Table, 
@@ -81,15 +82,65 @@ export default function AgentActivity() {
           </div>
         </header>
 
-        {/* Table View */}
+        {/* Workstations (Moved to Top) */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
+            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
+              <Zap className="w-3 h-3" /> Workstations
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { id: 'Risk-01', load: 82, status: 'Active' },
+              { id: 'Risk-02', load: 12, status: 'Idle' },
+              { id: 'Compliance-01', load: 45, status: 'Active' },
+              { id: 'Compliance-02', load: 0, status: 'Paused' },
+            ].map((item, i) => (
+              <div key={i} className="p-4 bg-white border border-[#B7C3B0]/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-[#F6F3EE] flex items-center justify-center text-lg">🤖</div>
+                  <Badge className={cn(
+                    "text-[8px] font-black uppercase",
+                    item.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-[#F6F3EE] text-[#B7C3B0]'
+                  )}>
+                    {item.status}
+                  </Badge>
+                </div>
+                <h4 className="font-black text-sm mb-1">{item.id}</h4>
+                <div className="flex items-center justify-between text-[10px] font-bold text-[#B7C3B0] mb-2">
+                  <span>Load</span>
+                  <span>{item.load}%</span>
+                </div>
+                <div className="h-1 bg-[#F6F3EE] rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-primary transition-all group-hover:bg-primary/80" 
+                    style={{ width: `${item.load}%` }} 
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Table View (Active Workers) */}
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
               <Terminal className="w-3 h-3" /> Active Workers
             </h2>
-            <Badge variant="outline" className="text-[10px] font-bold border-[#B7C3B0]/50 bg-[#B7C3B0]/5 text-[#2F2A26]/60">
-              12 Running
-            </Badge>
+            
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" className="h-7 text-[10px] font-black uppercase tracking-wider gap-2 border-[#B7C3B0]/30">
+                <Filter className="w-3 h-3" /> Status
+              </Button>
+              <Button variant="outline" size="sm" className="h-7 text-[10px] font-black uppercase tracking-wider gap-2 border-[#B7C3B0]/30">
+                <Cpu className="w-3 h-3" /> Resources
+              </Button>
+              <Badge variant="outline" className="text-[10px] font-bold border-[#B7C3B0]/50 bg-[#B7C3B0]/5 text-[#2F2A26]/60 h-7 px-3">
+                12 Running
+              </Badge>
+            </div>
           </div>
           
           <div className="bg-white rounded-xl border border-[#B7C3B0]/30 shadow-sm overflow-hidden">
@@ -99,7 +150,6 @@ export default function AgentActivity() {
                   <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Agent ID</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Status / Workload</TableHead>
                   <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 text-center">Resources</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Live Log</TableHead>
                   <TableHead className="text-right text-[10px] font-black uppercase tracking-widest py-4">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -144,12 +194,6 @@ export default function AgentActivity() {
                         ))}
                       </div>
                     </TableCell>
-                    <TableCell className="py-5">
-                      <div className="bg-[#2F2A26] rounded-md p-2 font-mono text-[9px] text-green-400/80 max-w-[240px] truncate">
-                        <span className="opacity-40 mr-2">$</span>
-                        {agent.log}
-                      </div>
-                    </TableCell>
                     <TableCell className="text-right py-5">
                       <div className="flex items-center justify-end gap-1">
                         <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive">
@@ -164,47 +208,6 @@ export default function AgentActivity() {
                 ))}
               </TableBody>
             </Table>
-          </div>
-        </section>
-
-        {/* Quick Status Grid (Secondary) */}
-        <section className="space-y-6 opacity-80">
-          <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
-            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
-              <Zap className="w-3 h-3" /> Workstations
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { id: 'Risk-01', load: 82, status: 'Active' },
-              { id: 'Risk-02', load: 12, status: 'Idle' },
-              { id: 'Compliance-01', load: 45, status: 'Active' },
-              { id: 'Compliance-02', load: 0, status: 'Paused' },
-            ].map((item, i) => (
-              <div key={i} className="p-4 bg-white border border-[#B7C3B0]/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-[#F6F3EE] flex items-center justify-center text-lg">🤖</div>
-                  <Badge className={cn(
-                    "text-[8px] font-black uppercase",
-                    item.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-[#F6F3EE] text-[#B7C3B0]'
-                  )}>
-                    {item.status}
-                  </Badge>
-                </div>
-                <h4 className="font-black text-sm mb-1">{item.id}</h4>
-                <div className="flex items-center justify-between text-[10px] font-bold text-[#B7C3B0] mb-2">
-                  <span>Load</span>
-                  <span>{item.load}%</span>
-                </div>
-                <div className="h-1 bg-[#F6F3EE] rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-primary transition-all group-hover:bg-primary/80" 
-                    style={{ width: `${item.load}%` }} 
-                  />
-                </div>
-              </div>
-            ))}
           </div>
         </section>
       </div>
