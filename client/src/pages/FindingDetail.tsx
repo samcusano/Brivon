@@ -169,27 +169,19 @@ export default function FindingDetail() {
         </div>
       </div>
 
-      {/* Sticky Bottom Decision Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-t border-border/50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      {/* Fixed Bottom Decision Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-[0_-10px_40px_rgba(0,0,0,0.08)]">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <Button variant="ghost" className="text-sm font-bold text-muted-foreground hover:text-destructive transition-colors px-0">
               Escalate
             </Button>
-            <div className="h-4 w-px bg-border/30" />
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-3 group cursor-pointer">
-                <div className="w-4 h-4 rounded-full border-2 border-primary/20 group-hover:border-primary transition-colors flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <span className="text-sm font-bold text-muted-foreground group-hover:text-foreground transition-colors">
-                  Overrides recommendations
-                </span>
-              </div>
-            </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <Button variant="outline" className="h-11 px-8 font-bold border-border hover:bg-muted transition-colors">
+              Override recommendations
+            </Button>
             <Button className="bg-[#1A1A1A] text-white hover:bg-black font-bold h-11 px-8 rounded-lg shadow-sm flex items-center gap-2">
               <Zap className="w-4 h-4 text-amber-400 fill-amber-400" />
               Accept AI recommendations
