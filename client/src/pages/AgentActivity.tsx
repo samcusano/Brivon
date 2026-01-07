@@ -85,7 +85,7 @@ export default function AgentActivity() {
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
-              <Terminal className="w-3 h-3" /> Active Processing Blades
+              <Terminal className="w-3 h-3" /> Active Workers
             </h2>
             <Badge variant="outline" className="text-[10px] font-bold border-[#B7C3B0]/50 bg-[#B7C3B0]/5 text-[#2F2A26]/60">
               12 Running
@@ -171,7 +171,7 @@ export default function AgentActivity() {
         <section className="space-y-6 opacity-80">
           <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
-              <Zap className="w-3 h-3" /> System Nodes
+              <Zap className="w-3 h-3" /> Workstations
             </h2>
           </div>
 
