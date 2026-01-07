@@ -74,22 +74,33 @@ export default function Dashboard() {
                 <LayoutGrid className="w-3.5 h-3.5" /> Agent Activity
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex justify-between items-center py-4 overflow-x-auto no-scrollbar">
-              <div className="flex items-center gap-8 min-w-max">
-                <div className="flex items-center">
+            <CardContent className="flex justify-between items-center py-6 overflow-x-auto no-scrollbar">
+              <div className="flex items-center gap-10 min-w-max">
+                <div className="flex items-center gap-4 group cursor-help">
+                  <div className="relative">
+                    <div className="absolute -inset-1 bg-primary/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <span className="relative text-4xl font-black text-primary tracking-tighter">12</span>
+                  </div>
                   <div>
-                    <span className="text-2xl font-black text-primary">12</span>
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Active Agents</p>
+                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-0.5">Active Agents</p>
+                    <div className="flex gap-1">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="w-1 h-1 rounded-full bg-primary/40 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className="w-px h-8 bg-border/50 hidden sm:block" />
-                <div className="flex flex-col text-center">
-                  <span className="text-2xl font-black text-muted-foreground">3</span>
-                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Awaiting Data</p>
+
+                <div className="w-px h-10 bg-gradient-to-b from-transparent via-border/60 to-transparent hidden sm:block" />
+
+                <div className="flex flex-col group cursor-help">
+                  <span className="text-3xl font-black text-foreground/40 group-hover:text-foreground transition-colors duration-300 tracking-tighter">3</span>
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Awaiting Data</p>
                 </div>
-                <div className="flex flex-col text-center">
-                  <span className="text-2xl font-black text-green-600">8</span>
-                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Completed Today</p>
+
+                <div className="flex flex-col group cursor-help">
+                  <span className="text-3xl font-black text-emerald-500 group-hover:scale-110 transition-transform duration-300 tracking-tighter">8</span>
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Completed Today</p>
                 </div>
               </div>
             </CardContent>
