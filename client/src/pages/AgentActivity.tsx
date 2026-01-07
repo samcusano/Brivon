@@ -1,9 +1,7 @@
 import React from 'react';
 import { Shell } from '@/components/layout/Shell';
-import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { 
   Play, 
   Pause, 
@@ -16,11 +14,50 @@ import {
   Terminal,
   Cpu,
   Clock,
-  ArrowUpRight
+  ArrowUpRight,
+  Settings as SettingsIcon
 } from 'lucide-react';
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from "@/components/ui/table";
 import { cn } from '@/lib/utils';
 
 export default function AgentActivity() {
+  const agents = [
+    { 
+      id: 'VendorRiskMonitor-07', 
+      uptime: '2h 14m', 
+      progress: 60, 
+      status: 'Analyzing Questionnaires',
+      metrics: { cpu: '12%', mem: '1.2GB', threads: 64 },
+      log: 'Found SOC2 mismatch for Acme Corp...',
+      color: 'bg-primary'
+    },
+    { 
+      id: 'ComplianceMonitor-03', 
+      uptime: '6h 47m', 
+      progress: 85, 
+      status: 'Regulatory Scanning',
+      metrics: { cpu: '4%', mem: '0.8GB', threads: 32 },
+      log: 'Updated GDPR schema for EU region...',
+      color: 'bg-amber-500'
+    },
+    { 
+      id: 'EntityScanner-12', 
+      uptime: '1h 05m', 
+      progress: 30, 
+      status: 'Entity Resolution',
+      metrics: { cpu: '22%', mem: '2.4GB', threads: 128 },
+      log: 'Matching 42 entities in US-East...',
+      color: 'bg-blue-500'
+    }
+  ];
+
   return (
     <Shell>
       <div className="p-8 max-w-7xl mx-auto space-y-12 pb-20">
@@ -44,7 +81,7 @@ export default function AgentActivity() {
           </div>
         </header>
 
-        {/* Exploratory Design 1: Technical "Blade" View */}
+        {/* Table View */}
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
@@ -55,108 +92,86 @@ export default function AgentActivity() {
             </Badge>
           </div>
           
-          <div className="grid grid-cols-1 gap-4">
-            {[
-              { 
-                id: 'VendorRiskMonitor-07', 
-                uptime: '2h 14m', 
-                progress: 60, 
-                status: 'Analyzing Questionnaires',
-                metrics: { cpu: '12%', mem: '1.2GB', threads: 64 },
-                log: 'Found SOC2 mismatch for Acme Corp...',
-                color: 'bg-primary'
-              },
-              { 
-                id: 'ComplianceMonitor-03', 
-                uptime: '6h 47m', 
-                progress: 85, 
-                status: 'Regulatory Scanning',
-                metrics: { cpu: '4%', mem: '0.8GB', threads: 32 },
-                log: 'Updated GDPR schema for EU region...',
-                color: 'bg-amber-500'
-              }
-            ].map((agent, idx) => (
-              <div key={idx} className="group relative bg-white border border-[#B7C3B0]/30 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
-                <div className="flex h-full">
-                  {/* Status Sidecar */}
-                  <div className={cn("w-1.5 h-full transition-all group-hover:w-2", agent.color)} />
-                  
-                  <div className="flex-1 p-5">
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-[#F6F3EE] flex items-center justify-center border border-[#B7C3B0]/20">
-                          <Cpu className="w-5 h-5 text-[#2F2A26]/60" />
-                        </div>
+          <div className="bg-white rounded-xl border border-[#B7C3B0]/30 shadow-sm overflow-hidden">
+            <Table>
+              <TableHeader className="bg-[#F6F3EE]/50">
+                <TableRow className="hover:bg-transparent border-b border-[#B7C3B0]/20">
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Agent ID</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Status / Workload</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 text-center">Resources</TableHead>
+                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Live Log</TableHead>
+                  <TableHead className="text-right text-[10px] font-black uppercase tracking-widest py-4">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {agents.map((agent, idx) => (
+                  <TableRow key={idx} className="group hover:bg-[#F6F3EE]/30 transition-colors">
+                    <TableCell className="py-5">
+                      <div className="flex items-center gap-3">
+                        <div className={cn("w-1 h-8 rounded-full", agent.color)} />
                         <div>
                           <div className="flex items-center gap-2">
-                            <h3 className="font-black text-[#2F2A26]">{agent.id}</h3>
-                            <Badge className="bg-[#F6F3EE] text-[#2F2A26] border-[#B7C3B0]/30 text-[9px] font-black uppercase px-1.5 h-4">v2.4.0</Badge>
+                            <span className="font-black text-sm text-[#2F2A26]">{agent.id}</span>
+                            <Badge className="bg-[#F6F3EE] text-[#2F2A26] border-[#B7C3B0]/30 text-[8px] font-black uppercase px-1 h-3.5">v2.4.0</Badge>
                           </div>
-                          <p className="text-[10px] font-bold text-[#B7C3B0] uppercase flex items-center gap-1.5 mt-0.5">
-                            <Clock className="w-3 h-3" /> Uptime: {agent.uptime}
-                          </p>
+                          <div className="flex items-center gap-1.5 mt-0.5 text-[9px] font-bold text-[#B7C3B0] uppercase">
+                            <Clock className="w-2.5 h-2.5" /> {agent.uptime}
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive transition-colors">
-                          <Pause className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-[#B7C3B0]/10">
-                          <Settings className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                      {/* Progress Section */}
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-end">
-                          <span className="text-[10px] font-black uppercase text-[#2F2A26]/40 tracking-wider">Workload Integrity</span>
-                          <span className="text-xs font-black">{agent.progress}%</span>
+                    </TableCell>
+                    <TableCell className="py-5">
+                      <div className="space-y-2 max-w-[200px]">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[10px] font-bold text-[#2F2A26]/80">{agent.status}</span>
+                          <span className="text-[10px] font-black">{agent.progress}%</span>
                         </div>
-                        <div className="h-1.5 bg-[#F6F3EE] rounded-full overflow-hidden border border-[#B7C3B0]/20">
+                        <div className="h-1 bg-[#F6F3EE] rounded-full overflow-hidden border border-[#B7C3B0]/10">
                           <div 
                             className={cn("h-full transition-all duration-1000", agent.color)} 
                             style={{ width: `${agent.progress}%` }} 
                           />
                         </div>
-                        <p className="text-xs font-bold text-[#2F2A26]/80">{agent.status}</p>
                       </div>
-
-                      {/* Metrics Section */}
-                      <div className="flex items-center justify-around bg-[#F6F3EE]/50 rounded-lg p-3 border border-[#B7C3B0]/10">
+                    </TableCell>
+                    <TableCell className="py-5">
+                      <div className="flex items-center justify-center gap-4 bg-[#F6F3EE]/50 rounded-lg p-2 border border-[#B7C3B0]/10">
                         {Object.entries(agent.metrics).map(([key, val]) => (
                           <div key={key} className="text-center">
-                            <p className="text-[9px] font-black uppercase text-[#B7C3B0] mb-0.5">{key}</p>
-                            <p className="text-xs font-black text-[#2F2A26]">{val}</p>
+                            <p className="text-[8px] font-black uppercase text-[#B7C3B0]">{key}</p>
+                            <p className="text-[10px] font-black text-[#2F2A26]">{val}</p>
                           </div>
                         ))}
                       </div>
-
-                      {/* Live Log */}
-                      <div className="bg-[#2F2A26] rounded-lg p-3 font-mono text-[10px] text-green-400/80 overflow-hidden relative border border-white/5">
-                        <div className="flex items-center gap-2 mb-1.5 opacity-50">
-                          <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                          <span>stdout</span>
-                        </div>
-                        <p className="truncate line-clamp-2">
-                          {agent.log}
-                        </p>
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#2F2A26] to-transparent pointer-events-none opacity-20" />
+                    </TableCell>
+                    <TableCell className="py-5">
+                      <div className="bg-[#2F2A26] rounded-md p-2 font-mono text-[9px] text-green-400/80 max-w-[240px] truncate">
+                        <span className="opacity-40 mr-2">$</span>
+                        {agent.log}
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                    </TableCell>
+                    <TableCell className="text-right py-5">
+                      <div className="flex items-center justify-end gap-1">
+                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive">
+                          <Pause className="w-3.5 h-3.5" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-[#B7C3B0]/10 text-[#2F2A26]/60">
+                          <SettingsIcon className="w-3.5 h-3.5" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </section>
 
-        {/* Exploratory Design 2: High-Level Grid */}
-        <section className="space-y-6">
+        {/* Quick Status Grid (Secondary) */}
+        <section className="space-y-6 opacity-80">
           <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
             <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
-              <Zap className="w-3 h-3" /> Quick Status Grid
+              <Zap className="w-3 h-3" /> System Nodes
             </h2>
           </div>
 
@@ -192,36 +207,7 @@ export default function AgentActivity() {
             ))}
           </div>
         </section>
-
-        {/* Urgent Attention View */}
-        <section className="space-y-6">
-          <div className="flex items-center gap-2 text-destructive border-b border-destructive/10 pb-2">
-            <AlertCircle className="w-4 h-4" />
-            <h2 className="text-xs font-black uppercase tracking-[0.2em]">Intervention Required</h2>
-          </div>
-          
-          <div className="bg-destructive/5 border border-destructive/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-6">
-               <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-inner border border-destructive/10">
-                 <span className="text-3xl">⚠️</span>
-               </div>
-               <div>
-                 <h3 className="text-lg font-black text-[#2F2A26]">VendorRiskMonitor-04 is stalling</h3>
-                 <p className="text-sm text-[#2F2A26]/60 font-medium">Needs human verification on 12 findings for VENDOR-0512 to resume execution.</p>
-               </div>
-            </div>
-            <Button size="lg" className="bg-[#2F2A26] text-white font-black uppercase tracking-widest px-8 rounded-xl hover:scale-[1.02] transition-transform">
-              Resume Agent
-            </Button>
-          </div>
-        </section>
       </div>
     </Shell>
-  );
-}
-
-function Settings(props: any) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
   );
 }
