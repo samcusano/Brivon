@@ -124,19 +124,6 @@ export default function FindingDetail() {
           </div>
 
           <div className="space-y-6">
-            {/* Notification Box */}
-            <Card className="border-amber-200 bg-amber-50/50">
-              <CardContent className="p-4 flex gap-3">
-                <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
-                <div className="space-y-1">
-                  <p className="text-xs font-bold text-amber-900 uppercase tracking-tight">System Alert</p>
-                  <p className="text-xs text-amber-800 leading-relaxed">
-                    This vendor has been flagged for 2 other similar issues in the last 30 days. Priority escalated.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Context */}
             <Card>
               <CardHeader className="pb-2">
