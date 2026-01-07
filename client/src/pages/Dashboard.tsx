@@ -12,7 +12,8 @@ import {
   Users, 
   LayoutGrid,
   ChevronDown,
-  Layers
+  Layers,
+  Filter
 } from 'lucide-react';
 import { Link } from 'wouter';
 import { cn } from '@/lib/utils';
@@ -103,12 +104,12 @@ export default function Dashboard() {
               Priority Queue
             </h2>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="h-9 px-4 gap-2 border-border/50 bg-white/50 hover:bg-white transition-all shadow-sm">
-                    <Layers className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm font-medium text-foreground/80">My Decisions</span>
+                  <Button variant="outline" className="h-9 px-3 gap-2 border-border/50 bg-white/50 hover:bg-white transition-all shadow-sm">
+                    <Layers className="w-3.5 h-3.5 text-muted-foreground" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-foreground/80">My Decisions</span>
                     <ChevronDown className="w-3.5 h-3.5 opacity-50" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -120,8 +121,19 @@ export default function Dashboard() {
                       <span className="font-medium text-sm">{filter.label}</span>
                     </DropdownMenuItem>
                   ))}
-                  <DropdownMenuSeparator />
-                  <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2 py-1.5">Risk Type</DropdownMenuLabel>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="h-9 px-3 gap-2 border-border/50 bg-white/50 hover:bg-white transition-all shadow-sm">
+                    <Filter className="w-3.5 h-3.5 text-muted-foreground" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-foreground/80">Risk Type</span>
+                    <ChevronDown className="w-3.5 h-3.5 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2 py-1.5">By Risk Type</DropdownMenuLabel>
                   {riskFilters.map((filter, i) => (
                     <DropdownMenuItem key={i} className="gap-2 px-2 py-2 cursor-pointer">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary" />
