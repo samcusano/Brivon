@@ -4,20 +4,44 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { ChevronLeft, FileText, Mail, Info, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  FileText, 
+  Mail, 
+  Info, 
+  AlertTriangle, 
+  ShieldCheck,
+  Zap
+} from 'lucide-react';
 import { Link } from 'wouter';
 
 export default function FindingDetail() {
   return (
     <Shell>
-      <div className="p-8 max-w-5xl mx-auto space-y-8 pb-32">
-        <div className="flex items-center gap-4">
-          <Link href="/dashboard">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ChevronLeft className="w-4 h-4" /> Back to Queue
+      <div className="p-8 max-w-5xl mx-auto space-y-8 pb-40">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/dashboard">
+              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
+                <ChevronLeft className="w-4 h-4" /> Back to Queue
+              </Button>
+            </Link>
+            <div className="h-4 w-px bg-border/50 mx-2" />
+            <h1 className="text-xl font-bold tracking-tight">VENDOR-0847: Acme Corp</h1>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+              <ChevronLeft className="w-4 h-4" />
             </Button>
-          </Link>
-          <h1 className="text-xl font-bold">VENDOR-0847: Acme Corp</h1>
+            <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2">
+              Issue 1 of 42
+            </span>
+            <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -140,33 +164,36 @@ export default function FindingDetail() {
               </CardContent>
             </Card>
 
-            {/* Your Decision */}
-            <Card className="border-primary shadow-lg sticky top-24">
-              <CardHeader className="bg-primary/10 border-b border-primary/20">
-                <CardTitle className="text-sm font-bold uppercase tracking-wider text-primary">Your Decision</CardTitle>
-              </CardHeader>
-              <CardContent className="p-6 space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <input type="radio" name="decision" id="accept" className="w-4 h-4 accent-primary" defaultChecked />
-                    <label htmlFor="accept" className="text-sm font-bold">Accept AI Recommendation</label>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <input type="radio" name="decision" id="override" className="w-4 h-4 accent-primary" />
-                    <label htmlFor="override" className="text-sm font-bold">Override recommendation</label>
-                  </div>
-                </div>
+            {/* Removed sticky decision card from sidebar */}
+          </div>
+        </div>
+      </div>
 
-                <div className="space-y-3">
-                  <Button className="w-full bg-primary text-primary-foreground font-bold py-6">
-                    Submit Decision
-                  </Button>
-                  <Button variant="ghost" className="w-full text-muted-foreground font-bold">
-                    Escalate to Manager
-                  </Button>
+      {/* Sticky Bottom Decision Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-t border-border/50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+        <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-8">
+            <Button variant="ghost" className="text-sm font-bold text-muted-foreground hover:text-destructive transition-colors px-0">
+              Escalate
+            </Button>
+            <div className="h-4 w-px bg-border/30" />
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 group cursor-pointer">
+                <div className="w-4 h-4 rounded-full border-2 border-primary/20 group-hover:border-primary transition-colors flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-              </CardContent>
-            </Card>
+                <span className="text-sm font-bold text-muted-foreground group-hover:text-foreground transition-colors">
+                  Overrides recommendations
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Button className="bg-[#1A1A1A] text-white hover:bg-black font-bold h-11 px-8 rounded-lg shadow-sm flex items-center gap-2">
+              <Zap className="w-4 h-4 text-amber-400 fill-amber-400" />
+              Accept AI recommendations
+            </Button>
           </div>
         </div>
       </div>
