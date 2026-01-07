@@ -30,18 +30,6 @@ export default function FindingDetail() {
             <div className="h-4 w-px bg-border/50 mx-2" />
             <h1 className="text-xl font-bold tracking-tight">VENDOR-0847: Acme Corp</h1>
           </div>
-          
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2">
-              Issue 1 of 42
-            </span>
-            <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -78,7 +66,7 @@ export default function FindingDetail() {
             <Card className="border-primary/20">
               <CardHeader className="bg-primary/5 border-b border-border/50 flex flex-row items-center justify-between">
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <span className="text-xl">🤖</span> AI Analysis
+                  AI Analysis
                 </CardTitle>
                 <div className="text-right">
                   <p className="text-xs text-muted-foreground">Confidence</p>
@@ -176,6 +164,18 @@ export default function FindingDetail() {
             <Button variant="ghost" className="text-sm font-bold text-muted-foreground hover:text-destructive transition-colors px-0">
               Escalate
             </Button>
+            <div className="h-4 w-px bg-border/30" />
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2">
+                Issue 1 of 42
+              </span>
+              <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
