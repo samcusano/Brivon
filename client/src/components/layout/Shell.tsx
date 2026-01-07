@@ -21,7 +21,7 @@ import {
   LogOut,
   Filter
 } from 'lucide-react';
-import logoImage from '@assets/image_1766197243611.png';
+import logoImage from '@assets/logo.svg';
 import { Link, useLocation } from 'wouter';
 
 interface ShellProps {
