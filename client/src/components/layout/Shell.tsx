@@ -3,7 +3,6 @@ import { cn } from '@/lib/utils';
 import { 
   LayoutGrid,
   Users as UsersIcon, 
-  Search,
   Settings
 } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
@@ -20,7 +19,6 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
   const mainNavItems = [
     { label: 'Dashboard', icon: LayoutGrid, href: '/dashboard' },
     { label: 'All Agents', icon: UsersIcon, href: '/agents' },
-    { label: 'Search', icon: Search, href: '/search' },
   ];
 
   return (
