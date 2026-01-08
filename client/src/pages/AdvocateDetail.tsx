@@ -12,7 +12,10 @@ import {
   Calendar,
   Award,
   Heart,
-  Share2,
+  HelpCircle,
+  ClipboardList,
+  TrendingUp,
+  BadgeCheck,
   MapPin,
   Languages,
   Briefcase,
@@ -118,6 +121,51 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
         condition: 'Lymphoma',
       },
     ],
+    // Patient Outcome Stats
+    outcomeStats: {
+      appealsApproved: { value: '87%', label: 'Insurance appeals approved' },
+      clinicalTrialsMatched: { value: '43', label: 'Clinical trials matched' },
+      secondOpinions: { value: '156', label: 'Second opinions coordinated' },
+      avgTimeSaved: { value: '12 hrs', label: 'Avg. time saved per patient' },
+    },
+    // Professional Memberships
+    professionalMemberships: [
+      { name: 'National Association of Healthcare Advocacy', acronym: 'NAHAC', verified: true },
+      { name: 'Alliance of Professional Health Advocates', acronym: 'APHA', verified: true },
+      { name: 'Patient Advocate Certification Board', acronym: 'PACB', verified: true },
+      { name: 'Oncology Nursing Society', acronym: 'ONS', verified: true },
+    ],
+    // FAQ
+    faq: [
+      { 
+        question: 'Do you attend appointments with me?', 
+        answer: 'Yes! I can join virtually or in-person (within Boston metro area). I take notes, ask questions you might not think of, and help you process everything afterward.' 
+      },
+      { 
+        question: 'How quickly can we start working together?', 
+        answer: 'Usually within 48 hours. After our intro call, I\'ll send an intake questionnaire, review your medical records, and schedule our first strategy session.' 
+      },
+      { 
+        question: 'Do you communicate with my doctors directly?', 
+        answer: 'With your written permission, absolutely. I can call your care team, clarify treatment plans, and coordinate between specialists on your behalf.' 
+      },
+      { 
+        question: 'What if I can\'t afford your full rate?', 
+        answer: 'I keep 2-3 sliding scale spots open each month for patients with financial hardship. Let\'s talk about it on our intro call—I\'ll be honest about what I can offer.' 
+      },
+    ],
+    // Intake Questionnaire Preview
+    intakePreview: {
+      description: 'Before we meet, I\'ll ask you to complete a brief questionnaire so I can hit the ground running. Here\'s what I\'ll need:',
+      items: [
+        { category: 'Your story', examples: 'Diagnosis timeline, current symptoms, what\'s worrying you most' },
+        { category: 'Medical team', examples: 'Current doctors, hospitals, any specialists you\'ve seen' },
+        { category: 'Insurance info', examples: 'Plan type, any denials or authorization issues' },
+        { category: 'Goals', examples: 'What does success look like for you? What decisions are ahead?' },
+        { category: 'Documents', examples: 'Recent lab results, pathology reports, imaging (I\'ll help you gather these)' },
+      ],
+      timeToComplete: '10-15 minutes',
+    },
     // Human Connection Factors
     humanConnection: {
       communicationStyle: {
@@ -224,7 +272,6 @@ export default function AdvocateDetail() {
   const advocate = advocatesData[advocateId] || defaultAdvocate;
   
   const [selectedOption, setSelectedOption] = useState<'intro' | 'consultation'>('consultation');
-  const [isFavorited, setIsFavorited] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
@@ -237,23 +284,6 @@ export default function AdvocateDetail() {
               <span className="font-medium">Back to advocates</span>
             </button>
           </Link>
-          <div className="flex items-center gap-3">
-            <button 
-              className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-              data-testid="button-share"
-            >
-              <Share2 className="w-4 h-4" />
-              <span className="text-sm font-medium">Share</span>
-            </button>
-            <button 
-              onClick={() => setIsFavorited(!isFavorited)}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-              data-testid="button-save"
-            >
-              <Heart className={cn("w-4 h-4", isFavorited && "fill-red-500 text-red-500")} />
-              <span className="text-sm font-medium">Save</span>
-            </button>
-          </div>
         </div>
       </header>
 
@@ -350,6 +380,43 @@ export default function AdvocateDetail() {
                     {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-emerald-600" />}
                     <span className="font-medium text-gray-800">{cred.label}</span>
                     {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />}
+                  </span>
+                ))}
+              </div>
+            </section>
+
+            {/* Patient Outcome Stats */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                Results I've achieved
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {Object.values(advocate.outcomeStats || {}).map((stat: any, idx: number) => (
+                  <div key={idx} className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                    <div className="text-2xl font-bold text-emerald-700">{stat.value}</div>
+                    <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Professional Memberships */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <BadgeCheck className="w-5 h-5" />
+                Professional memberships
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {advocate.professionalMemberships?.map((membership: any, idx: number) => (
+                  <span 
+                    key={idx} 
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 border border-blue-100 rounded-full text-sm"
+                  >
+                    <span className="font-semibold text-blue-700">{membership.acronym}</span>
+                    <span className="text-gray-600">·</span>
+                    <span className="text-gray-700">{membership.name}</span>
+                    {membership.verified && <CheckCircle className="w-3.5 h-3.5 text-blue-600" />}
                   </span>
                 ))}
               </div>
@@ -562,6 +629,48 @@ export default function AdvocateDetail() {
                       {idx + 1}
                     </div>
                     <span className="text-gray-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Intake Questionnaire Preview */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <ClipboardList className="w-5 h-5" />
+                Before we meet
+              </h2>
+              <p className="text-gray-600 mb-4">{advocate.intakePreview?.description}</p>
+              <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 space-y-4">
+                {advocate.intakePreview?.items?.map((item: any, idx: number) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-semibold flex-shrink-0 mt-0.5">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <span className="font-semibold text-black">{item.category}</span>
+                      <span className="text-gray-600"> — {item.examples}</span>
+                    </div>
+                  </div>
+                ))}
+                <div className="pt-3 border-t border-gray-200 flex items-center gap-2 text-sm text-gray-500">
+                  <Clock className="w-4 h-4" />
+                  <span>Takes about {advocate.intakePreview?.timeToComplete}</span>
+                </div>
+              </div>
+            </section>
+
+            {/* FAQ */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <HelpCircle className="w-5 h-5" />
+                Frequently asked questions
+              </h2>
+              <div className="space-y-4">
+                {advocate.faq?.map((item: any, idx: number) => (
+                  <div key={idx} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                    <h3 className="font-semibold text-black mb-2">{item.question}</h3>
+                    <p className="text-gray-600">{item.answer}</p>
                   </div>
                 ))}
               </div>
