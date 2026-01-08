@@ -17,7 +17,7 @@ const advocates = [
     id: 1,
     name: 'Dr. Sarah Mitchell',
     username: 'SarahMitchell',
-    title: '20+ years in the oncology trenches. Now she fights beside you—translating the chaos into a battle plan you can win.',
+    title: '20+ years in oncology. She translates the chaos into a clear path forward—and stands beside you every step.',
     price: 150,
     image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -29,19 +29,19 @@ const advocates = [
     id: 2,
     name: 'Maria Rodriguez',
     username: 'MariaRodriguez',
-    title: 'Bilingual warrior who cuts through insurance red tape. Your claim denied? She makes them think twice.',
+    title: 'Bilingual champion who cuts through insurance red tape. Claim denied? She becomes your voice.',
     price: 95,
     image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.9,
     reviews: 187,
-    specialty: 'Insurance Fighter',
+    specialty: 'Insurance Advocacy',
   },
   {
     id: 3,
     name: 'James Chen',
     username: 'JamesChen',
-    title: 'Healthcare attorney who switched sides. Now he uses the system\'s own rules to make sure you win.',
+    title: 'Healthcare attorney who switched sides. Now he uses the system\'s own rules to advocate for you.',
     price: 200,
     image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -65,7 +65,7 @@ const advocates = [
     id: 5,
     name: 'Robert Thompson',
     username: 'RobertThompson',
-    title: 'Former hospital insider. He knows their playbook—and how to make it work for you, not against you.',
+    title: 'Former hospital insider. He knows how the system works—and makes sure it works for you.',
     price: 125,
     image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -77,7 +77,7 @@ const advocates = [
     id: 6,
     name: 'Lisa Park',
     username: 'LisaPark',
-    title: 'Mental health battles are real battles. She fights to get you the care you deserve—no stigma, no barriers.',
+    title: 'Mental health matters. She champions your access to care—no stigma, no barriers, just support.',
     price: 110,
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -89,7 +89,7 @@ const advocates = [
     id: 7,
     name: 'Michael Davis',
     username: 'MichaelDavis',
-    title: 'Chronic illness survivor. He\'s lived the fight you\'re in—and now maps the path forward with you.',
+    title: 'Chronic illness survivor. He\'s been where you are—and now helps you chart your own path forward.',
     price: 85,
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -101,7 +101,7 @@ const advocates = [
     id: 8,
     name: 'Angela Foster',
     username: 'AngelaFoster',
-    title: 'Caring for aging parents is brutal. She turns the maze of Medicare and care decisions into a clear battle plan.',
+    title: 'Caring for aging parents is overwhelming. She turns the maze of Medicare into a clear roadmap.',
     price: 140,
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -137,13 +137,13 @@ const advocates = [
     id: 11,
     name: 'David Kim',
     username: 'DavidKim',
-    title: 'Insurance companies bank on you giving up. He doesn\'t. Appeals, denials, fine print—he breaks through it all.',
+    title: 'Insurance companies count on you giving up. He doesn\'t. Appeals, denials, fine print—he breaks through it all.',
     price: 120,
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 5.0,
     reviews: 234,
-    specialty: 'Claims Warrior',
+    specialty: 'Claims Champion',
   },
   {
     id: 12,
@@ -214,7 +214,7 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           <p className="text-gray-600" data-testid="text-results">
-            Warriors who have your back. Because this isn't a solo fight.
+            Champions who have your back. Because you shouldn't do this alone.
           </p>
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -238,8 +238,8 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Battle-Tested Advocates</h3>
-            <p className="text-gray-500 text-sm mt-1">They've been in the trenches. Now they're ready to fight alongside you.</p>
+            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Proven Advocates</h3>
+            <p className="text-gray-500 text-sm mt-1">They've been where you are. Now they're ready to stand alongside you.</p>
           </div>
           <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors" data-testid="button-see-all">
             See all
@@ -317,7 +317,7 @@ export default function Marketplace() {
                   className="w-full bg-black text-white font-medium py-3 rounded-xl hover:bg-gray-800 transition-colors"
                   data-testid={`button-book-${advocate.id}`}
                 >
-                  Start the Fight Together
+                  Book Your Advocate
                 </button>
               </div>
             </div>
@@ -328,7 +328,7 @@ export default function Marketplace() {
       {/* Footer */}
       <footer className="border-t border-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500">
-          © 2026 PatientAdvocate. Take back control. Rule your treatment. Own your health story.
+          © 2026 PatientAdvocate. Your voice. Your advocate. Your health story.
         </div>
       </footer>
     </div>
