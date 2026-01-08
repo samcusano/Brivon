@@ -276,7 +276,6 @@ export default function AdvocateDetail() {
   const advocate = advocatesData[advocateId] || defaultAdvocate;
   
   const [selectedOption, setSelectedOption] = useState<'intro' | 'consultation'>('consultation');
-  const [headerDesign, setHeaderDesign] = useState<1 | 2 | 3 | 4>(1);
 
   return (
     <div className="min-h-screen bg-white">
@@ -293,167 +292,81 @@ export default function AdvocateDetail() {
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {/* Design Switcher - Remove this after choosing */}
-        <div className="mb-6 p-4 bg-stone-100 rounded-xl">
-          <p className="text-sm font-medium text-stone-600 mb-3">Preview header designs:</p>
-          <div className="flex gap-2">
-            {[1, 2, 3, 4].map((num) => (
-              <button
-                key={num}
-                onClick={() => setHeaderDesign(num as 1 | 2 | 3 | 4)}
-                className={cn(
-                  "px-4 py-2 rounded-lg text-sm font-medium transition-all",
-                  headerDesign === num
-                    ? "bg-orange-800 text-white"
-                    : "bg-white text-stone-600 hover:bg-stone-50 border border-stone-200"
-                )}
-              >
-                Design {num}
-              </button>
-            ))}
+        {/* Hero Section - Large image with info beside */}
+        <div className="bg-stone-100 rounded-2xl p-8 mb-10">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+            {/* Large Circular Photo */}
+            <div className="relative flex-shrink-0">
+              <div className="w-48 h-48 rounded-full overflow-hidden bg-stone-200 border-4 border-white shadow-lg">
+                <img 
+                  src={advocate.image} 
+                  alt={advocate.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Verified Badge */}
+              <div className="absolute bottom-2 right-2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-white">
+                <CheckCircle className="w-6 h-6 text-orange-800" />
+              </div>
+            </div>
+
+            {/* Info Section */}
+            <div className="flex-1 text-center md:text-left">
+              {/* Name */}
+              <h1 className="text-3xl font-bold text-black mb-3" data-testid="text-advocate-name">
+                {advocate.name}
+              </h1>
+
+              {/* Badges Row */}
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
+                <span className="inline-flex items-center gap-1.5 text-sm text-stone-600">
+                  <CheckCircle className="w-4 h-4 text-orange-800" />
+                  Verified
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-stone-600">
+                  <Star className="w-4 h-4 text-orange-800" />
+                  Top Advocate
+                </span>
+              </div>
+
+              {/* Specialty/Title */}
+              <p className="text-sm text-stone-500 mb-3">{advocate.specialty} • {advocate.credentials[0]?.label}</p>
+
+              {/* Location Row */}
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-stone-500 mb-4">
+                <span className="inline-flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4" />
+                  {advocate.location}
+                </span>
+                <span className="text-stone-300">|</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock className="w-4 h-4" />
+                  {advocate.responseTime}
+                </span>
+                <span className="text-stone-300">|</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Languages className="w-4 h-4" />
+                  {advocate.languages.join(', ')}
+                </span>
+              </div>
+
+              {/* Rating + Stats Row */}
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm">
+                <div className="flex items-center gap-1.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-black text-black" />
+                  ))}
+                  <span className="font-semibold text-black ml-1">{advocate.rating}</span>
+                  <span className="text-stone-500">| {advocate.reviews} Reviews</span>
+                </div>
+                <span className="text-stone-300">|</span>
+                <span className="text-stone-500">{advocate.stats.patientsHelped.toLocaleString()}+ Patients Helped</span>
+                <span className="text-stone-300">|</span>
+                <span className="text-stone-500">{advocate.stats.yearsExperience} Years Experience</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* DESIGN 1: Clean Horizontal - LinkedIn-style professional */}
-        {headerDesign === 1 && (
-          <div className="border-b border-stone-200 pb-8 mb-10">
-            <div className="flex items-start gap-6">
-              <div className="w-24 h-24 rounded-full overflow-hidden bg-stone-200 border-2 border-white shadow-md flex-shrink-0">
-                <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-1">
-                  <h1 className="text-2xl font-bold text-black" data-testid="text-advocate-name">{advocate.name}</h1>
-                  <CheckCircle className="w-5 h-5 text-orange-800" />
-                </div>
-                <p className="text-stone-600 mb-2">{advocate.specialty} • {advocate.credentials[0]?.label}</p>
-                <p className="text-sm text-stone-500 mb-3">{advocate.location} • Responds {advocate.responseTime}</p>
-                <div className="flex items-center gap-4 text-sm">
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 fill-black text-black" />
-                    <span className="font-semibold">{advocate.rating}</span>
-                    <span className="text-stone-500">({advocate.reviews})</span>
-                  </div>
-                  <span className="text-stone-300">•</span>
-                  <span className="text-stone-500">{advocate.stats.patientsHelped.toLocaleString()}+ helped</span>
-                  <span className="text-stone-300">•</span>
-                  <span className="text-stone-500">{advocate.stats.yearsExperience} years</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* DESIGN 2: Centered Card - Warm & Approachable */}
-        {headerDesign === 2 && (
-          <div className="text-center mb-10">
-            <div className="w-20 h-20 rounded-full overflow-hidden bg-stone-200 border-3 border-orange-100 shadow-lg mx-auto mb-4">
-              <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
-            </div>
-            <h1 className="text-2xl font-bold text-black mb-1" data-testid="text-advocate-name">{advocate.name}</h1>
-            <p className="text-orange-800 font-medium text-sm mb-2">{advocate.specialty}</p>
-            <p className="text-stone-500 text-sm mb-4">{advocate.credentials[0]?.label} • {advocate.location}</p>
-            <div className="flex items-center justify-center gap-6 text-sm">
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-1 mb-1">
-                  <Star className="w-4 h-4 fill-black text-black" />
-                  <span className="font-bold text-black">{advocate.rating}</span>
-                </div>
-                <span className="text-stone-500 text-xs">{advocate.reviews} reviews</span>
-              </div>
-              <div className="w-px h-8 bg-stone-200"></div>
-              <div className="text-center">
-                <div className="font-bold text-black mb-1">{advocate.stats.patientsHelped.toLocaleString()}+</div>
-                <span className="text-stone-500 text-xs">patients helped</span>
-              </div>
-              <div className="w-px h-8 bg-stone-200"></div>
-              <div className="text-center">
-                <div className="font-bold text-black mb-1">{advocate.stats.yearsExperience}</div>
-                <span className="text-stone-500 text-xs">years exp.</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* DESIGN 3: Two-Column Split - Quote-Forward */}
-        {headerDesign === 3 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 pb-10 border-b border-stone-200">
-            <div>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden bg-stone-200 flex-shrink-0">
-                  <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-black" data-testid="text-advocate-name">{advocate.name}</h1>
-                  <p className="text-sm text-stone-500">{advocate.specialty}</p>
-                </div>
-              </div>
-              <blockquote className="text-lg text-stone-700 italic leading-relaxed">
-                "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
-              </blockquote>
-            </div>
-            <div className="flex flex-col justify-center">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="bg-stone-50 rounded-lg p-3">
-                  <div className="text-stone-500 text-xs mb-1">Experience</div>
-                  <div className="font-semibold text-black">{advocate.stats.yearsExperience} years</div>
-                </div>
-                <div className="bg-stone-50 rounded-lg p-3">
-                  <div className="text-stone-500 text-xs mb-1">Patients helped</div>
-                  <div className="font-semibold text-black">{advocate.stats.patientsHelped.toLocaleString()}+</div>
-                </div>
-                <div className="bg-stone-50 rounded-lg p-3">
-                  <div className="text-stone-500 text-xs mb-1">Rating</div>
-                  <div className="font-semibold text-black flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 fill-black text-black" />
-                    {advocate.rating} ({advocate.reviews})
-                  </div>
-                </div>
-                <div className="bg-stone-50 rounded-lg p-3">
-                  <div className="text-stone-500 text-xs mb-1">Location</div>
-                  <div className="font-semibold text-black">{advocate.location}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* DESIGN 4: Compact Inline - Directory Style */}
-        {headerDesign === 4 && (
-          <div className="bg-stone-50 rounded-xl p-6 mb-10">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full overflow-hidden bg-stone-200 flex-shrink-0 ring-2 ring-white shadow">
-                <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <h1 className="text-lg font-bold text-black truncate" data-testid="text-advocate-name">{advocate.name}</h1>
-                  <span className="inline-flex items-center gap-1 text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full font-medium">
-                    <CheckCircle className="w-3 h-3" /> Verified
-                  </span>
-                </div>
-                <p className="text-sm text-stone-600 truncate">{advocate.specialty} • {advocate.credentials[0]?.label}</p>
-              </div>
-              <div className="hidden md:flex items-center gap-6 text-sm">
-                <div className="text-center">
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 fill-black text-black" />
-                    <span className="font-bold">{advocate.rating}</span>
-                  </div>
-                  <span className="text-xs text-stone-500">{advocate.reviews} reviews</span>
-                </div>
-                <div className="text-center">
-                  <div className="font-bold text-black">{advocate.stats.patientsHelped.toLocaleString()}+</div>
-                  <span className="text-xs text-stone-500">helped</span>
-                </div>
-                <div className="text-center">
-                  <div className="font-bold text-black">{advocate.stats.yearsExperience} yrs</div>
-                  <span className="text-xs text-stone-500">experience</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content */}
