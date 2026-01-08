@@ -276,7 +276,7 @@ export default function AdvocateDetail() {
   const advocate = advocatesData[advocateId] || defaultAdvocate;
   
   const [selectedOption, setSelectedOption] = useState<'intro' | 'consultation'>('consultation');
-  const [headerDesign, setHeaderDesign] = useState<1 | 2 | 3 | 4>(1);
+  const [headerDesign, setHeaderDesign] = useState<1 | 2 | 3 | 4>(3);
 
   return (
     <div className="min-h-screen bg-white">
@@ -388,9 +388,11 @@ export default function AdvocateDetail() {
                   <p className="text-sm text-stone-500">{advocate.specialty}</p>
                 </div>
               </div>
-              <blockquote className="text-lg text-stone-700 italic leading-relaxed">
-                "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
-              </blockquote>
+              <div className="bg-orange-50 border-l-4 border-orange-800 rounded-r-lg p-4">
+                <p className="text-lg text-stone-700 leading-relaxed">
+                  "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
+                </p>
+              </div>
             </div>
             <div className="flex flex-col justify-center">
               <div className="grid grid-cols-2 gap-4 text-sm">
