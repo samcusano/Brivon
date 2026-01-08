@@ -210,10 +210,10 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
         story: 'I was my mother\'s caregiver through her ovarian cancer journey. I know what it\'s like to be on the other side of the hospital bed—the fear, the exhaustion, the feeling of helplessness. It\'s why I do this work.',
       },
       boundaries: [
-        'I don\'t give medical advice or tell you what treatment to choose',
-        'I don\'t replace your medical team—I help you work with them',
-        'I don\'t handle legal malpractice cases (but can refer you)',
-        'You prefer an advocate who will be more directive about treatment choices',
+        'Give medical advice or recommend treatments',
+        'Replace your medical team',
+        'Handle legal malpractice cases',
+        'Make decisions for you',
       ],
       network: {
         description: 'I have direct relationships built over 20+ years with oncologists, nurse navigators, social workers, and billing departments at major cancer centers across the Northeast. I\'m not cold-calling—I\'m calling colleagues.',
@@ -249,11 +249,11 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
     // Fit (softer framing for "uncomfortable questions")
     fit: {
       bestFor: [
-        'Patients facing new or complex cancer diagnoses',
-        'Families who feel overwhelmed by conflicting opinions',
-        'Anyone who needs help understanding treatment options',
-        'People navigating insurance denials or authorization battles',
-        'Patients who want someone at appointments taking notes',
+        'Navigate new or complex diagnoses',
+        'Coordinate between multiple specialists',
+        'Understand treatment options and trade-offs',
+        'Fight insurance denials and appeals',
+        'Attend appointments and take notes',
       ],
       worksBestWhen: [
         'You\'re ready to be an active participant in your care',
