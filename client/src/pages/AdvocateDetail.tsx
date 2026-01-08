@@ -495,37 +495,42 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* What I do */}
+            {/* What I do / What I don't do - Side by side */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <Handshake className="w-5 h-5" />
-                What I do
-              </h2>
-              <div className="space-y-2">
-                {advocate.fit?.bestFor?.map((item: string, idx: number) => (
-                  <div key={idx} className="flex items-start gap-2 text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>{item}</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* What I do */}
+                <div>
+                  <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                    <Handshake className="w-5 h-5" />
+                    What I do
+                  </h2>
+                  <div className="space-y-2">
+                    {advocate.fit?.bestFor?.map((item: string, idx: number) => (
+                      <div key={idx} className="flex items-start gap-2 text-gray-700">
+                        <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </section>
+                </div>
 
-            {/* What I don't do */}
-            <section>
-              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <Shield className="w-5 h-5" />
-                What I don't do
-              </h2>
-              <p className="text-gray-600 mb-4">Clear expectations help us both. No hard feelings if it doesn't work out. Here's where my role ends:</p>
-              <div className="space-y-2">
-                {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
-                  <div key={idx} className="flex items-start gap-2 text-gray-700">
-                    <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                    <span>{boundary}</span>
+                {/* What I don't do */}
+                <div>
+                  <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                    <Shield className="w-5 h-5" />
+                    What I don't do
+                  </h2>
+                  <div className="space-y-2">
+                    {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
+                      <div key={idx} className="flex items-start gap-2 text-gray-700">
+                        <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                        <span>{boundary}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
+              <p className="text-sm text-gray-500 mt-6">Clear expectations help us both. No hard feelings if it doesn't work out.</p>
             </section>
 
             {/* Network */}
