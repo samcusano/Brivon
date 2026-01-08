@@ -61,15 +61,15 @@ const advocatesData: Record<string, any> = {
     ],
     about: `After 22 years as an oncology nurse at Dana-Farber Cancer Institute, I know firsthand how overwhelming a cancer diagnosis can be. The medical system moves fast, the terminology is confusing, and you're making life-changing decisions while processing the hardest news of your life.
 
-I became an advocate because I saw too many patients fall through the cracks—missing critical information, not knowing their options, or feeling unheard by their care team.
+I became an advocate because I believe everyone deserves a champion in their corner—someone who listens, explains, and stands beside you when the path feels uncertain.
 
-Now I work exclusively for you. I attend appointments, ask the questions you didn't know to ask, coordinate between your specialists, and make sure you understand every option before making decisions. Your voice matters. Your preferences matter. And you deserve someone who has the time and expertise to make sure you're getting the best possible care.`,
+Now I work exclusively for you. I attend appointments, ask the questions you didn't know to ask, coordinate between your specialists, and make sure you understand every option before making decisions. You're not just a patient number—you're a person with a story, and I'm here to make sure your voice is heard loud and clear.`,
     whatToExpect: [
-      'Pre-call questionnaire to understand your situation',
-      'Video consultation to discuss your diagnosis and concerns',
-      'Written summary of your options and next steps',
-      'Help preparing questions for your medical team',
-      'Follow-up support via message for 7 days',
+      'A brief questionnaire so I can understand your story before we meet',
+      'A video call where we talk through your situation—at your pace, in your words',
+      'A clear, written summary of your options and recommended next steps',
+      'Help preparing the right questions for your medical team',
+      '7 days of follow-up messaging—because questions don\'t stop when the call ends',
     ],
     stats: {
       patientsHelped: 1250,
@@ -263,7 +263,7 @@ export default function AdvocateDetail() {
 
             {/* Specializations */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4">What I Help With</h2>
+              <h2 className="text-xl font-bold text-black mb-4">How I Stand With You</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {advocate.specializations.map((spec: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-2 text-gray-700">
@@ -276,7 +276,7 @@ export default function AdvocateDetail() {
 
             {/* Conditions */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4">Conditions I've Worked With</h2>
+              <h2 className="text-xl font-bold text-black mb-4">Patients I've Championed</h2>
               <div className="flex flex-wrap gap-2">
                 {advocate.conditionsHandled.map((condition: string, idx: number) => (
                   <span 
@@ -357,7 +357,7 @@ export default function AdvocateDetail() {
                     <span className="font-semibold text-black">Free Intro Call</span>
                     <span className="text-emerald-600 font-semibold">Free</span>
                   </div>
-                  <p className="text-sm text-gray-500">15-minute call to see if we're a good fit</p>
+                  <p className="text-sm text-gray-500">15 minutes to share your story and see if I'm the right champion for you</p>
                 </button>
 
                 <button
@@ -374,7 +374,7 @@ export default function AdvocateDetail() {
                     <span className="font-semibold text-black">Full Consultation</span>
                     <span className="font-semibold text-black">${advocate.price}</span>
                   </div>
-                  <p className="text-sm text-gray-500">60-minute deep dive into your situation</p>
+                  <p className="text-sm text-gray-500">60 minutes focused entirely on you—your questions, your options, your path forward</p>
                 </button>
               </div>
 
@@ -403,19 +403,19 @@ export default function AdvocateDetail() {
               <div className="space-y-3 pt-6 border-t border-gray-100">
                 <div className="flex items-center gap-3 text-sm text-gray-600">
                   <Shield className="w-4 h-4 text-emerald-600" />
-                  <span>100% satisfaction guarantee</span>
+                  <span>Your satisfaction, guaranteed</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-600">
                   <Video className="w-4 h-4 text-emerald-600" />
-                  <span>Secure video call platform</span>
+                  <span>Private, secure video—just you and your advocate</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-600">
                   <FileCheck className="w-4 h-4 text-emerald-600" />
-                  <span>Written summary after every session</span>
+                  <span>Written summary so nothing gets lost</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-600">
                   <MessageCircle className="w-4 h-4 text-emerald-600" />
-                  <span>7-day follow-up messaging included</span>
+                  <span>7 days of support—I'm in your corner</span>
                 </div>
               </div>
             </div>
@@ -426,13 +426,13 @@ export default function AdvocateDetail() {
         <section className="mt-16 p-6 bg-amber-50 border border-amber-200 rounded-2xl">
           <h3 className="font-bold text-black mb-3 flex items-center gap-2">
             <AlertCircle className="w-5 h-5 text-amber-600" />
-            Important Information
+            Good to Know
           </h3>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li>• Patient advocates do not provide medical advice or diagnoses—they help you understand your options and navigate the healthcare system.</li>
-            <li>• Your advocate works exclusively for you, not for any hospital, insurance company, or healthcare provider.</li>
-            <li>• All conversations are confidential and HIPAA-compliant.</li>
-            <li>• You can request a different advocate at any time if the fit isn't right.</li>
+            <li>• Your advocate helps you understand your options and navigate the system—not give medical advice. Your doctors remain your medical decision-makers.</li>
+            <li>• Your advocate works only for you. No hospital. No insurance company. Just you.</li>
+            <li>• Everything you share stays between us—confidential and HIPAA-protected.</li>
+            <li>• Not the right fit? No hard feelings. You can switch advocates anytime.</li>
           </ul>
         </section>
       </main>
