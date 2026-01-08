@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, ChevronDown, CheckCircle, Star, Users, Award, Ribbon, Pill, Brain, Handshake, Baby } from 'lucide-react';
+import { Heart, CheckCircle, Star, Users, Award, Ribbon, Pill, Brain, Handshake, Baby, Grid3X3, LayoutList, LayoutGrid } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const categories = [
@@ -159,9 +159,192 @@ const advocates = [
   },
 ];
 
+// Layout 1: Classic Grid Cards
+function GridLayout({ advocates }: { advocates: typeof advocates }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {advocates.map((advocate) => (
+        <div
+          key={advocate.id}
+          className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
+          data-testid={`card-advocate-${advocate.id}`}
+        >
+          <button 
+            className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+            data-testid={`button-favorite-${advocate.id}`}
+          >
+            <Heart className="w-4 h-4 text-gray-600" />
+          </button>
+
+          {advocate.isTopExpert && (
+            <div className="absolute top-3 left-3 z-10 bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
+              <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
+              Top Advocate
+            </div>
+          )}
+
+          <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+            <img
+              src={advocate.image}
+              alt={advocate.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+
+          <div className="p-4">
+            <div className="flex items-center gap-2 mb-1">
+              <h4 className="font-semibold text-black">{advocate.name}</h4>
+              {advocate.isTopExpert && (
+                <CheckCircle className="w-4 h-4 text-black" strokeWidth={1.5} />
+              )}
+            </div>
+
+            <p className="text-xs text-emerald-600 font-medium mb-2">{advocate.specialty}</p>
+            
+            <p className="text-lg font-bold text-black mb-2">
+              ${advocate.price} <span className="text-sm font-normal text-gray-500">• Consultation</span>
+            </p>
+
+            <p className="text-sm text-gray-600 line-clamp-2">{advocate.title}</p>
+
+            <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-gray-100">
+              <Star className="w-3.5 h-3.5 fill-black text-black" />
+              <span className="text-sm font-medium text-black">{advocate.rating}</span>
+              <span className="text-sm text-gray-400">({advocate.reviews} reviews)</span>
+            </div>
+          </div>
+
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white to-transparent pt-8 pb-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button className="w-full bg-black text-white font-medium py-3 rounded-xl hover:bg-gray-800 transition-colors">
+              Book Consultation
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Layout 2: Horizontal List Cards
+function ListLayout({ advocates }: { advocates: typeof advocates }) {
+  return (
+    <div className="flex flex-col gap-4">
+      {advocates.map((advocate) => (
+        <div
+          key={advocate.id}
+          className="group flex bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
+          data-testid={`card-advocate-${advocate.id}`}
+        >
+          <div className="w-48 h-48 flex-shrink-0 overflow-hidden bg-gray-100 relative">
+            <img
+              src={advocate.image}
+              alt={advocate.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            {advocate.isTopExpert && (
+              <div className="absolute top-3 left-3 bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
+                <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
+                Top
+              </div>
+            )}
+          </div>
+
+          <div className="flex-1 p-5 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <h4 className="text-lg font-semibold text-black">{advocate.name}</h4>
+                {advocate.isTopExpert && (
+                  <CheckCircle className="w-4 h-4 text-black" strokeWidth={1.5} />
+                )}
+                <span className="text-xs text-emerald-600 font-medium bg-emerald-50 px-2 py-0.5 rounded-full">{advocate.specialty}</span>
+              </div>
+
+              <p className="text-gray-600 mt-2 line-clamp-2">{advocate.title}</p>
+              
+              <div className="flex items-center gap-4 mt-3">
+                <div className="flex items-center gap-1.5">
+                  <Star className="w-4 h-4 fill-black text-black" />
+                  <span className="font-medium text-black">{advocate.rating}</span>
+                  <span className="text-gray-400">({advocate.reviews})</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between mt-4">
+              <p className="text-xl font-bold text-black">
+                ${advocate.price} <span className="text-sm font-normal text-gray-500">per session</span>
+              </p>
+              <div className="flex items-center gap-2">
+                <button className="p-2 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors">
+                  <Heart className="w-5 h-5 text-gray-600" />
+                </button>
+                <button className="bg-black text-white font-medium px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors">
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Layout 3: Compact Tiles
+function TileLayout({ advocates }: { advocates: typeof advocates }) {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+      {advocates.map((advocate) => (
+        <div
+          key={advocate.id}
+          className="group relative bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer text-center"
+          data-testid={`card-advocate-${advocate.id}`}
+        >
+          <div className="relative pt-4 px-4">
+            <div className="w-20 h-20 mx-auto rounded-full overflow-hidden ring-2 ring-gray-100 group-hover:ring-emerald-200 transition-all">
+              <img
+                src={advocate.image}
+                alt={advocate.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {advocate.isTopExpert && (
+              <div className="absolute top-2 right-2">
+                <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" />
+              </div>
+            )}
+          </div>
+
+          <div className="p-3">
+            <div className="flex items-center justify-center gap-1 mb-1">
+              <h4 className="font-semibold text-black text-sm truncate">{advocate.name.split(' ')[0]}</h4>
+              {advocate.isTopExpert && (
+                <CheckCircle className="w-3 h-3 text-black flex-shrink-0" strokeWidth={1.5} />
+              )}
+            </div>
+
+            <p className="text-xs text-emerald-600 font-medium mb-2 truncate">{advocate.specialty}</p>
+
+            <div className="flex items-center justify-center gap-1 mb-2">
+              <Star className="w-3 h-3 fill-black text-black" />
+              <span className="text-xs font-medium text-black">{advocate.rating}</span>
+            </div>
+            
+            <p className="text-sm font-bold text-black mb-3">${advocate.price}</p>
+
+            <button className="w-full bg-gray-100 text-black text-xs font-medium py-2 rounded-lg group-hover:bg-black group-hover:text-white transition-colors">
+              Book
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Marketplace() {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [showFilters, setShowFilters] = useState(false);
+  const [layout, setLayout] = useState<'grid' | 'list' | 'tile'>('grid');
 
   return (
     <div className="min-h-screen bg-white">
@@ -216,21 +399,55 @@ export default function Marketplace() {
           <p className="text-gray-600" data-testid="text-results">
             Connect with experienced advocates who help you navigate healthcare
           </p>
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
-            data-testid="button-filters"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="4" y1="6" x2="20" y2="6" />
-              <line x1="4" y1="12" x2="20" y2="12" />
-              <line x1="4" y1="18" x2="20" y2="18" />
-              <circle cx="8" cy="6" r="2" fill="currentColor" />
-              <circle cx="16" cy="12" r="2" fill="currentColor" />
-              <circle cx="10" cy="18" r="2" fill="currentColor" />
-            </svg>
-            Filters
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Layout Toggle */}
+            <div className="flex items-center border border-gray-200 rounded-lg p-1">
+              <button
+                onClick={() => setLayout('grid')}
+                className={cn(
+                  "p-2 rounded-md transition-colors",
+                  layout === 'grid' ? "bg-black text-white" : "text-gray-500 hover:text-black"
+                )}
+                data-testid="button-layout-grid"
+              >
+                <LayoutGrid className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setLayout('list')}
+                className={cn(
+                  "p-2 rounded-md transition-colors",
+                  layout === 'list' ? "bg-black text-white" : "text-gray-500 hover:text-black"
+                )}
+                data-testid="button-layout-list"
+              >
+                <LayoutList className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setLayout('tile')}
+                className={cn(
+                  "p-2 rounded-md transition-colors",
+                  layout === 'tile' ? "bg-black text-white" : "text-gray-500 hover:text-black"
+                )}
+                data-testid="button-layout-tile"
+              >
+                <Grid3X3 className="w-4 h-4" />
+              </button>
+            </div>
+            <button
+              className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+              data-testid="button-filters"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="18" x2="20" y2="18" />
+                <circle cx="8" cy="6" r="2" fill="currentColor" />
+                <circle cx="16" cy="12" r="2" fill="currentColor" />
+                <circle cx="10" cy="18" r="2" fill="currentColor" />
+              </svg>
+              Filters
+            </button>
+          </div>
         </div>
       </div>
 
@@ -250,79 +467,11 @@ export default function Marketplace() {
         </div>
       </div>
 
-      {/* Advocate Cards Grid */}
+      {/* Advocate Cards - Dynamic Layout */}
       <div className="max-w-7xl mx-auto px-6 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {advocates.map((advocate) => (
-            <div
-              key={advocate.id}
-              className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
-              data-testid={`card-advocate-${advocate.id}`}
-            >
-              {/* Favorite Button */}
-              <button 
-                className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                data-testid={`button-favorite-${advocate.id}`}
-              >
-                <Heart className="w-4 h-4 text-gray-600" />
-              </button>
-
-              {/* Top Advocate Badge */}
-              {advocate.isTopExpert && (
-                <div className="absolute top-3 left-3 z-10 bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
-                  Top Advocate
-                </div>
-              )}
-
-              {/* Image */}
-              <div className="aspect-[4/3] overflow-hidden bg-gray-100">
-                <img
-                  src={advocate.image}
-                  alt={advocate.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-1">
-                  <h4 className="font-semibold text-black" data-testid={`text-name-${advocate.id}`}>{advocate.name}</h4>
-                  {advocate.isTopExpert && (
-                    <CheckCircle className="w-4 h-4 text-black" strokeWidth={1.5} />
-                  )}
-                </div>
-
-                <p className="text-xs text-emerald-600 font-medium mb-2">{advocate.specialty}</p>
-                
-                <p className="text-lg font-bold text-black mb-2" data-testid={`text-price-${advocate.id}`}>
-                  ${advocate.price} <span className="text-sm font-normal text-gray-500">• Consultation</span>
-                </p>
-
-                <p className="text-sm text-gray-600 line-clamp-2" data-testid={`text-title-${advocate.id}`}>
-                  {advocate.title}
-                </p>
-
-                {/* Rating */}
-                <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-gray-100">
-                  <Star className="w-3.5 h-3.5 fill-black text-black" />
-                  <span className="text-sm font-medium text-black">{advocate.rating}</span>
-                  <span className="text-sm text-gray-400">({advocate.reviews} reviews)</span>
-                </div>
-              </div>
-
-              {/* Book Consultation Button */}
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white to-transparent pt-8 pb-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button 
-                  className="w-full bg-black text-white font-medium py-3 rounded-xl hover:bg-gray-800 transition-colors"
-                  data-testid={`button-book-${advocate.id}`}
-                >
-                  Book Consultation
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        {layout === 'grid' && <GridLayout advocates={advocates} />}
+        {layout === 'list' && <ListLayout advocates={advocates} />}
+        {layout === 'tile' && <TileLayout advocates={advocates} />}
       </div>
 
       {/* Footer */}
