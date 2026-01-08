@@ -271,7 +271,7 @@ export default function Marketplace() {
               {/* Top Advocate Badge */}
               {advocate.isTopExpert && (
                 <div className="absolute top-3 left-3 z-10 bg-stone-200 text-stone-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 text-orange-700" strokeWidth={1.5} />
+                  <Star className="w-3 h-3 text-orange-800" strokeWidth={1.5} />
                   Top Advocate
                 </div>
               )}
@@ -294,7 +294,7 @@ export default function Marketplace() {
                   )}
                 </div>
 
-                <p className="text-xs text-orange-700 font-medium mb-2">{advocate.specialty}</p>
+                <p className="text-xs text-orange-800 font-medium mb-2">{advocate.specialty}</p>
                 
                 <p className="text-lg font-bold text-black mb-2" data-testid={`text-price-${advocate.id}`}>
                   ${advocate.price} <span className="text-sm font-normal text-stone-500">• Consultation</span>
@@ -315,7 +315,7 @@ export default function Marketplace() {
               {/* Book Consultation Button */}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white to-transparent pt-8 pb-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
-                  className="w-full bg-orange-700 text-white font-semibold py-3 rounded-xl hover:bg-orange-800 transition-colors"
+                  className="w-full bg-orange-800 text-white font-semibold py-3 rounded-xl hover:bg-orange-900 transition-colors"
                   data-testid={`button-book-${advocate.id}`}
                 >
                   Book Your Advocate
