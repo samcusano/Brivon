@@ -3,147 +3,159 @@ import { Heart, ChevronDown, Check, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const categories = [
-  { id: 'all', label: 'All Experts', icon: '👥' },
-  { id: 'top', label: 'Top Experts', icon: '⭐' },
-  { id: 'home', label: 'Home', icon: '🏠' },
-  { id: 'wellness', label: 'Wellness', icon: '🧘' },
-  { id: 'career', label: 'Career & Business', icon: '💼' },
-  { id: 'style', label: 'Style & Beauty', icon: '✨' },
-  { id: 'astrology', label: 'Astrology & more', icon: '🔮' },
+  { id: 'all', label: 'All Advocates', icon: '👥' },
+  { id: 'top', label: 'Top Advocates', icon: '⭐' },
+  { id: 'cancer', label: 'Cancer Care', icon: '🎗️' },
+  { id: 'chronic', label: 'Chronic Illness', icon: '💊' },
+  { id: 'mental', label: 'Mental Health', icon: '🧠' },
+  { id: 'elderly', label: 'Elder Care', icon: '🤝' },
+  { id: 'pediatric', label: 'Pediatric Care', icon: '👶' },
 ];
 
-const experts = [
+const advocates = [
   {
     id: 1,
-    name: 'Alexis Ohanian',
-    username: 'AlexisOhanian',
-    title: 'Founder of Reddit, Initialized, & 776 (100% to charity)',
-    price: 2000,
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+    name: 'Dr. Sarah Mitchell',
+    username: 'SarahMitchell',
+    title: 'Former oncology nurse with 20+ years experience. Specializes in cancer treatment navigation.',
+    price: 150,
+    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 5.0,
-    reviews: 48,
+    reviews: 248,
+    specialty: 'Cancer Care',
   },
   {
     id: 2,
-    name: 'Alli Webb',
-    username: 'AlliWebb',
-    title: 'Founder of Drybar (sold for $255M) Shark Tank Judge, NYT Best Selling Author',
-    price: 550,
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face',
+    name: 'Maria Rodriguez',
+    username: 'MariaRodriguez',
+    title: 'Bilingual advocate helping families navigate complex healthcare systems and insurance claims.',
+    price: 95,
+    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.9,
-    reviews: 127,
+    reviews: 187,
+    specialty: 'Insurance Navigation',
   },
   {
     id: 3,
-    name: 'Nicolas Jammet',
-    username: 'NicolasJammet',
-    title: 'Co-founder of Sweetgreen. NYSE: $SG. Valued $5B+.',
-    price: 500,
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-    isTopExpert: true,
-    rating: 5.0,
-    reviews: 89,
-  },
-  {
-    id: 4,
-    name: 'Paul English',
-    username: 'PaulEnglish',
-    title: 'Co-founder of KAYAK (IPO then $2B exit). Total six exits. Founded five nonprofits.',
-    price: 1300,
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face',
-    isTopExpert: true,
-    rating: 4.8,
-    reviews: 64,
-  },
-  {
-    id: 5,
-    name: 'Nikita Bier',
-    username: 'NikitaBier',
-    title: 'Co-founder of Gas, acquired by Discord. Co-founder of TBH, acquired by Facebook.',
-    price: 7500,
-    image: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop&crop=face',
+    name: 'James Chen',
+    username: 'JamesChen',
+    title: 'Healthcare attorney turned advocate. Expert in patient rights and medical billing disputes.',
+    price: 200,
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 5.0,
     reviews: 156,
+    specialty: 'Patient Rights',
+  },
+  {
+    id: 4,
+    name: 'Dr. Emily Watson',
+    username: 'EmilyWatson',
+    title: 'Pediatric specialist helping parents navigate childhood illness and developmental care.',
+    price: 175,
+    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=face',
+    isTopExpert: true,
+    rating: 4.8,
+    reviews: 134,
+    specialty: 'Pediatric Care',
+  },
+  {
+    id: 5,
+    name: 'Robert Thompson',
+    username: 'RobertThompson',
+    title: 'Former hospital administrator. Helps patients understand treatment options and hospital procedures.',
+    price: 125,
+    image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face',
+    isTopExpert: true,
+    rating: 5.0,
+    reviews: 198,
+    specialty: 'Hospital Navigation',
   },
   {
     id: 6,
-    name: 'Heidi Zak',
-    username: 'HeidiZak',
-    title: 'CEO of Thirdlove, an intimates brand with over 5 million customers',
-    price: 400,
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+    name: 'Lisa Park',
+    username: 'LisaPark',
+    title: 'Mental health advocate specializing in treatment access and insurance coverage for therapy.',
+    price: 110,
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.9,
-    reviews: 93,
+    reviews: 167,
+    specialty: 'Mental Health',
   },
   {
     id: 7,
-    name: 'Jason Tan',
-    username: 'JasonTan',
-    title: 'Founded & led sift.com (AI security, $1.5B+) thru $100M ARR, 400 people',
-    price: 450,
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face',
+    name: 'Michael Davis',
+    username: 'MichaelDavis',
+    title: 'Chronic illness survivor. Guides patients through long-term care planning and disability claims.',
+    price: 85,
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.7,
-    reviews: 78,
+    reviews: 143,
+    specialty: 'Chronic Illness',
   },
   {
     id: 8,
-    name: 'Nancy Twine',
-    username: 'NancyTwine',
-    title: 'Founder of Briogeo (Acq. by Wella). EY Entrepreneur of the Year FL (2024)',
-    price: 1000,
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop&crop=face',
+    name: 'Angela Foster',
+    username: 'AngelaFoster',
+    title: 'Elder care specialist helping families navigate Medicare, nursing homes, and end-of-life care.',
+    price: 140,
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 5.0,
-    reviews: 112,
+    reviews: 212,
+    specialty: 'Elder Care',
   },
   {
     id: 9,
-    name: 'Brian Lee',
-    username: 'BrianLee',
-    title: 'Co-Founder of LegalZoom ($2B IPO), The Honest Company ($1B IPO), ShoeDazzle',
-    price: 1750,
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face',
+    name: 'Dr. Kevin Patel',
+    username: 'KevinPatel',
+    title: 'Former ER physician now advocating for patients dealing with emergency care and trauma recovery.',
+    price: 190,
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.9,
-    reviews: 87,
+    reviews: 178,
+    specialty: 'Emergency Care',
   },
   {
     id: 10,
-    name: 'Sarah Leary',
-    username: 'SarahLeary',
-    title: 'Co-founder of Nextdoor. Investor. Board Member. Entrepreneur in Residence, Harvard.',
-    price: 470,
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
+    name: 'Susan Williams',
+    username: 'SusanWilliams',
+    title: 'Registered nurse helping patients understand diagnoses, treatment plans, and medication management.',
+    price: 100,
+    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.8,
-    reviews: 56,
+    reviews: 156,
+    specialty: 'Treatment Planning',
   },
   {
     id: 11,
-    name: 'Andrew Chen',
-    username: 'AndrewChen',
-    title: 'General Partner at Andreessen Horowitz. Author of The Cold Start Problem.',
-    price: 2000,
+    name: 'David Kim',
+    username: 'DavidKim',
+    title: 'Insurance specialist who helps patients maximize benefits and appeal denied claims.',
+    price: 120,
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 5.0,
-    reviews: 203,
+    reviews: 234,
+    specialty: 'Insurance Claims',
   },
   {
     id: 12,
-    name: 'Neil Parikh',
-    username: 'NeilParikh',
-    title: 'Co-Founder of Casper. Investor in 150+ startups (Affirm, Reddit, Relativity)',
-    price: 1250,
-    image: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&crop=face',
+    name: 'Jennifer Moore',
+    username: 'JenniferMoore',
+    title: 'Rare disease advocate connecting patients with specialists, clinical trials, and support groups.',
+    price: 160,
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.9,
-    reviews: 134,
+    reviews: 189,
+    specialty: 'Rare Diseases',
   },
 ];
 
@@ -157,9 +169,9 @@ export default function Marketplace() {
       <header className="border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold text-black" data-testid="logo">intro</h1>
+            <h1 className="text-2xl font-bold text-black" data-testid="logo">PatientAdvocate</h1>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#" className="text-sm text-gray-600 hover:text-black transition-colors" data-testid="nav-browse">Browse</a>
+              <a href="#" className="text-sm text-gray-600 hover:text-black transition-colors" data-testid="nav-browse">Find an Advocate</a>
               <a href="#" className="text-sm text-gray-600 hover:text-black transition-colors" data-testid="nav-how">How it works</a>
             </nav>
           </div>
@@ -172,8 +184,8 @@ export default function Marketplace() {
 
       {/* Hero */}
       <section className="py-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Choose an expert. Book a session.</h2>
-        <p className="text-xl text-gray-500" data-testid="hero-subtitle">Get advice over a video call.</p>
+        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Find your patient advocate. Book a consultation.</h2>
+        <p className="text-xl text-gray-500" data-testid="hero-subtitle">Get expert healthcare guidance over a video call.</p>
       </section>
 
       {/* Categories */}
@@ -202,7 +214,7 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           <p className="text-gray-600" data-testid="text-results">
-            Book in-demand experts & get advice over a video call
+            Connect with experienced advocates who help you navigate healthcare
           </p>
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -226,8 +238,8 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Top Experts</h3>
-            <p className="text-gray-500 text-sm mt-1">Access to the best experts has never been easier</p>
+            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Top Patient Advocates</h3>
+            <p className="text-gray-500 text-sm mt-1">Trusted professionals ready to help you navigate your healthcare journey</p>
           </div>
           <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors" data-testid="button-see-all">
             See all
@@ -238,36 +250,36 @@ export default function Marketplace() {
         </div>
       </div>
 
-      {/* Expert Cards Grid */}
+      {/* Advocate Cards Grid */}
       <div className="max-w-7xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {experts.map((expert) => (
+          {advocates.map((advocate) => (
             <div
-              key={expert.id}
+              key={advocate.id}
               className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
-              data-testid={`card-expert-${expert.id}`}
+              data-testid={`card-advocate-${advocate.id}`}
             >
               {/* Favorite Button */}
               <button 
                 className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                data-testid={`button-favorite-${expert.id}`}
+                data-testid={`button-favorite-${advocate.id}`}
               >
                 <Heart className="w-4 h-4 text-gray-600" />
               </button>
 
-              {/* Top Expert Badge */}
-              {expert.isTopExpert && (
-                <div className="absolute top-3 left-3 z-10 bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
-                  Top Expert
+              {/* Top Advocate Badge */}
+              {advocate.isTopExpert && (
+                <div className="absolute top-3 left-3 z-10 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
+                  <Star className="w-3 h-3 fill-blue-500 text-blue-500" />
+                  Top Advocate
                 </div>
               )}
 
               {/* Image */}
               <div className="aspect-[4/3] overflow-hidden bg-gray-100">
                 <img
-                  src={expert.image}
-                  alt={expert.name}
+                  src={advocate.image}
+                  alt={advocate.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -275,37 +287,39 @@ export default function Marketplace() {
               {/* Content */}
               <div className="p-4">
                 <div className="flex items-center gap-2 mb-1">
-                  <h4 className="font-semibold text-black" data-testid={`text-name-${expert.id}`}>{expert.name}</h4>
-                  {expert.isTopExpert && (
-                    <div className="w-4 h-4 bg-amber-400 rounded-full flex items-center justify-center">
+                  <h4 className="font-semibold text-black" data-testid={`text-name-${advocate.id}`}>{advocate.name}</h4>
+                  {advocate.isTopExpert && (
+                    <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
                       <Check className="w-2.5 h-2.5 text-white" />
                     </div>
                   )}
                 </div>
+
+                <p className="text-xs text-blue-600 font-medium mb-2">{advocate.specialty}</p>
                 
-                <p className="text-lg font-bold text-black mb-2" data-testid={`text-price-${expert.id}`}>
-                  ${expert.price.toLocaleString()} <span className="text-sm font-normal text-gray-500">• Session</span>
+                <p className="text-lg font-bold text-black mb-2" data-testid={`text-price-${advocate.id}`}>
+                  ${advocate.price} <span className="text-sm font-normal text-gray-500">• Consultation</span>
                 </p>
 
-                <p className="text-sm text-gray-600 line-clamp-2" data-testid={`text-title-${expert.id}`}>
-                  {expert.title}
+                <p className="text-sm text-gray-600 line-clamp-2" data-testid={`text-title-${advocate.id}`}>
+                  {advocate.title}
                 </p>
 
                 {/* Rating */}
                 <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-gray-100">
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="text-sm font-medium text-black">{expert.rating}</span>
-                  <span className="text-sm text-gray-400">({expert.reviews} reviews)</span>
+                  <span className="text-sm font-medium text-black">{advocate.rating}</span>
+                  <span className="text-sm text-gray-400">({advocate.reviews} reviews)</span>
                 </div>
               </div>
 
-              {/* See Times Button */}
+              {/* Book Consultation Button */}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white to-transparent pt-8 pb-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
                   className="w-full bg-black text-white font-medium py-3 rounded-xl hover:bg-gray-800 transition-colors"
-                  data-testid={`button-see-times-${expert.id}`}
+                  data-testid={`button-book-${advocate.id}`}
                 >
-                  See Times
+                  Book Consultation
                 </button>
               </div>
             </div>
@@ -316,7 +330,7 @@ export default function Marketplace() {
       {/* Footer */}
       <footer className="border-t border-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500">
-          © 2026 Intro. All rights reserved.
+          © 2026 PatientAdvocate. Empowering patients to navigate healthcare with confidence.
         </div>
       </footer>
     </div>
