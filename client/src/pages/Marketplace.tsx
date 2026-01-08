@@ -315,7 +315,7 @@ export default function Marketplace() {
               {/* Book Consultation Button */}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white to-transparent pt-8 pb-4 px-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button 
-                  className="w-full bg-black text-white font-medium py-3 rounded-xl hover:bg-gray-800 transition-colors"
+                  className="w-full bg-amber-700 text-white font-semibold py-3 rounded-xl hover:bg-amber-800 transition-colors"
                   data-testid={`button-book-${advocate.id}`}
                 >
                   Book Your Advocate

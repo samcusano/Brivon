@@ -567,7 +567,7 @@ export default function AdvocateDetail() {
                 {advocate.trustIndicators?.network?.highlights?.map((place: string, idx: number) => (
                   <span 
                     key={idx}
-                    className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100"
+                    className="px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full text-sm font-medium border border-amber-200"
                   >
                     {place}
                   </span>
@@ -828,7 +828,7 @@ export default function AdvocateDetail() {
 
               {/* Book Button */}
               <Button 
-                className="w-full bg-black text-white py-6 text-lg font-medium rounded-xl hover:bg-gray-800 transition-colors mb-4"
+                className="w-full bg-amber-700 text-white py-6 text-lg font-semibold rounded-xl hover:bg-amber-800 transition-colors mb-4"
                 data-testid="button-book-now"
               >
                 {selectedOption === 'intro' ? 'Schedule Free Intro Call' : `Book for $${advocate.price}`}
