@@ -172,7 +172,7 @@ export default function Marketplace() {
           <div className="flex items-center gap-8">
             <h1 className="text-2xl font-bold text-black" data-testid="logo">PatientAdvocate</h1>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#" className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="nav-browse">Find Your Fighter</a>
+              <a href="#" className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="nav-browse">Find an Advocate</a>
               <a href="#" className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="nav-how">How It Works</a>
             </nav>
           </div>
@@ -185,15 +185,15 @@ export default function Marketplace() {
 
       {/* Hero */}
       <section className="py-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Your health story deserves someone in your corner.</h2>
-        <p className="text-xl text-stone-500" data-testid="hero-subtitle">Find advocates who see you, hear you, and stand with you.</p>
+        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Don't fight the healthcare system alone.</h2>
+        <p className="text-xl text-stone-500" data-testid="hero-subtitle">We make the calls, cut through the red tape, and get you the care you deserve.</p>
       </section>
 
       {/* Filters Bar */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           <p className="text-stone-500" data-testid="text-results">
-            Champions who have your back. Because you shouldn't do this alone.
+            Real experts who handle the hard parts so you can focus on getting better.
           </p>
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -217,8 +217,8 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Proven Advocates</h3>
-            <p className="text-stone-500 text-sm mt-1">They've been where you are. Now they're ready to stand alongside you.</p>
+            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Advocates Ready to Help</h3>
+            <p className="text-stone-500 text-sm mt-1">Doctors, nurses, and healthcare experts who know how to get results.</p>
           </div>
           <button className="flex items-center gap-2 text-sm font-medium text-stone-500 hover:text-black transition-colors" data-testid="button-see-all">
             See all
@@ -288,7 +288,7 @@ export default function Marketplace() {
                   className="w-full bg-orange-800 text-white font-semibold py-3 rounded-xl hover:bg-orange-900 transition-colors"
                   data-testid={`button-book-${advocate.id}`}
                 >
-                  Book Your Advocate
+                  Get Started
                 </button>
               </div>
               </div>
@@ -300,7 +300,7 @@ export default function Marketplace() {
       {/* Footer */}
       <footer className="border-t border-stone-200 py-8">
         <div className="max-w-7xl mx-auto px-6 text-center text-sm text-stone-500">
-          © 2026 PatientAdvocate. Your voice. Your advocate. Your health story.
+          © 2026 PatientAdvocate. We fight for you.
         </div>
       </footer>
     </div>

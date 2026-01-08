@@ -394,7 +394,7 @@ export default function AdvocateDetail() {
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5" />
-                Results I've achieved
+                Results I've gotten for patients
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
@@ -525,7 +525,7 @@ export default function AdvocateDetail() {
                 <div>
                   <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                     <Handshake className="w-5 h-5" />
-                    What I do
+                    I'll handle this for you
                   </h2>
                   <div className="space-y-2">
                     {advocate.fit?.bestFor?.map((item: string, idx: number) => (
@@ -541,7 +541,7 @@ export default function AdvocateDetail() {
                 <div>
                   <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                     <Shield className="w-5 h-5" />
-                    What I don't do
+                    Outside my scope
                   </h2>
                   <div className="space-y-2">
                     {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
@@ -553,14 +553,14 @@ export default function AdvocateDetail() {
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-stone-500 mt-6">Clear expectations help us both. No hard feelings if it doesn't work out.</p>
+              <p className="text-sm text-stone-500 mt-6">So you know exactly what to expect from day one.</p>
             </section>
 
             {/* Network */}
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Network className="w-5 h-5" />
-                My network (these are people I know)
+                My connections (I can get you in)
               </h2>
               <p className="text-stone-500 mb-4">{advocate.trustIndicators?.network?.description}</p>
               <div className="flex flex-wrap gap-2">
@@ -579,7 +579,7 @@ export default function AdvocateDetail() {
             <section>
               <h2 className="text-xl font-bold text-black mb-6 flex items-center gap-2">
                 <Video className="w-5 h-5" />
-                How I approach decisions
+                How I work
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {advocate.decisionPhilosophy?.videos?.map((video: any) => (
@@ -621,7 +621,7 @@ export default function AdvocateDetail() {
 
             {/* Specializations */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4">How I stand with you</h2>
+              <h2 className="text-xl font-bold text-black mb-4">What I do for you</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {advocate.specializations.map((spec: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-2 text-stone-600">
@@ -634,7 +634,7 @@ export default function AdvocateDetail() {
 
             {/* Conditions */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4">Patients I've championed</h2>
+              <h2 className="text-xl font-bold text-black mb-4">Patients I've helped</h2>
               <div className="flex flex-wrap gap-2">
                 {advocate.conditionsHandled.map((condition: string, idx: number) => (
                   <span 
@@ -799,7 +799,7 @@ export default function AdvocateDetail() {
                     <span className="font-semibold text-black">Free Intro Call</span>
                     <span className="text-orange-800 font-semibold">Free</span>
                   </div>
-                  <p className="text-sm text-stone-500">15 minutes to share your story and see if I'm the right champion for you</p>
+                  <p className="text-sm text-stone-500">15 minutes to tell me what's going on—I'll let you know how I can help</p>
                 </button>
 
                 <button
@@ -816,7 +816,7 @@ export default function AdvocateDetail() {
                     <span className="font-semibold text-black">Full Consultation</span>
                     <span className="font-semibold text-black">${advocate.price}</span>
                   </div>
-                  <p className="text-sm text-stone-500">60 minutes focused entirely on you—your questions, your options, your path forward</p>
+                  <p className="text-sm text-stone-500">60 minutes where I dig in, make a plan, and start working on your case</p>
                 </button>
               </div>
 
@@ -845,19 +845,19 @@ export default function AdvocateDetail() {
               <div className="space-y-3 pt-6 border-t border-stone-200">
                 <div className="flex items-center gap-3 text-sm text-stone-500">
                   <Shield className="w-4 h-4 text-orange-800" />
-                  <span>Your satisfaction, guaranteed</span>
+                  <span>100% satisfaction guaranteed</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-stone-500">
                   <Video className="w-4 h-4 text-orange-800" />
-                  <span>Private, secure video—just you and your advocate</span>
+                  <span>Private, secure video calls</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-stone-500">
                   <FileCheck className="w-4 h-4 text-orange-800" />
-                  <span>Written summary so nothing gets lost</span>
+                  <span>Written summary after every session</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-stone-500">
                   <MessageCircle className="w-4 h-4 text-orange-800" />
-                  <span>7 days of support—I'm in your corner</span>
+                  <span>7 days of follow-up support included</span>
                 </div>
               </div>
             </div>
@@ -869,7 +869,7 @@ export default function AdvocateDetail() {
       {/* Footer */}
       <footer className="border-t border-stone-200 py-8 mt-16">
         <div className="max-w-6xl mx-auto px-6 text-center text-sm text-stone-500">
-          © 2026 PatientAdvocate. Your voice. Your advocate. Your health story.
+          © 2026 PatientAdvocate. We fight for you.
         </div>
       </footer>
     </div>
