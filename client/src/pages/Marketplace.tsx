@@ -17,7 +17,7 @@ const advocates = [
     id: 1,
     name: 'Dr. Sarah Mitchell',
     username: 'SarahMitchell',
-    title: '20+ years in oncology. She translates the chaos into a clear path forward—and stands beside you every step.',
+    title: '20+ years in oncology. She gives you the clarity to make confident decisions—on your terms.',
     price: 150,
     image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -29,19 +29,19 @@ const advocates = [
     id: 2,
     name: 'Maria Rodriguez',
     username: 'MariaRodriguez',
-    title: 'Bilingual champion who cuts through insurance red tape. Claim denied? She becomes your voice.',
+    title: 'Bilingual expert who breaks down insurance barriers. She gives you the leverage to get what you deserve.',
     price: 95,
     image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 4.9,
     reviews: 187,
-    specialty: 'Insurance Advocacy',
+    specialty: 'Insurance Mastery',
   },
   {
     id: 3,
     name: 'James Chen',
     username: 'JamesChen',
-    title: 'Healthcare attorney who switched sides. Now he uses the system\'s own rules to advocate for you.',
+    title: 'Healthcare attorney who switched sides. He shows you how to use the system\'s rules to your advantage.',
     price: 200,
     image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -53,7 +53,7 @@ const advocates = [
     id: 4,
     name: 'Dr. Emily Watson',
     username: 'EmilyWatson',
-    title: 'When it\'s your kid, fear hits different. She walks with you through every test, every question, every sleepless night.',
+    title: 'When it\'s your kid, you need answers—not anxiety. She empowers you to ask the right questions and own the process.',
     price: 175,
     image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -65,7 +65,7 @@ const advocates = [
     id: 5,
     name: 'Robert Thompson',
     username: 'RobertThompson',
-    title: 'Former hospital insider. He knows how the system works—and makes sure it works for you.',
+    title: 'Former hospital insider. He shows you how the system works—so you can make it work for you.',
     price: 125,
     image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -77,7 +77,7 @@ const advocates = [
     id: 6,
     name: 'Lisa Park',
     username: 'LisaPark',
-    title: 'Mental health matters. She champions your access to care—no stigma, no barriers, just support.',
+    title: 'Mental health is strength. She helps you unlock access to care—on your timeline, your way.',
     price: 110,
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -89,7 +89,7 @@ const advocates = [
     id: 7,
     name: 'Michael Davis',
     username: 'MichaelDavis',
-    title: 'Chronic illness survivor. He\'s been where you are—and now helps you chart your own path forward.',
+    title: 'Chronic illness survivor. He helps you build the roadmap—so you\'re driving, not just along for the ride.',
     price: 85,
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -101,7 +101,7 @@ const advocates = [
     id: 8,
     name: 'Angela Foster',
     username: 'AngelaFoster',
-    title: 'Caring for aging parents is overwhelming. She turns the maze of Medicare into a clear roadmap.',
+    title: 'Caring for aging parents is complex. She gives you the knowledge to lead with confidence.',
     price: 140,
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -113,7 +113,7 @@ const advocates = [
     id: 9,
     name: 'Dr. Kevin Patel',
     username: 'KevinPatel',
-    title: 'Former ER doc. When crisis hits, he\'s the calm voice giving you real answers—fast.',
+    title: 'Former ER doc. In a crisis, he gives you clarity and control when everything feels out of reach.',
     price: 190,
     image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -125,7 +125,7 @@ const advocates = [
     id: 10,
     name: 'Susan Williams',
     username: 'SusanWilliams',
-    title: 'Cuts through the jargon. Gives you insights that are clear, actionable, and real. No fluff, just truth.',
+    title: 'Cuts through the jargon. Gives you insights that are clear, actionable, and real—so you can decide.',
     price: 100,
     image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -137,19 +137,19 @@ const advocates = [
     id: 11,
     name: 'David Kim',
     username: 'DavidKim',
-    title: 'Insurance companies count on you giving up. He doesn\'t. Appeals, denials, fine print—he breaks through it all.',
+    title: 'Insurance companies count on you giving up. He gives you the playbook to push back and prevail.',
     price: 120,
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
     rating: 5.0,
     reviews: 234,
-    specialty: 'Claims Champion',
+    specialty: 'Claims Expert',
   },
   {
     id: 12,
     name: 'Jennifer Moore',
     username: 'JenniferMoore',
-    title: 'Rare disease? Uncharted territory? She connects you with specialists and trials others can\'t find.',
+    title: 'Rare disease? She unlocks access to specialists and trials—putting options back in your hands.',
     price: 160,
     image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
     isTopExpert: true,
@@ -184,8 +184,8 @@ export default function Marketplace() {
 
       {/* Hero */}
       <section className="py-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Your health story deserves someone in your corner.</h2>
-        <p className="text-xl text-gray-500" data-testid="hero-subtitle">Find advocates who see you, hear you, and stand with you.</p>
+        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Take the reins on your health story.</h2>
+        <p className="text-xl text-gray-500" data-testid="hero-subtitle">Find advocates who help you own your care and reclaim your power.</p>
       </section>
 
       {/* Categories */}
@@ -214,7 +214,7 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           <p className="text-gray-600" data-testid="text-results">
-            Champions who have your back. Because you shouldn't do this alone.
+            Experts who put the power back in your hands. You lead—they amplify.
           </p>
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -238,8 +238,8 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Proven Advocates</h3>
-            <p className="text-gray-500 text-sm mt-1">They've been where you are. Now they're ready to stand alongside you.</p>
+            <h3 className="text-2xl font-bold text-black" data-testid="section-title">Your Power Team</h3>
+            <p className="text-gray-500 text-sm mt-1">They give you the tools, knowledge, and confidence to own every decision.</p>
           </div>
           <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors" data-testid="button-see-all">
             See all
@@ -317,7 +317,7 @@ export default function Marketplace() {
                   className="w-full bg-black text-white font-medium py-3 rounded-xl hover:bg-gray-800 transition-colors"
                   data-testid={`button-book-${advocate.id}`}
                 >
-                  Book Your Advocate
+                  Take Control Now
                 </button>
               </div>
             </div>
@@ -328,7 +328,7 @@ export default function Marketplace() {
       {/* Footer */}
       <footer className="border-t border-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500">
-          © 2026 PatientAdvocate. Your voice. Your advocate. Your health story.
+          © 2026 PatientAdvocate. Your power. Your decisions. Your health story.
         </div>
       </footer>
     </div>
