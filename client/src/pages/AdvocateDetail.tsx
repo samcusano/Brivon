@@ -545,6 +545,64 @@ export default function AdvocateDetail() {
                 <span className="text-lg text-gray-600">{advocate.reviews} reviews</span>
               </div>
 
+              {/* Rating Breakdown - Patient Advocacy Categories */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-3 mb-10 pb-10 border-b border-gray-200">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm text-gray-700">Communication clarity</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm text-gray-700">Responsiveness</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-black rounded-full" style={{ width: '98%' }}></div>
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 w-6">4.9</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm text-gray-700">Medical knowledge</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm text-gray-700">Advocacy effectiveness</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm text-gray-700">Emotional support</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-black rounded-full" style={{ width: '96%' }}></div>
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 w-6">4.8</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-sm text-gray-700">Value for cost</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
+                    </div>
+                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                  </div>
+                </div>
+              </div>
+
               {/* Review Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {advocate.reviewsList.map((review: any) => (
