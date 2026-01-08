@@ -63,7 +63,7 @@ export default function AgentActivity() {
                   key={i}
                   className={cn(
                     "w-36 h-28 rounded-xl flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-[1.02]",
-                    i === 0 ? "bg-[#4A9B8C] text-white" : "border border-[#e5e5e5]"
+                    i === 0 ? "bg-[#1a1a1a] text-white" : "border border-[#e5e5e5]"
                   )}
                   data-testid={`card-workstation-${ws.id}`}
                 >
@@ -125,7 +125,7 @@ export default function AgentActivity() {
                       <div className="flex items-center gap-3">
                         <div className="w-24 h-2 bg-[#f0f0f0] rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-[#4A9B8C] rounded-full transition-all"
+                            className="h-full bg-[#1a1a1a] rounded-full transition-all"
                             style={{ width: `${agent.progress}%` }}
                           />
                         </div>

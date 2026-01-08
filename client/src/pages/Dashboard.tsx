@@ -54,7 +54,7 @@ export default function Dashboard() {
           <div className="space-y-6">
             <h2 className="text-xl font-semibold text-[#1a1a1a]">My decision</h2>
             <div className="flex gap-4">
-              <div className="w-32 h-28 bg-[#4A9B8C] rounded-xl flex flex-col items-center justify-center text-white" data-testid="card-urgent">
+              <div className="w-32 h-28 bg-[#1a1a1a] rounded-xl flex flex-col items-center justify-center text-white" data-testid="card-urgent">
                 <span className="text-5xl font-bold">3</span>
                 <span className="text-sm mt-1">Urgent</span>
               </div>

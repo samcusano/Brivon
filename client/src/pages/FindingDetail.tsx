@@ -66,7 +66,7 @@ export default function FindingDetail() {
                 <h3 className="font-semibold text-[#1a1a1a]">AI Analysis</h3>
                 <div className="text-right">
                   <span className="text-xs text-[#999]">Confidence</span>
-                  <span className="ml-2 text-sm font-semibold text-[#4A9B8C]" data-testid="text-confidence">92%</span>
+                  <span className="ml-2 text-sm font-semibold text-[#1a1a1a]" data-testid="text-confidence">92%</span>
                 </div>
               </div>
               <div className="p-6 space-y-6">
@@ -112,7 +112,7 @@ export default function FindingDetail() {
                         <p className="text-xs text-[#999]">{item.status}</p>
                       </div>
                     </div>
-                    <Button variant="ghost" size="sm" className="text-[#4A9B8C] font-medium hover:text-[#3d8577]">
+                    <Button variant="ghost" size="sm" className="text-[#1a1a1a] font-medium hover:text-[#333]">
                       {item.action}
                     </Button>
                   </div>

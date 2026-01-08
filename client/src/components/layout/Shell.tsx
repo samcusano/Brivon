@@ -47,7 +47,7 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
                     )}
                     data-testid={`nav-${item.label.toLowerCase().replace(' ', '-')}`}
                   >
-                    <item.icon className={cn("w-4 h-4", location === item.href ? "text-[#4A9B8C]" : "")} />
+                    <item.icon className={cn("w-4 h-4", location === item.href ? "text-[#1a1a1a]" : "")} />
                     {item.label}
                   </a>
                 </Link>
