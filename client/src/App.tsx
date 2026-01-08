@@ -3,27 +3,14 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
-import Home from "@/pages/Home";
-import Vault from "@/pages/Vault";
-import History from "@/pages/History";
-
-import Dashboard from "./pages/Dashboard";
-import FindingDetail from "./pages/FindingDetail";
-import AgentActivity from "./pages/AgentActivity";
-import EntityProfile from "./pages/EntityProfile";
+import Marketplace from "./pages/Marketplace";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/finding/:id" component={FindingDetail} />
-      <Route path="/agents" component={AgentActivity} />
-      <Route path="/entity/:id" component={EntityProfile} />
-      <Route path="/vault" component={Vault} />
-      <Route path="/history" component={History} />
-      <Route component={NotFound} />
+      <Route path="/" component={Marketplace} />
+      <Route path="/marketplace" component={Marketplace} />
+      <Route component={Marketplace} />
     </Switch>
   );
 }
