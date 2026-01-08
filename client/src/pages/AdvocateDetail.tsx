@@ -23,6 +23,10 @@ import {
   FileCheck,
   Users,
   ThumbsUp,
+  FileText,
+  Beaker,
+  Stethoscope,
+  Hourglass,
   AlertCircle,
   Zap,
   Handshake,
@@ -288,79 +292,63 @@ export default function AdvocateDetail() {
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {/* Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Image */}
-          <div className="aspect-square rounded-2xl overflow-hidden bg-gray-100">
-            <img 
-              src={advocate.image} 
-              alt={advocate.name}
-              className="w-full h-full object-cover"
-            />
+        {/* Hero Section - Zocdoc-inspired compact layout */}
+        <div className="mb-10">
+          {/* Profile Header */}
+          <div className="flex items-start gap-6 mb-4">
+            {/* Circular Photo */}
+            <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+              <img 
+                src={advocate.image} 
+                alt={advocate.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Name, Title, Location */}
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h1 className="text-2xl font-bold text-black" data-testid="text-advocate-name">{advocate.name}</h1>
+                <span className="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
+                  Top Advocate
+                </span>
+              </div>
+              <p className="text-gray-600 mb-2">{advocate.specialty}</p>
+              <p className="text-sm text-gray-500">{advocate.location}</p>
+            </div>
           </div>
 
-          {/* Quick Info */}
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
-                <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
-                Top Advocate
-              </span>
-              <span className="text-sm text-gray-500">{advocate.specialty}</span>
-            </div>
-
-            <h1 className="text-3xl font-bold text-black mb-2" data-testid="text-advocate-name">{advocate.name}</h1>
-            
-            <div className="flex items-center gap-4 mb-4">
-              <div className="flex items-center gap-1">
-                <Star className="w-4 h-4 fill-black text-black" />
-                <span className="font-semibold">{advocate.rating}</span>
-                <span className="text-gray-500">({advocate.reviews} reviews)</span>
-              </div>
-              <div className="flex items-center gap-1 text-gray-600">
-                <MapPin className="w-4 h-4" />
-                <span>{advocate.location}</span>
+          {/* Rating + Review Snippet */}
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-1">
+              <span className="text-2xl font-bold text-black">{advocate.rating}</span>
+              <div className="flex items-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                ))}
               </div>
             </div>
-
-            <p className="text-gray-600 mb-6">{advocate.title}</p>
-
-            {/* Key Stats */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="text-2xl font-bold text-black">{advocate.stats.patientsHelped.toLocaleString()}+</div>
-                <div className="text-sm text-gray-500">Patients helped</div>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="text-2xl font-bold text-black">{advocate.stats.yearsExperience}</div>
-                <div className="text-sm text-gray-500">Years experience</div>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="text-2xl font-bold text-black">{advocate.stats.responseRate}%</div>
-                <div className="text-sm text-gray-500">Response rate</div>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="flex items-center gap-1">
-                  <Star className="w-5 h-5 fill-black text-black" />
-                  <span className="text-2xl font-bold text-black">{advocate.stats.avgRating}</span>
-                </div>
-                <div className="text-sm text-gray-500">Average rating</div>
-              </div>
-            </div>
-
-            {/* Response Time */}
-            <div className="flex items-center gap-2 text-gray-600 mb-6">
-              <Clock className="w-4 h-4" />
-              <span className="text-sm">{advocate.responseTime}</span>
-            </div>
-
-            {/* Languages */}
-            <div className="flex items-center gap-2 text-gray-600">
-              <Languages className="w-4 h-4" />
-              <span className="text-sm">Speaks {advocate.languages.join(', ')}</span>
-            </div>
-
+            <span className="text-gray-400">|</span>
+            <span className="text-gray-600 italic text-sm">"{advocate.reviewsList?.[0]?.text?.slice(0, 80)}..."</span>
+            <button className="text-sm font-medium text-black underline hover:no-underline ml-2">
+              See all {advocate.reviews} reviews
+            </button>
           </div>
+
+          {/* Stats as inline text */}
+          <div className="flex items-center flex-wrap gap-x-2 text-sm text-gray-600">
+            <span>{advocate.stats.patientsHelped.toLocaleString()}+ patients helped</span>
+            <span className="text-gray-400">•</span>
+            <span>{advocate.stats.yearsExperience} years experience</span>
+            <span className="text-gray-400">•</span>
+            <span>{advocate.stats.responseRate}% response rate</span>
+            <span className="text-gray-400">•</span>
+            <span>Speaks {advocate.languages.join(', ')}</span>
+          </div>
+
+          {/* Bio/Title */}
+          <p className="text-gray-700 mt-4">{advocate.title}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -392,12 +380,26 @@ export default function AdvocateDetail() {
                 Results I've achieved
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {Object.values(advocate.outcomeStats || {}).map((stat: any, idx: number) => (
-                  <div key={idx} className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
-                    <div className="text-2xl font-bold text-emerald-700">{stat.value}</div>
-                    <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
-                  </div>
-                ))}
+                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <FileText className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.appealsApproved?.value}</div>
+                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.appealsApproved?.label}</div>
+                </div>
+                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <Beaker className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.clinicalTrialsMatched?.value}</div>
+                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.clinicalTrialsMatched?.label}</div>
+                </div>
+                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <Stethoscope className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.secondOpinions?.value}</div>
+                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.secondOpinions?.label}</div>
+                </div>
+                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <Hourglass className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.avgTimeSaved?.value}</div>
+                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.avgTimeSaved?.label}</div>
+                </div>
               </div>
             </section>
 
@@ -411,12 +413,10 @@ export default function AdvocateDetail() {
                 {advocate.professionalMemberships?.map((membership: any, idx: number) => (
                   <span 
                     key={idx} 
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 border border-blue-100 rounded-full text-sm"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm"
                   >
-                    <span className="font-semibold text-blue-700">{membership.acronym}</span>
-                    <span className="text-gray-600">·</span>
-                    <span className="text-gray-700">{membership.name}</span>
-                    {membership.verified && <CheckCircle className="w-3.5 h-3.5 text-blue-600" />}
+                    <BadgeCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="font-medium text-gray-800">{membership.acronym} - {membership.name}</span>
                   </span>
                 ))}
               </div>
@@ -619,21 +619,6 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* What to Expect */}
-            <section>
-              <h2 className="text-xl font-bold text-black mb-4">What to expect</h2>
-              <div className="space-y-3">
-                {advocate.whatToExpect.map((item: string, idx: number) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-medium flex-shrink-0">
-                      {idx + 1}
-                    </div>
-                    <span className="text-gray-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-
             {/* Intake Questionnaire Preview */}
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
@@ -791,13 +776,6 @@ export default function AdvocateDetail() {
               </button>
             </section>
 
-            {/* About */}
-            <section>
-              <h2 className="text-xl font-bold text-black mb-4">About {advocate.name.split(' ')[1]}</h2>
-              <div className="text-gray-600 whitespace-pre-line leading-relaxed">
-                {advocate.about}
-              </div>
-            </section>
           </div>
 
           {/* Booking Sidebar */}
@@ -860,6 +838,60 @@ export default function AdvocateDetail() {
                   : 'You won\'t be charged until after your session'
                 }
               </p>
+
+              {/* What to expect - based on selected option */}
+              <div className="pt-6 border-t border-gray-100">
+                <h3 className="font-bold text-black mb-3">What to expect</h3>
+                {selectedOption === 'intro' ? (
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <div className="font-semibold text-black mb-3">15 minute session</div>
+                    <div className="space-y-2 text-sm text-gray-700">
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>Share your situation and biggest concerns</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>Ask questions about how I work</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>See if we're a good fit for each other</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>Get initial thoughts on next steps</span>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <div className="font-semibold text-black mb-3">60 minute session</div>
+                    <div className="space-y-2 text-sm text-gray-700">
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>Deep dive into your diagnosis and medical history</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>Review all treatment options with pros and cons</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>Prepare questions for your medical team</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>Written summary of everything we discussed</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-gray-400">-</span>
+                        <span>7 days of follow-up messaging support</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Trust Signals */}
               <div className="space-y-3 pt-6 border-t border-gray-100">
