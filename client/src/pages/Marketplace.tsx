@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'wouter';
 import { Heart, ChevronDown, CheckCircle, Star, Users, Award, Ribbon, Pill, Brain, Handshake, Baby } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -254,11 +255,11 @@ export default function Marketplace() {
       <div className="max-w-7xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {advocates.map((advocate) => (
-            <div
-              key={advocate.id}
-              className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
-              data-testid={`card-advocate-${advocate.id}`}
-            >
+            <Link key={advocate.id} href={`/advocate/${advocate.id}`}>
+              <div
+                className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
+                data-testid={`card-advocate-${advocate.id}`}
+              >
               {/* Favorite Button */}
               <button 
                 className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
@@ -320,7 +321,8 @@ export default function Marketplace() {
                   Book Your Advocate
                 </button>
               </div>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
