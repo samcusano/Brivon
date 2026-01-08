@@ -351,7 +351,7 @@ export default function AdvocateDetail() {
               </div>
 
               {/* Rating + Stats Row */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm mb-4">
                 <div className="flex items-center gap-1.5">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-black text-black" />
@@ -363,6 +363,19 @@ export default function AdvocateDetail() {
                 <span className="text-stone-500">{advocate.stats.patientsHelped.toLocaleString()}+ Patients Helped</span>
                 <span className="text-stone-300">|</span>
                 <span className="text-stone-500">{advocate.stats.yearsExperience} Years Experience</span>
+              </div>
+
+              {/* Credential Badges */}
+              <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                {advocate.credentials.map((cred: any, idx: number) => (
+                  <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-stone-200 rounded-full text-sm shadow-sm">
+                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-amber-700" />}
+                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-amber-700" />}
+                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-amber-700" />}
+                    <span className="font-medium text-stone-700">{cred.label}</span>
+                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-amber-700" />}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
