@@ -309,8 +309,8 @@ export default function AdvocateDetail() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-2xl font-bold text-black" data-testid="text-advocate-name">{advocate.name}</h1>
-                <span className="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
+                <span className="bg-stone-200 text-stone-800 text-xs font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <Star className="w-3 h-3 text-teal-700" strokeWidth={1.5} />
                   Top Advocate
                 </span>
               </div>
@@ -363,11 +363,11 @@ export default function AdvocateDetail() {
               <div className="flex flex-wrap gap-2">
                 {advocate.credentials.map((cred: any, idx: number) => (
                   <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm">
-                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-emerald-600" />}
-                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-emerald-600" />}
-                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-emerald-600" />}
+                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-teal-700" />}
+                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-teal-700" />}
+                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-teal-700" />}
                     <span className="font-medium text-gray-800">{cred.label}</span>
-                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />}
+                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-teal-700" />}
                   </span>
                 ))}
               </div>
@@ -380,31 +380,31 @@ export default function AdvocateDetail() {
                 Results I've achieved
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <FileText className="w-4 h-4 text-emerald-600" />
-                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.appealsApproved?.value}</span>
+                    <FileText className="w-4 h-4 text-teal-700" />
+                    <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.appealsApproved?.value}</span>
                   </div>
                   <div className="text-sm text-gray-600">{advocate.outcomeStats?.appealsApproved?.label}</div>
                 </div>
-                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Beaker className="w-4 h-4 text-emerald-600" />
-                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.clinicalTrialsMatched?.value}</span>
+                    <Beaker className="w-4 h-4 text-teal-700" />
+                    <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.clinicalTrialsMatched?.value}</span>
                   </div>
                   <div className="text-sm text-gray-600">{advocate.outcomeStats?.clinicalTrialsMatched?.label}</div>
                 </div>
-                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Stethoscope className="w-4 h-4 text-emerald-600" />
-                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.secondOpinions?.value}</span>
+                    <Stethoscope className="w-4 h-4 text-teal-700" />
+                    <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.secondOpinions?.value}</span>
                   </div>
                   <div className="text-sm text-gray-600">{advocate.outcomeStats?.secondOpinions?.label}</div>
                 </div>
-                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Hourglass className="w-4 h-4 text-emerald-600" />
-                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.avgTimeSaved?.value}</span>
+                    <Hourglass className="w-4 h-4 text-teal-700" />
+                    <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.avgTimeSaved?.value}</span>
                   </div>
                   <div className="text-sm text-gray-600">{advocate.outcomeStats?.avgTimeSaved?.label}</div>
                 </div>
@@ -417,7 +417,7 @@ export default function AdvocateDetail() {
               </h3>
               <div className="space-y-3">
                 {advocate.practicalStuff?.wins?.map((win: any, idx: number) => (
-                  <div key={idx} className="bg-emerald-50 border border-emerald-100 rounded-xl p-4">
+                  <div key={idx} className="bg-stone-100 border border-stone-200 rounded-xl p-4">
                     <div className="font-semibold text-black mb-1">{win.title}</div>
                     <p className="text-sm text-gray-600">{win.description}</p>
                   </div>
@@ -437,7 +437,7 @@ export default function AdvocateDetail() {
                     key={idx} 
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm"
                   >
-                    <BadgeCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <BadgeCheck className="w-3.5 h-3.5 text-teal-700" />
                     <span className="font-medium text-gray-800">{membership.acronym} - {membership.name}</span>
                   </span>
                 ))}
@@ -513,7 +513,7 @@ export default function AdvocateDetail() {
                   <div className="space-y-2">
                     {advocate.fit?.bestFor?.map((item: string, idx: number) => (
                       <div key={idx} className="flex items-start gap-2 text-gray-700">
-                        <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-teal-700 mt-0.5 flex-shrink-0" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -608,7 +608,7 @@ export default function AdvocateDetail() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {advocate.specializations.map((spec: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-emerald-600" />
+                    <CheckCircle className="w-4 h-4 text-teal-700" />
                     <span>{spec}</span>
                   </div>
                 ))}
@@ -780,7 +780,7 @@ export default function AdvocateDetail() {
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-semibold text-black">Free Intro Call</span>
-                    <span className="text-emerald-600 font-semibold">Free</span>
+                    <span className="text-teal-700 font-semibold">Free</span>
                   </div>
                   <p className="text-sm text-gray-500">15 minutes to share your story and see if I'm the right champion for you</p>
                 </button>
@@ -827,19 +827,19 @@ export default function AdvocateDetail() {
               {/* Trust Signals */}
               <div className="space-y-3 pt-6 border-t border-gray-100">
                 <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <Shield className="w-4 h-4 text-emerald-600" />
+                  <Shield className="w-4 h-4 text-teal-700" />
                   <span>Your satisfaction, guaranteed</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <Video className="w-4 h-4 text-emerald-600" />
+                  <Video className="w-4 h-4 text-teal-700" />
                   <span>Private, secure video—just you and your advocate</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <FileCheck className="w-4 h-4 text-emerald-600" />
+                  <FileCheck className="w-4 h-4 text-teal-700" />
                   <span>Written summary so nothing gets lost</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <MessageCircle className="w-4 h-4 text-teal-700" />
                   <span>7 days of support—I'm in your corner</span>
                 </div>
               </div>

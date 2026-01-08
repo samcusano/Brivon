@@ -270,8 +270,8 @@ export default function Marketplace() {
 
               {/* Top Advocate Badge */}
               {advocate.isTopExpert && (
-                <div className="absolute top-3 left-3 z-10 bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
+                <div className="absolute top-3 left-3 z-10 bg-stone-200 text-stone-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
+                  <Star className="w-3 h-3 text-teal-700" strokeWidth={1.5} />
                   Top Advocate
                 </div>
               )}
@@ -294,7 +294,7 @@ export default function Marketplace() {
                   )}
                 </div>
 
-                <p className="text-xs text-emerald-600 font-medium mb-2">{advocate.specialty}</p>
+                <p className="text-xs text-teal-700 font-medium mb-2">{advocate.specialty}</p>
                 
                 <p className="text-lg font-bold text-black mb-2" data-testid={`text-price-${advocate.id}`}>
                   ${advocate.price} <span className="text-sm font-normal text-gray-500">• Consultation</span>
