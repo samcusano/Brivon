@@ -2,7 +2,6 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { 
   LayoutGrid,
-  Users as UsersIcon, 
   Settings
 } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
@@ -18,7 +17,6 @@ export function Shell({ children, sidebar, panel }: ShellProps) {
 
   const mainNavItems = [
     { label: 'Dashboard', icon: LayoutGrid, href: '/dashboard' },
-    { label: 'All Agents', icon: UsersIcon, href: '/agents' },
   ];
 
   return (

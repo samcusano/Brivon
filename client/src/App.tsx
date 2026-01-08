@@ -10,8 +10,8 @@ import History from "@/pages/History";
 
 import Dashboard from "./pages/Dashboard";
 import FindingDetail from "./pages/FindingDetail";
-import AgentActivity from "./pages/AgentActivity";
 import EntityProfile from "./pages/EntityProfile";
+import { Redirect } from "wouter";
 
 function Router() {
   return (
@@ -19,7 +19,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/finding/:id" component={FindingDetail} />
-      <Route path="/agents" component={AgentActivity} />
+      <Route path="/agents">{() => <Redirect to="/dashboard" />}</Route>
       <Route path="/entity/:id" component={EntityProfile} />
       <Route path="/vault" component={Vault} />
       <Route path="/history" component={History} />
