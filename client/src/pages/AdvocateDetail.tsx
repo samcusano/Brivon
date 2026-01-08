@@ -20,7 +20,18 @@ import {
   FileCheck,
   Users,
   ThumbsUp,
-  AlertCircle
+  AlertCircle,
+  Zap,
+  Handshake,
+  Target,
+  BookOpen,
+  Network,
+  XCircle,
+  Sparkles,
+  HeartHandshake,
+  Timer,
+  Flame,
+  Scale
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -107,6 +118,88 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
         condition: 'Lymphoma',
       },
     ],
+    // Human Connection Factors
+    humanConnection: {
+      communicationStyle: {
+        label: 'Plain-English Translator',
+        description: 'I break down medical jargon into words that actually make sense. No doctor-speak unless you want it.',
+      },
+      emotionalApproach: {
+        label: 'Calm Navigator',
+        description: 'I stay steady when things get scary. You can fall apart if you need to—I\'ll hold the pieces until you\'re ready.',
+      },
+      crisisAvailability: {
+        label: 'Late-Night Text OK',
+        description: 'Scary results at 10pm? Text me. I check messages until midnight and will get back to you before morning.',
+        responseWindow: '8am-midnight, 7 days',
+      },
+    },
+    // Practical Stuff
+    practicalStuff: {
+      wins: [
+        { title: 'Got $47K experimental treatment approved', description: 'Insurance denied it twice. Third appeal with the right documentation—approved in 14 days.' },
+        { title: 'Found a Medicaid specialist after 3 rejections', description: 'Patient had rare blood cancer. Found a top specialist who takes Medicaid at Mass General.' },
+        { title: 'Caught a staging error that changed everything', description: 'Original diagnosis was Stage IIIB. Got second opinion, actual stage was IIA—completely different treatment.' },
+      ],
+      stamina: {
+        label: 'Marathon Runner',
+        description: 'I don\'t tap out. Some of my patients I\'ve worked with for 18+ months through multiple treatment phases. I\'m here for the long haul.',
+      },
+      conflictStyle: {
+        label: 'Diplomat First, Bulldog Second',
+        description: 'I start with relationship-building and clear communication. But if diplomacy fails? I know exactly when and how to escalate—and I will.',
+      },
+    },
+    // Trust Indicators
+    trustIndicators: {
+      personalExperience: {
+        hasExperience: true,
+        type: 'caregiver',
+        story: 'I was my mother\'s caregiver through her ovarian cancer journey. I know what it\'s like to be on the other side of the hospital bed—the fear, the exhaustion, the feeling of helplessness. It\'s why I do this work.',
+      },
+      boundaries: [
+        'I don\'t give medical advice or tell you what treatment to choose',
+        'I don\'t replace your medical team—I help you work with them',
+        'I don\'t handle legal malpractice cases (but can refer you)',
+        'I don\'t work with patients who aren\'t ready to be active participants',
+      ],
+      network: {
+        description: 'I have direct relationships built over 20+ years with oncologists, nurse navigators, social workers, and billing departments at major cancer centers across the Northeast. I\'m not cold-calling—I\'m calling colleagues.',
+        highlights: ['Dana-Farber', 'Memorial Sloan Kettering', 'MD Anderson', 'Mass General'],
+      },
+    },
+    // Decision-Making Philosophy
+    decisionPhilosophy: {
+      autonomy: {
+        label: 'Your Body, Your Call',
+        description: 'I present options, explain trade-offs, and help you think through decisions—but I will never push you toward a choice that isn\'t yours. If you decide "no more chemo," I\'ll help you explore what that path looks like with dignity.',
+      },
+      complexity: {
+        label: 'Energized by Complexity',
+        description: 'Rare diagnosis? Multiple specialists who can\'t agree? I love the puzzle. Complex cases are where I do my best work—I\'ll dig into research, coordinate between teams, and find the signal in the noise.',
+      },
+    },
+    // Fit (softer framing for "uncomfortable questions")
+    fit: {
+      bestFor: [
+        'Patients facing new or complex cancer diagnoses',
+        'Families who feel overwhelmed by conflicting opinions',
+        'Anyone who needs help understanding treatment options',
+        'People navigating insurance denials or authorization battles',
+        'Patients who want someone at appointments taking notes',
+      ],
+      worksBestWhen: [
+        'You\'re ready to be an active participant in your care',
+        'You value clear, honest communication—even when it\'s hard',
+        'You want a partner, not someone to take over completely',
+      ],
+      mayNotBeMatch: [
+        'You\'re looking for someone to make decisions for you',
+        'Your primary need is emotional counseling (I\'ll refer you to great therapists)',
+        'You need legal representation for malpractice',
+        'You prefer an advocate who will be more directive about treatment choices',
+      ],
+    },
   },
 };
 
@@ -258,6 +351,215 @@ export default function AdvocateDetail() {
               <h2 className="text-xl font-bold text-black mb-4">About {advocate.name.split(' ')[0]}</h2>
               <div className="text-gray-600 whitespace-pre-line leading-relaxed">
                 {advocate.about}
+              </div>
+            </section>
+
+            {/* Human Connection - Quick Scan Cards */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <HeartHandshake className="w-5 h-5" />
+                Who I Am When Things Get Hard
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <MessageCircle className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm font-semibold text-blue-800">Communication</span>
+                  </div>
+                  <div className="font-semibold text-black mb-1">{advocate.humanConnection?.communicationStyle?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.humanConnection?.communicationStyle?.description}</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Heart className="w-4 h-4 text-purple-600" />
+                    <span className="text-sm font-semibold text-purple-800">Emotional Style</span>
+                  </div>
+                  <div className="font-semibold text-black mb-1">{advocate.humanConnection?.emotionalApproach?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.humanConnection?.emotionalApproach?.description}</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-amber-50 to-white border border-amber-100 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Clock className="w-4 h-4 text-amber-600" />
+                    <span className="text-sm font-semibold text-amber-800">Crisis Hours</span>
+                  </div>
+                  <div className="font-semibold text-black mb-1">{advocate.humanConnection?.crisisAvailability?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.humanConnection?.crisisAvailability?.description}</p>
+                  <div className="mt-2 text-xs font-medium text-amber-700 bg-amber-100 px-2 py-1 rounded-full inline-block">
+                    {advocate.humanConnection?.crisisAvailability?.responseWindow}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* What I've Fought For and Won */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <Sparkles className="w-5 h-5" />
+                Real Wins (Not Just Bullet Points)
+              </h2>
+              <div className="space-y-4">
+                {advocate.practicalStuff?.wins?.map((win: any, idx: number) => (
+                  <div key={idx} className="bg-emerald-50 border border-emerald-100 rounded-xl p-4">
+                    <div className="font-semibold text-black mb-1">{win.title}</div>
+                    <p className="text-sm text-gray-600">{win.description}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Stamina & Conflict Style - Cards */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <Flame className="w-5 h-5" />
+                How I Work
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Timer className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-semibold text-gray-700">Stamina Level</span>
+                  </div>
+                  <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.stamina?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.stamina?.description}</p>
+                </div>
+
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Scale className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-semibold text-gray-700">Conflict Approach</span>
+                  </div>
+                  <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.conflictStyle?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.conflictStyle?.description}</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Personal Experience */}
+            {advocate.trustIndicators?.personalExperience?.hasExperience && (
+              <section>
+                <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                  <Heart className="w-5 h-5" />
+                  I've Been There Too
+                </h2>
+                <div className="bg-gradient-to-br from-rose-50 to-white border border-rose-100 rounded-xl p-5">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0">
+                      <Heart className="w-5 h-5 text-rose-600" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-black mb-1">
+                        {advocate.trustIndicators.personalExperience.type === 'patient' ? 'I was a patient' : 'I was a caregiver'}
+                      </div>
+                      <p className="text-gray-600">{advocate.trustIndicators.personalExperience.story}</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Network */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <Network className="w-5 h-5" />
+                My Network (These Are People I Know)
+              </h2>
+              <p className="text-gray-600 mb-4">{advocate.trustIndicators?.network?.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {advocate.trustIndicators?.network?.highlights?.map((place: string, idx: number) => (
+                  <span 
+                    key={idx}
+                    className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100"
+                  >
+                    {place}
+                  </span>
+                ))}
+              </div>
+            </section>
+
+            {/* Decision Philosophy */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <Target className="w-5 h-5" />
+                How I Approach Decisions
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  <div className="font-semibold text-black mb-1">{advocate.decisionPhilosophy?.autonomy?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.decisionPhilosophy?.autonomy?.description}</p>
+                </div>
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  <div className="font-semibold text-black mb-1">{advocate.decisionPhilosophy?.complexity?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.decisionPhilosophy?.complexity?.description}</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Fit Section - Soft Framing */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <Handshake className="w-5 h-5" />
+                Are We a Good Fit?
+              </h2>
+              
+              <div className="space-y-6">
+                {/* Best For */}
+                <div>
+                  <h3 className="font-semibold text-black mb-3 text-sm uppercase tracking-wide">I'm at my best with...</h3>
+                  <div className="space-y-2">
+                    {advocate.fit?.bestFor?.map((item: string, idx: number) => (
+                      <div key={idx} className="flex items-start gap-2 text-gray-700">
+                        <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Works Best When */}
+                <div>
+                  <h3 className="font-semibold text-black mb-3 text-sm uppercase tracking-wide">We'll work well together if...</h3>
+                  <div className="space-y-2">
+                    {advocate.fit?.worksBestWhen?.map((item: string, idx: number) => (
+                      <div key={idx} className="flex items-start gap-2 text-gray-700">
+                        <ThumbsUp className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* May Not Be Match */}
+                <div className="bg-gray-50 rounded-xl p-4">
+                  <h3 className="font-semibold text-black mb-3 text-sm uppercase tracking-wide">I might not be your match if...</h3>
+                  <div className="space-y-2">
+                    {advocate.fit?.mayNotBeMatch?.map((item: string, idx: number) => (
+                      <div key={idx} className="flex items-start gap-2 text-gray-600">
+                        <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-500 mt-3 italic">No hard feelings—the right fit matters for both of us.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Boundaries */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <Shield className="w-5 h-5" />
+                What I Don't Do
+              </h2>
+              <p className="text-gray-600 mb-4">Clear expectations help us both. Here's where my role ends:</p>
+              <div className="space-y-2">
+                {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
+                  <div key={idx} className="flex items-start gap-2 text-gray-700">
+                    <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                    <span>{boundary}</span>
+                  </div>
+                ))}
               </div>
             </section>
 
