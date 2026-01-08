@@ -322,13 +322,6 @@ export default function AdvocateDetail() {
               <span className="text-sm">Speaks {advocate.languages.join(', ')}</span>
             </div>
 
-            {/* Sub Navigation */}
-            <nav className="flex gap-4 mt-6 pt-6 border-t border-gray-100">
-              <a href="#credentials" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">Credentials</a>
-              <a href="#how-i-work" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">How I work</a>
-              <a href="#real-wins" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">Real wins</a>
-              <a href="#reviews" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">Reviews</a>
-            </nav>
           </div>
         </div>
 
@@ -540,35 +533,59 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* Reviews */}
+            {/* Reviews - Airbnb Style */}
             <section id="reviews">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-black flex items-center gap-2">
-                  <Star className="w-5 h-5 fill-black text-black" />
-                  {advocate.reviews} reviews
-                </h2>
+              {/* Rating Summary */}
+              <div className="flex items-center gap-3 mb-8">
+                <div className="flex items-center gap-1">
+                  <Star className="w-6 h-6 fill-black text-black" />
+                  <span className="text-2xl font-semibold text-black">{advocate.rating}</span>
+                </div>
+                <span className="text-gray-400">·</span>
+                <span className="text-lg text-gray-600">{advocate.reviews} reviews</span>
               </div>
 
-              <div className="space-y-6">
+              {/* Review Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {advocate.reviewsList.map((review: any) => (
-                  <div key={review.id} className="border-b border-gray-100 pb-6 last:border-0">
-                    <div className="flex items-center justify-between mb-2">
+                  <div key={review.id} className="space-y-3">
+                    {/* Reviewer Info */}
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center text-white font-semibold text-lg">
+                        {review.name.charAt(0)}
+                      </div>
                       <div>
                         <div className="font-semibold text-black">{review.name}</div>
-                        <div className="text-sm text-gray-500">{review.date} • {review.condition}</div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-black text-black" />
-                        ))}
+                        <div className="text-sm text-gray-500">{review.condition}</div>
                       </div>
                     </div>
-                    <p className="text-gray-600">{review.text}</p>
+
+                    {/* Rating & Date */}
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className={cn("w-3 h-3", i < review.rating ? "fill-black text-black" : "fill-gray-200 text-gray-200")} />
+                        ))}
+                      </div>
+                      <span className="text-gray-400">·</span>
+                      <span className="text-sm text-gray-500">{review.date}</span>
+                    </div>
+
+                    {/* Review Text */}
+                    <p className="text-gray-700 leading-relaxed line-clamp-4">{review.text}</p>
+                    
+                    <button className="text-sm font-semibold text-black underline hover:no-underline">
+                      Show more
+                    </button>
                   </div>
                 ))}
               </div>
 
-              <button className="mt-6 text-black font-medium underline hover:no-underline" data-testid="button-show-all-reviews">
+              {/* Show All Button */}
+              <button 
+                className="mt-8 px-6 py-3 border border-black rounded-lg font-semibold text-black hover:bg-gray-50 transition-colors"
+                data-testid="button-show-all-reviews"
+              >
                 Show all {advocate.reviews} reviews
               </button>
             </section>
