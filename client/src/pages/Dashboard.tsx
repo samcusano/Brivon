@@ -116,28 +116,27 @@ export default function Dashboard() {
               </TableHeader>
               <TableBody>
                 {queueItems.map((item, idx) => (
-                  <TableRow 
-                    key={idx} 
-                    className="border-b border-[#f0f0f0] hover:bg-[#fafafa] transition-colors cursor-pointer group"
-                    data-testid={`row-queue-${item.id}`}
-                  >
-                    <TableCell className="py-5 pl-6 text-[#999] text-sm">{item.id}</TableCell>
-                    <TableCell className="py-5">
-                      <span className="font-semibold text-[#1a1a1a]">{item.entity}</span>
-                    </TableCell>
-                    <TableCell className="py-5 text-[#666] text-sm">{item.issue}</TableCell>
-                    <TableCell className="py-5 text-[#666] text-sm">{item.due}</TableCell>
-                    <TableCell className="py-5 pr-6">
-                      <Link href={`/finding/${item.id}`}>
+                  <Link key={idx} href={`/finding/${item.id}`}>
+                    <TableRow 
+                      className="border-b border-[#f0f0f0] hover:bg-[#fafafa] transition-colors cursor-pointer group"
+                      data-testid={`row-queue-${item.id}`}
+                    >
+                      <TableCell className="py-5 pl-6 text-[#999] text-sm">{item.id}</TableCell>
+                      <TableCell className="py-5">
+                        <span className="font-semibold text-[#1a1a1a]">{item.entity}</span>
+                      </TableCell>
+                      <TableCell className="py-5 text-[#666] text-sm">{item.issue}</TableCell>
+                      <TableCell className="py-5 text-[#666] text-sm">{item.due}</TableCell>
+                      <TableCell className="py-5 pr-6">
                         <Badge className={cn(
-                          "font-medium text-xs px-3 py-1 rounded-full cursor-pointer hover:opacity-80 transition-opacity",
+                          "font-medium text-xs px-3 py-1 rounded-full",
                           getPriorityStyle(item.priority)
                         )} data-testid={`badge-priority-${item.id}`}>
                           {item.priority}
                         </Badge>
-                      </Link>
-                    </TableCell>
-                  </TableRow>
+                      </TableCell>
+                    </TableRow>
+                  </Link>
                 ))}
               </TableBody>
             </Table>
