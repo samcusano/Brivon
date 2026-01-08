@@ -184,8 +184,8 @@ export default function Marketplace() {
 
       {/* Hero */}
       <section className="py-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Your health story deserves a fighter in your corner.</h2>
-        <p className="text-xl text-gray-500" data-testid="hero-subtitle">Find advocates who see you, hear you, and fight for you.</p>
+        <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Your health story deserves someone in your corner.</h2>
+        <p className="text-xl text-gray-500" data-testid="hero-subtitle">Find advocates who see you, hear you, and stand with you.</p>
       </section>
 
       {/* Categories */}
