@@ -327,47 +327,77 @@ export default function AdvocateDetail() {
                   <p className="text-sm text-stone-500">{advocate.specialty}</p>
                 </div>
               </div>
-              {/* STYLE 1: Left Border Accent */}
+              {/* STYLE 1: Gelt-inspired — Bold quote marks, warm background */}
               {quoteStyle === 1 && (
-                <div className="bg-orange-50 border-l-4 border-orange-800 rounded-r-lg p-4">
-                  <p className="text-lg text-stone-700 leading-relaxed">
-                    "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
+                <div className="bg-gradient-to-br from-orange-50 via-orange-50 to-amber-50 rounded-2xl p-6 relative overflow-hidden">
+                  <div className="absolute -top-4 -left-2 text-[80px] text-orange-200 font-serif leading-none select-none">"</div>
+                  <p className="text-lg text-stone-800 leading-relaxed relative z-10 pl-8">
+                    I've been where you are. Let me help you navigate this—you don't have to figure it out alone.
                   </p>
+                  <div className="absolute -bottom-6 -right-2 text-[80px] text-orange-200 font-serif leading-none rotate-180 select-none">"</div>
                 </div>
               )}
 
-              {/* STYLE 2: Full Border Card */}
+              {/* STYLE 2: Untitled UI-inspired — Clean card with avatar row */}
               {quoteStyle === 2 && (
-                <div className="border-2 border-orange-200 bg-white rounded-xl p-5 relative">
-                  <div className="absolute -top-3 left-4 bg-white px-2">
-                    <span className="text-orange-800 text-2xl font-serif">"</span>
+                <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full overflow-hidden bg-stone-200">
+                      <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-stone-900 text-sm">{advocate.name}</p>
+                      <p className="text-xs text-stone-500">{advocate.specialty}</p>
+                    </div>
                   </div>
-                  <p className="text-lg text-stone-700 leading-relaxed">
-                    I've been where you are. Let me help you navigate this—you don't have to figure it out alone.
-                  </p>
-                </div>
-              )}
-
-              {/* STYLE 3: Gradient Background */}
-              {quoteStyle === 3 && (
-                <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-5 shadow-sm">
                   <p className="text-lg text-stone-700 leading-relaxed">
                     "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
                   </p>
-                  <div className="mt-3 flex items-center gap-2">
-                    <div className="w-1 h-1 rounded-full bg-orange-800"></div>
-                    <span className="text-sm text-orange-800 font-medium">{advocate.name.split(' ')[0]}</span>
+                  <div className="mt-4 pt-4 border-t border-stone-100 flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-orange-400 text-orange-400" />
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* STYLE 4: Minimal with Quote Mark */}
+              {/* STYLE 3: Quotly-inspired — Literary, earthy, elegant */}
+              {quoteStyle === 3 && (
+                <div className="bg-stone-50 rounded-xl p-6 relative">
+                  <div className="absolute top-4 left-4 w-8 h-8 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-orange-700" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                  </div>
+                  <div className="pl-12 pr-4">
+                    <p className="text-xl text-stone-800 leading-relaxed font-light">
+                      I've been where you are. Let me help you navigate this—you don't have to figure it out alone.
+                    </p>
+                    <div className="mt-6 flex items-center gap-3">
+                      <div className="h-px flex-1 bg-gradient-to-r from-orange-200 to-transparent"></div>
+                      <span className="text-sm text-orange-800 font-medium tracking-wide uppercase">{advocate.name.split(' ')[0]}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* STYLE 4: Testimonial Card — Polished with photo accent */}
               {quoteStyle === 4 && (
-                <div className="relative pl-6">
-                  <div className="absolute left-0 top-0 text-5xl text-orange-300 font-serif leading-none">"</div>
-                  <p className="text-lg text-stone-700 leading-relaxed pt-2">
-                    I've been where you are. Let me help you navigate this—you don't have to figure it out alone.
-                  </p>
+                <div className="relative">
+                  <div className="bg-stone-900 rounded-2xl p-6 text-white">
+                    <p className="text-lg leading-relaxed">
+                      "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 mt-4 ml-2">
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-orange-200 shadow-md">
+                      <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-stone-900">{advocate.name}</p>
+                      <p className="text-sm text-orange-800">{advocate.specialty}</p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
