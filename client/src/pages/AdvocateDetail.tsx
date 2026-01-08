@@ -161,10 +161,6 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
         'I don\'t give medical advice or tell you what treatment to choose',
         'I don\'t replace your medical team—I help you work with them',
         'I don\'t handle legal malpractice cases (but can refer you)',
-        'I don\'t work with patients who aren\'t ready to be active participants',
-        'You\'re looking for someone to make decisions for you',
-        'Your primary need is emotional counseling (I\'ll refer you to great therapists)',
-        'You need legal representation for malpractice',
         'You prefer an advocate who will be more directive about treatment choices',
       ],
       network: {
@@ -172,16 +168,31 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
         highlights: ['Dana-Farber', 'Memorial Sloan Kettering', 'MD Anderson', 'Mass General'],
       },
     },
-    // Decision-Making Philosophy
+    // Decision-Making Philosophy - Video Format
     decisionPhilosophy: {
-      autonomy: {
-        label: 'Your Body, Your Call',
-        description: 'I present options, explain trade-offs, and help you think through decisions—but I will never push you toward a choice that isn\'t yours. If you decide "no more chemo," I\'ll help you explore what that path looks like with dignity.',
-      },
-      complexity: {
-        label: 'Energized by Complexity',
-        description: 'Rare diagnosis? Multiple specialists who can\'t agree? I love the puzzle. Complex cases are where I do my best work—I\'ll dig into research, coordinate between teams, and find the signal in the noise.',
-      },
+      videos: [
+        {
+          id: 'autonomy',
+          thumbnail: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop',
+          title: 'Your body, your call',
+          duration: '1:24',
+          overlay: 'How I support your decisions without pushing my preferences',
+        },
+        {
+          id: 'complexity',
+          thumbnail: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=300&fit=crop',
+          title: 'Why I love complex cases',
+          duration: '2:08',
+          overlay: 'Rare diagnosis? Multiple specialists? That\'s where I thrive.',
+        },
+        {
+          id: 'difficult-conversations',
+          thumbnail: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=300&fit=crop',
+          title: 'Having hard conversations',
+          duration: '1:47',
+          overlay: 'How I help you talk to doctors about what really matters',
+        },
+      ],
     },
     // Fit (softer framing for "uncomfortable questions")
     fit: {
@@ -198,9 +209,6 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
         'You want a partner, not someone to take over completely',
       ],
       mayNotBeMatch: [
-        'You\'re looking for someone to make decisions for you',
-        'Your primary need is emotional counseling (I\'ll refer you to great therapists)',
-        'You need legal representation for malpractice',
         'You prefer an advocate who will be more directive about treatment choices',
       ],
     },
@@ -472,21 +480,47 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* Decision Philosophy */}
+            {/* Decision Philosophy - Video Section */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <Target className="w-5 h-5" />
+              <h2 className="text-xl font-bold text-black mb-6 flex items-center gap-2">
+                <Video className="w-5 h-5" />
                 How I approach decisions
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-                  <div className="font-semibold text-black mb-1">{advocate.decisionPhilosophy?.autonomy?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.decisionPhilosophy?.autonomy?.description}</p>
-                </div>
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-                  <div className="font-semibold text-black mb-1">{advocate.decisionPhilosophy?.complexity?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.decisionPhilosophy?.complexity?.description}</p>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {advocate.decisionPhilosophy?.videos?.map((video: any) => (
+                  <div key={video.id} className="group cursor-pointer">
+                    {/* Video Thumbnail */}
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-3">
+                      <img 
+                        src={video.thumbnail} 
+                        alt={video.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      {/* Dark Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                      
+                      {/* Play Button */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                          <div className="w-0 h-0 border-l-[18px] border-l-black border-y-[11px] border-y-transparent ml-1"></div>
+                        </div>
+                      </div>
+                      
+                      {/* Duration Badge */}
+                      <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/70 text-white text-xs font-medium rounded">
+                        {video.duration}
+                      </div>
+                      
+                      {/* Text Overlay */}
+                      <div className="absolute bottom-3 left-3 right-12">
+                        <p className="text-white text-sm font-medium leading-snug drop-shadow-lg">{video.overlay}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Title Below */}
+                    <h3 className="font-semibold text-black group-hover:underline">{video.title}</h3>
+                  </div>
+                ))}
               </div>
             </section>
 
