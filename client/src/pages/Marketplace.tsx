@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Heart, ChevronDown, Check, Star } from 'lucide-react';
+import { Heart, ChevronDown, CheckCircle, Star, Users, Award, Ribbon, Pill, Brain, Handshake, Baby } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const categories = [
-  { id: 'all', label: 'All Advocates', icon: '👥' },
-  { id: 'top', label: 'Top Advocates', icon: '⭐' },
-  { id: 'cancer', label: 'Cancer Care', icon: '🎗️' },
-  { id: 'chronic', label: 'Chronic Illness', icon: '💊' },
-  { id: 'mental', label: 'Mental Health', icon: '🧠' },
-  { id: 'elderly', label: 'Elder Care', icon: '🤝' },
-  { id: 'pediatric', label: 'Pediatric Care', icon: '👶' },
+  { id: 'all', label: 'All Advocates', Icon: Users },
+  { id: 'top', label: 'Top Advocates', Icon: Award },
+  { id: 'cancer', label: 'Cancer Care', Icon: Ribbon },
+  { id: 'chronic', label: 'Chronic Illness', Icon: Pill },
+  { id: 'mental', label: 'Mental Health', Icon: Brain },
+  { id: 'elderly', label: 'Elder Care', Icon: Handshake },
+  { id: 'pediatric', label: 'Pediatric Care', Icon: Baby },
 ];
 
 const advocates = [
@@ -203,7 +203,7 @@ export default function Marketplace() {
               )}
               data-testid={`category-${cat.id}`}
             >
-              <span>{cat.icon}</span>
+              <cat.Icon className="w-4 h-4" strokeWidth={1.5} />
               {cat.label}
             </button>
           ))}
@@ -269,8 +269,8 @@ export default function Marketplace() {
 
               {/* Top Advocate Badge */}
               {advocate.isTopExpert && (
-                <div className="absolute top-3 left-3 z-10 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-blue-500 text-blue-500" />
+                <div className="absolute top-3 left-3 z-10 bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
+                  <Star className="w-3 h-3 text-emerald-600" strokeWidth={1.5} />
                   Top Advocate
                 </div>
               )}
@@ -289,13 +289,11 @@ export default function Marketplace() {
                 <div className="flex items-center gap-2 mb-1">
                   <h4 className="font-semibold text-black" data-testid={`text-name-${advocate.id}`}>{advocate.name}</h4>
                   {advocate.isTopExpert && (
-                    <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                      <Check className="w-2.5 h-2.5 text-white" />
-                    </div>
+                    <CheckCircle className="w-4 h-4 text-black" strokeWidth={1.5} />
                   )}
                 </div>
 
-                <p className="text-xs text-blue-600 font-medium mb-2">{advocate.specialty}</p>
+                <p className="text-xs text-emerald-600 font-medium mb-2">{advocate.specialty}</p>
                 
                 <p className="text-lg font-bold text-black mb-2" data-testid={`text-price-${advocate.id}`}>
                   ${advocate.price} <span className="text-sm font-normal text-gray-500">• Consultation</span>
@@ -307,7 +305,7 @@ export default function Marketplace() {
 
                 {/* Rating */}
                 <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-gray-100">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  <Star className="w-3.5 h-3.5 fill-black text-black" />
                   <span className="text-sm font-medium text-black">{advocate.rating}</span>
                   <span className="text-sm text-gray-400">({advocate.reviews} reviews)</span>
                 </div>
