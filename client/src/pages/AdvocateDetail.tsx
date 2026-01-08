@@ -624,32 +624,6 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* Intake Questionnaire Preview */}
-            <section>
-              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <ClipboardList className="w-5 h-5" />
-                Before we meet
-              </h2>
-              <p className="text-gray-600 mb-4">{advocate.intakePreview?.description}</p>
-              <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 space-y-4">
-                {advocate.intakePreview?.items?.map((item: any, idx: number) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-semibold flex-shrink-0 mt-0.5">
-                      {idx + 1}
-                    </div>
-                    <div>
-                      <span className="font-semibold text-black">{item.category}</span>
-                      <span className="text-gray-600"> — {item.examples}</span>
-                    </div>
-                  </div>
-                ))}
-                <div className="pt-3 border-t border-gray-200 flex items-center gap-2 text-sm text-gray-500">
-                  <Clock className="w-4 h-4" />
-                  <span>Takes about {advocate.intakePreview?.timeToComplete}</span>
-                </div>
-              </div>
-            </section>
-
             {/* FAQ */}
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
@@ -843,60 +817,6 @@ export default function AdvocateDetail() {
                   : 'You won\'t be charged until after your session'
                 }
               </p>
-
-              {/* What to expect - based on selected option */}
-              <div className="pt-6 border-t border-gray-100">
-                <h3 className="font-bold text-black mb-3">What to expect</h3>
-                {selectedOption === 'intro' ? (
-                  <div className="bg-gray-50 rounded-xl p-4">
-                    <div className="font-semibold text-black mb-3">15 minute session</div>
-                    <div className="space-y-2 text-sm text-gray-700">
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>Share your situation and biggest concerns</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>Ask questions about how I work</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>See if we're a good fit for each other</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>Get initial thoughts on next steps</span>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="bg-gray-50 rounded-xl p-4">
-                    <div className="font-semibold text-black mb-3">60 minute session</div>
-                    <div className="space-y-2 text-sm text-gray-700">
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>Deep dive into your diagnosis and medical history</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>Review all treatment options with pros and cons</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>Prepare questions for your medical team</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>Written summary of everything we discussed</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-gray-400">-</span>
-                        <span>7 days of follow-up messaging support</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
 
               {/* Trust Signals */}
               <div className="space-y-3 pt-6 border-t border-gray-100">
