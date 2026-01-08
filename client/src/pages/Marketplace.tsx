@@ -189,28 +189,6 @@ export default function Marketplace() {
         <p className="text-xl text-stone-500" data-testid="hero-subtitle">Find advocates who see you, hear you, and stand with you.</p>
       </section>
 
-      {/* Categories */}
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all",
-                activeCategory === cat.id
-                  ? "bg-black text-white"
-                  : "bg-stone-100 text-stone-600 hover:bg-stone-200"
-              )}
-              data-testid={`category-${cat.id}`}
-            >
-              <cat.Icon className="w-4 h-4" strokeWidth={1.5} />
-              {cat.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Filters Bar */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
@@ -260,14 +238,6 @@ export default function Marketplace() {
                 className="group relative bg-white border border-stone-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
                 data-testid={`card-advocate-${advocate.id}`}
               >
-              {/* Favorite Button */}
-              <button 
-                className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                data-testid={`button-favorite-${advocate.id}`}
-              >
-                <Heart className="w-4 h-4 text-stone-500" />
-              </button>
-
               {/* Top Advocate Badge */}
               {advocate.isTopExpert && (
                 <div className="absolute top-3 left-3 z-10 bg-stone-200 text-stone-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
