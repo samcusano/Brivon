@@ -162,6 +162,10 @@ Now I work exclusively for you. I attend appointments, ask the questions you did
         'I don\'t replace your medical team—I help you work with them',
         'I don\'t handle legal malpractice cases (but can refer you)',
         'I don\'t work with patients who aren\'t ready to be active participants',
+        'You\'re looking for someone to make decisions for you',
+        'Your primary need is emotional counseling (I\'ll refer you to great therapists)',
+        'You need legal representation for malpractice',
+        'You prefer an advocate who will be more directive about treatment choices',
       ],
       network: {
         description: 'I have direct relationships built over 20+ years with oncologists, nurse navigators, social workers, and billing departments at major cancer centers across the Northeast. I\'m not cold-calling—I\'m calling colleagues.',
@@ -327,7 +331,7 @@ export default function AdvocateDetail() {
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Shield className="w-5 h-5" />
-                Verified Credentials
+                Verified credentials
               </h2>
               <div className="space-y-3">
                 {advocate.credentials.map((cred: any, idx: number) => (
@@ -346,19 +350,11 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* About */}
-            <section>
-              <h2 className="text-xl font-bold text-black mb-4">About {advocate.name.split(' ')[0]}</h2>
-              <div className="text-gray-600 whitespace-pre-line leading-relaxed">
-                {advocate.about}
-              </div>
-            </section>
-
             {/* Human Connection - Quick Scan Cards */}
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <HeartHandshake className="w-5 h-5" />
-                Who I Am When Things Get Hard
+                Who I am when things get hard
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-xl p-4">
@@ -397,7 +393,7 @@ export default function AdvocateDetail() {
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Sparkles className="w-5 h-5" />
-                Real Wins (Not Just Bullet Points)
+                Real wins (not just bullet points)
               </h2>
               <div className="space-y-4">
                 {advocate.practicalStuff?.wins?.map((win: any, idx: number) => (
@@ -413,7 +409,7 @@ export default function AdvocateDetail() {
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Flame className="w-5 h-5" />
-                How I Work
+                How I work
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
@@ -441,7 +437,7 @@ export default function AdvocateDetail() {
               <section>
                 <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                   <Heart className="w-5 h-5" />
-                  I've Been There Too
+                  I've been there too
                 </h2>
                 <div className="bg-gradient-to-br from-rose-50 to-white border border-rose-100 rounded-xl p-5">
                   <div className="flex items-start gap-3">
@@ -463,7 +459,7 @@ export default function AdvocateDetail() {
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Network className="w-5 h-5" />
-                My Network (These Are People I Know)
+                My network (these are people I know)
               </h2>
               <p className="text-gray-600 mb-4">{advocate.trustIndicators?.network?.description}</p>
               <div className="flex flex-wrap gap-2">
@@ -482,7 +478,7 @@ export default function AdvocateDetail() {
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Target className="w-5 h-5" />
-                How I Approach Decisions
+                How I approach decisions
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
@@ -496,63 +492,30 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* Fit Section - Soft Framing */}
+            {/* What I do */}
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Handshake className="w-5 h-5" />
-                Are We a Good Fit?
+                What I do
               </h2>
               
-              <div className="space-y-6">
-                {/* Best For */}
-                <div>
-                  <h3 className="font-semibold text-black mb-3 text-sm uppercase tracking-wide">I'm at my best with...</h3>
-                  <div className="space-y-2">
-                    {advocate.fit?.bestFor?.map((item: string, idx: number) => (
-                      <div key={idx} className="flex items-start gap-2 text-gray-700">
-                        <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
+              <div className="space-y-2">
+                {advocate.fit?.bestFor?.map((item: string, idx: number) => (
+                  <div key={idx} className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                    <span>{item}</span>
                   </div>
-                </div>
-
-                {/* Works Best When */}
-                <div>
-                  <h3 className="font-semibold text-black mb-3 text-sm uppercase tracking-wide">We'll work well together if...</h3>
-                  <div className="space-y-2">
-                    {advocate.fit?.worksBestWhen?.map((item: string, idx: number) => (
-                      <div key={idx} className="flex items-start gap-2 text-gray-700">
-                        <ThumbsUp className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* May Not Be Match */}
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <h3 className="font-semibold text-black mb-3 text-sm uppercase tracking-wide">I might not be your match if...</h3>
-                  <div className="space-y-2">
-                    {advocate.fit?.mayNotBeMatch?.map((item: string, idx: number) => (
-                      <div key={idx} className="flex items-start gap-2 text-gray-600">
-                        <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-sm text-gray-500 mt-3 italic">No hard feelings—the right fit matters for both of us.</p>
-                </div>
+                ))}
               </div>
             </section>
 
-            {/* Boundaries */}
+            {/* What I don't do */}
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Shield className="w-5 h-5" />
-                What I Don't Do
+                What I don't do
               </h2>
-              <p className="text-gray-600 mb-4">Clear expectations help us both. Here's where my role ends:</p>
+              <p className="text-gray-600 mb-4">Clear expectations help us both. No hard feelings if it doesn't work out. Here's where my role ends:</p>
               <div className="space-y-2">
                 {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
                   <div key={idx} className="flex items-start gap-2 text-gray-700">
@@ -565,7 +528,7 @@ export default function AdvocateDetail() {
 
             {/* Specializations */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4">How I Stand With You</h2>
+              <h2 className="text-xl font-bold text-black mb-4">How I stand with you</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {advocate.specializations.map((spec: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-2 text-gray-700">
@@ -578,7 +541,7 @@ export default function AdvocateDetail() {
 
             {/* Conditions */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4">Patients I've Championed</h2>
+              <h2 className="text-xl font-bold text-black mb-4">Patients I've championed</h2>
               <div className="flex flex-wrap gap-2">
                 {advocate.conditionsHandled.map((condition: string, idx: number) => (
                   <span 
@@ -593,7 +556,7 @@ export default function AdvocateDetail() {
 
             {/* What to Expect */}
             <section>
-              <h2 className="text-xl font-bold text-black mb-4">What to Expect</h2>
+              <h2 className="text-xl font-bold text-black mb-4">What to expect</h2>
               <div className="space-y-3">
                 {advocate.whatToExpect.map((item: string, idx: number) => (
                   <div key={idx} className="flex items-start gap-3">
@@ -611,7 +574,7 @@ export default function AdvocateDetail() {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-black flex items-center gap-2">
                   <Star className="w-5 h-5 fill-black text-black" />
-                  {advocate.reviews} Reviews
+                  {advocate.reviews} reviews
                 </h2>
               </div>
 
@@ -637,6 +600,14 @@ export default function AdvocateDetail() {
               <button className="mt-6 text-black font-medium underline hover:no-underline" data-testid="button-show-all-reviews">
                 Show all {advocate.reviews} reviews
               </button>
+            </section>
+
+            {/* About */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4">About {advocate.name.split(' ')[1]}</h2>
+              <div className="text-gray-600 whitespace-pre-line leading-relaxed">
+                {advocate.about}
+              </div>
             </section>
           </div>
 
@@ -724,19 +695,6 @@ export default function AdvocateDetail() {
           </div>
         </div>
 
-        {/* Important Information */}
-        <section className="mt-16 p-6 bg-amber-50 border border-amber-200 rounded-2xl">
-          <h3 className="font-bold text-black mb-3 flex items-center gap-2">
-            <AlertCircle className="w-5 h-5 text-amber-600" />
-            Good to Know
-          </h3>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li>• Your advocate helps you understand your options and navigate the system—not give medical advice. Your doctors remain your medical decision-makers.</li>
-            <li>• Your advocate works only for you. No hospital. No insurance company. Just you.</li>
-            <li>• Everything you share stays between us—confidential and HIPAA-protected.</li>
-            <li>• Not the right fit? No hard feelings. You can switch advocates anytime.</li>
-          </ul>
-        </section>
       </main>
 
       {/* Footer */}
