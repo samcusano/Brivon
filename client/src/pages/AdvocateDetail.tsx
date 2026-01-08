@@ -306,7 +306,7 @@ export default function AdvocateDetail() {
               </div>
               {/* Verified Badge */}
               <div className="absolute bottom-2 right-2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-white">
-                <CheckCircle className="w-6 h-6 text-amber-700" />
+                <CheckCircle className="w-6 h-6 text-orange-700" />
               </div>
             </div>
 
@@ -320,11 +320,11 @@ export default function AdvocateDetail() {
               {/* Badges Row */}
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
                 <span className="inline-flex items-center gap-1.5 text-sm text-stone-600">
-                  <CheckCircle className="w-4 h-4 text-amber-700" />
+                  <CheckCircle className="w-4 h-4 text-orange-700" />
                   Verified
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-sm font-medium text-stone-600">
-                  <Star className="w-4 h-4 text-amber-700" />
+                  <Star className="w-4 h-4 text-orange-700" />
                   Top Advocate
                 </span>
               </div>
@@ -380,11 +380,11 @@ export default function AdvocateDetail() {
               <div className="flex flex-wrap gap-2">
                 {advocate.credentials.map((cred: any, idx: number) => (
                   <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-full text-sm">
-                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-amber-700" />}
-                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-amber-700" />}
-                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-amber-700" />}
+                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-orange-700" />}
+                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-orange-700" />}
+                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-orange-700" />}
                     <span className="font-medium text-stone-700">{cred.label}</span>
-                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-amber-700" />}
+                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-orange-700" />}
                   </span>
                 ))}
               </div>
@@ -399,28 +399,28 @@ export default function AdvocateDetail() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <FileText className="w-4 h-4 text-amber-700" />
+                    <FileText className="w-4 h-4 text-orange-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.appealsApproved?.value}</span>
                   </div>
                   <div className="text-sm text-stone-500">{advocate.outcomeStats?.appealsApproved?.label}</div>
                 </div>
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Beaker className="w-4 h-4 text-amber-700" />
+                    <Beaker className="w-4 h-4 text-orange-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.clinicalTrialsMatched?.value}</span>
                   </div>
                   <div className="text-sm text-stone-500">{advocate.outcomeStats?.clinicalTrialsMatched?.label}</div>
                 </div>
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Stethoscope className="w-4 h-4 text-amber-700" />
+                    <Stethoscope className="w-4 h-4 text-orange-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.secondOpinions?.value}</span>
                   </div>
                   <div className="text-sm text-stone-500">{advocate.outcomeStats?.secondOpinions?.label}</div>
                 </div>
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Hourglass className="w-4 h-4 text-amber-700" />
+                    <Hourglass className="w-4 h-4 text-orange-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.avgTimeSaved?.value}</span>
                   </div>
                   <div className="text-sm text-stone-500">{advocate.outcomeStats?.avgTimeSaved?.label}</div>
@@ -454,7 +454,7 @@ export default function AdvocateDetail() {
                     key={idx} 
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-full text-sm"
                   >
-                    <BadgeCheck className="w-3.5 h-3.5 text-amber-700" />
+                    <BadgeCheck className="w-3.5 h-3.5 text-orange-700" />
                     <span className="font-medium text-stone-700">{membership.acronym} - {membership.name}</span>
                   </span>
                 ))}
@@ -530,7 +530,7 @@ export default function AdvocateDetail() {
                   <div className="space-y-2">
                     {advocate.fit?.bestFor?.map((item: string, idx: number) => (
                       <div key={idx} className="flex items-start gap-2 text-stone-600">
-                        <CheckCircle className="w-4 h-4 text-amber-700 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-orange-700 mt-0.5 flex-shrink-0" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -567,7 +567,7 @@ export default function AdvocateDetail() {
                 {advocate.trustIndicators?.network?.highlights?.map((place: string, idx: number) => (
                   <span 
                     key={idx}
-                    className="px-3 py-1.5 bg-amber-50 text-amber-800 rounded-full text-sm font-medium border border-amber-200"
+                    className="px-3 py-1.5 bg-orange-50 text-orange-800 rounded-full text-sm font-medium border border-orange-200"
                   >
                     {place}
                   </span>
@@ -625,7 +625,7 @@ export default function AdvocateDetail() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {advocate.specializations.map((spec: string, idx: number) => (
                   <div key={idx} className="flex items-center gap-2 text-stone-600">
-                    <CheckCircle className="w-4 h-4 text-amber-700" />
+                    <CheckCircle className="w-4 h-4 text-orange-700" />
                     <span>{spec}</span>
                   </div>
                 ))}
@@ -797,7 +797,7 @@ export default function AdvocateDetail() {
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-semibold text-black">Free Intro Call</span>
-                    <span className="text-amber-700 font-semibold">Free</span>
+                    <span className="text-orange-700 font-semibold">Free</span>
                   </div>
                   <p className="text-sm text-stone-500">15 minutes to share your story and see if I'm the right champion for you</p>
                 </button>
@@ -828,7 +828,7 @@ export default function AdvocateDetail() {
 
               {/* Book Button */}
               <Button 
-                className="w-full bg-amber-700 text-white py-6 text-lg font-semibold rounded-xl hover:bg-amber-800 transition-colors mb-4"
+                className="w-full bg-orange-700 text-white py-6 text-lg font-semibold rounded-xl hover:bg-orange-800 transition-colors mb-4"
                 data-testid="button-book-now"
               >
                 {selectedOption === 'intro' ? 'Schedule Free Intro Call' : `Book for $${advocate.price}`}
@@ -844,19 +844,19 @@ export default function AdvocateDetail() {
               {/* Trust Signals */}
               <div className="space-y-3 pt-6 border-t border-stone-200">
                 <div className="flex items-center gap-3 text-sm text-stone-500">
-                  <Shield className="w-4 h-4 text-amber-700" />
+                  <Shield className="w-4 h-4 text-orange-700" />
                   <span>Your satisfaction, guaranteed</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-stone-500">
-                  <Video className="w-4 h-4 text-amber-700" />
+                  <Video className="w-4 h-4 text-orange-700" />
                   <span>Private, secure video—just you and your advocate</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-stone-500">
-                  <FileCheck className="w-4 h-4 text-amber-700" />
+                  <FileCheck className="w-4 h-4 text-orange-700" />
                   <span>Written summary so nothing gets lost</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-stone-500">
-                  <MessageCircle className="w-4 h-4 text-amber-700" />
+                  <MessageCircle className="w-4 h-4 text-orange-700" />
                   <span>7 days of support—I'm in your corner</span>
                 </div>
               </div>
