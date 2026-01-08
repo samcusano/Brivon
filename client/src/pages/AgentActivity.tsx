@@ -2,202 +2,143 @@ import React from 'react';
 import { Shell } from '@/components/layout/Shell';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  Play, 
-  Pause, 
-  RefreshCw, 
-  AlertCircle, 
-  CheckCircle2, 
-  ChevronRight, 
-  Activity,
-  Zap,
-  Terminal,
-  Cpu,
-  Clock,
-  ArrowUpRight,
-  Settings as SettingsIcon,
-  Filter
-} from 'lucide-react';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
+import { 
+  Pause,
+  Settings as SettingsIcon,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function AgentActivity() {
-  const agents = [
-    { 
-      id: 'VendorRiskMonitor-07', 
-      uptime: '2h 14m', 
-      progress: 60, 
-      status: 'Analyzing Questionnaires',
-      metrics: { cpu: '12%', mem: '1.2GB', threads: 64 },
-      log: 'Found SOC2 mismatch for Acme Corp...',
-      color: 'bg-primary'
-    },
-    { 
-      id: 'ComplianceMonitor-03', 
-      uptime: '6h 47m', 
-      progress: 85, 
-      status: 'Regulatory Scanning',
-      metrics: { cpu: '4%', mem: '0.8GB', threads: 32 },
-      log: 'Updated GDPR schema for EU region...',
-      color: 'bg-amber-500'
-    },
-    { 
-      id: 'EntityScanner-12', 
-      uptime: '1h 05m', 
-      progress: 30, 
-      status: 'Entity Resolution',
-      metrics: { cpu: '22%', mem: '2.4GB', threads: 128 },
-      log: 'Matching 42 entities in US-East...',
-      color: 'bg-blue-500'
-    }
+  const workstations = [
+    { id: 'Risk-01', load: 82, status: 'Active' },
+    { id: 'Risk-02', load: 12, status: 'Idle' },
+    { id: 'Compliance-01', load: 45, status: 'Active' },
+    { id: 'Compliance-02', load: 0, status: 'Paused' },
   ];
+
+  const agents = [
+    { id: 'Agent-7291', status: 'Processing', task: 'Vendor risk assessment', uptime: '2h 14m', progress: 78 },
+    { id: 'Agent-4521', status: 'Active', task: 'Compliance check', uptime: '5h 32m', progress: 92 },
+    { id: 'Agent-8834', status: 'Waiting', task: 'Data validation', uptime: '1h 05m', progress: 45 },
+    { id: 'Agent-2156', status: 'Processing', task: 'Document analysis', uptime: '3h 48m', progress: 61 },
+  ];
+
+  const getStatusStyle = (status: string) => {
+    switch (status) {
+      case 'Active':
+      case 'Processing':
+        return 'bg-[#C8E6B0] text-[#1a1a1a]';
+      case 'Idle':
+      case 'Waiting':
+        return 'bg-[#F0F4E8] text-[#666]';
+      case 'Paused':
+        return 'bg-[#f5f5f5] text-[#999]';
+      default:
+        return 'bg-gray-100 text-gray-600';
+    }
+  };
 
   return (
     <Shell>
-      <div className="p-8 max-w-7xl mx-auto space-y-12 pb-20">
-        <header className="flex flex-col gap-2">
+      <div className="p-10 max-w-6xl mx-auto space-y-12">
+        {/* Stats Section */}
+        <div className="flex gap-20">
+          {/* Workstations */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-[#1a1a1a]">Workstations</h2>
+            <div className="flex gap-4">
+              {workstations.map((ws, i) => (
+                <div 
+                  key={i}
+                  className={cn(
+                    "w-36 h-28 rounded-xl flex flex-col items-center justify-center cursor-pointer transition-all hover:scale-[1.02]",
+                    i === 0 ? "bg-[#4A9B8C] text-white" : "border border-[#e5e5e5]"
+                  )}
+                  data-testid={`card-workstation-${ws.id}`}
+                >
+                  <span className="text-4xl font-bold">{ws.load}%</span>
+                  <span className={cn("text-sm mt-1", i === 0 ? "text-white/80" : "text-[#666]")}>{ws.id}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Active Workers Section */}
+        <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-4xl font-black tracking-tight text-[#2F2A26]">All Agents</h1>
+            <h2 className="text-xl font-semibold text-[#1a1a1a]">Active Workers</h2>
             <div className="flex items-center gap-4">
-              <div className="flex flex-col items-end">
-                <span className="text-[10px] font-bold text-[#B7C3B0] uppercase">Compute Load</span>
-                <span className="text-sm font-black">24.2 GFLOPS</span>
-              </div>
-              <div className="h-8 w-px bg-[#B7C3B0]/20" />
-              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full border border-[#B7C3B0]/30 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[10px] font-black uppercase tracking-wider">Live Sync</span>
-              </div>
+              <button className="flex items-center gap-2 text-sm text-[#666] hover:text-[#1a1a1a] transition-colors" data-testid="filter-status">
+                Status <ChevronDown className="w-4 h-4" />
+              </button>
+              <button className="flex items-center gap-2 text-sm text-[#666] hover:text-[#1a1a1a] transition-colors" data-testid="filter-resources">
+                Resources <ChevronDown className="w-4 h-4" />
+              </button>
             </div>
           </div>
-        </header>
 
-        {/* Workstations (Moved to Top) */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
-            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
-              <Zap className="w-3 h-3" /> Workstations
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { id: 'Risk-01', load: 82, status: 'Active' },
-              { id: 'Risk-02', load: 12, status: 'Idle' },
-              { id: 'Compliance-01', load: 45, status: 'Active' },
-              { id: 'Compliance-02', load: 0, status: 'Paused' },
-            ].map((item, i) => (
-              <div key={i} className="p-4 bg-white border border-[#B7C3B0]/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-[#F6F3EE] flex items-center justify-center text-lg">🤖</div>
-                  <Badge className={cn(
-                    "text-[8px] font-black uppercase",
-                    item.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-[#F6F3EE] text-[#B7C3B0]'
-                  )}>
-                    {item.status}
-                  </Badge>
-                </div>
-                <h4 className="font-black text-sm mb-1">{item.id}</h4>
-                <div className="flex items-center justify-between text-[10px] font-bold text-[#B7C3B0] mb-2">
-                  <span>Load</span>
-                  <span>{item.load}%</span>
-                </div>
-                <div className="h-1 bg-[#F6F3EE] rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-primary transition-all group-hover:bg-primary/80" 
-                    style={{ width: `${item.load}%` }} 
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Table View (Active Workers) */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between border-b border-[#B7C3B0]/20 pb-2">
-            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#2F2A26]/40 flex items-center gap-2">
-              <Terminal className="w-3 h-3" /> Active Workers
-            </h2>
-            
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="h-7 text-[10px] font-black uppercase tracking-wider gap-2 border-[#B7C3B0]/30">
-                <Filter className="w-3 h-3" /> Status
-              </Button>
-              <Button variant="outline" size="sm" className="h-7 text-[10px] font-black uppercase tracking-wider gap-2 border-[#B7C3B0]/30">
-                <Cpu className="w-3 h-3" /> Resources
-              </Button>
-              <Badge variant="outline" className="text-[10px] font-bold border-[#B7C3B0]/50 bg-[#B7C3B0]/5 text-[#2F2A26]/60 h-7 px-3">
-                12 Running
-              </Badge>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-xl border border-[#B7C3B0]/30 shadow-sm overflow-hidden">
+          <div className="border border-[#e5e5e5] rounded-xl overflow-hidden bg-white">
             <Table>
-              <TableHeader className="bg-[#F6F3EE]/50">
-                <TableRow className="hover:bg-transparent border-b border-[#B7C3B0]/20">
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Agent ID</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Status / Workload</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4 text-center">Resources</TableHead>
-                  <TableHead className="text-right text-[10px] font-black uppercase tracking-widest py-4">Actions</TableHead>
+              <TableHeader>
+                <TableRow className="border-b border-[#e5e5e5] hover:bg-transparent">
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4 pl-6">Agent ID</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4">Status</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4">Current Task</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4">Uptime</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4">Progress</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4 pr-6 text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {agents.map((agent, idx) => (
-                  <TableRow key={idx} className="group hover:bg-[#F6F3EE]/30 transition-colors">
+                  <TableRow 
+                    key={idx} 
+                    className="border-b border-[#f0f0f0] hover:bg-[#fafafa] transition-colors"
+                    data-testid={`row-agent-${agent.id}`}
+                  >
+                    <TableCell className="py-5 pl-6">
+                      <span className="font-semibold text-[#1a1a1a]">{agent.id}</span>
+                    </TableCell>
+                    <TableCell className="py-5">
+                      <Badge className={cn(
+                        "font-medium text-xs px-3 py-1 rounded-full",
+                        getStatusStyle(agent.status)
+                      )} data-testid={`badge-status-${agent.id}`}>
+                        {agent.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="py-5 text-[#666] text-sm">{agent.task}</TableCell>
+                    <TableCell className="py-5 text-[#666] text-sm">{agent.uptime}</TableCell>
                     <TableCell className="py-5">
                       <div className="flex items-center gap-3">
-                        <div className={cn("w-1 h-8 rounded-full", agent.color)} />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-black text-sm text-[#2F2A26]">{agent.id}</span>
-                            <Badge className="bg-[#F6F3EE] text-[#2F2A26] border-[#B7C3B0]/30 text-[8px] font-black uppercase px-1 h-3.5">v2.4.0</Badge>
-                          </div>
-                          <div className="flex items-center gap-1.5 mt-0.5 text-[9px] font-bold text-[#B7C3B0] uppercase">
-                            <Clock className="w-2.5 h-2.5" /> {agent.uptime}
-                          </div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="py-5">
-                      <div className="space-y-2 max-w-[200px]">
-                        <div className="flex justify-between items-center">
-                          <span className="text-[10px] font-bold text-[#2F2A26]/80">{agent.status}</span>
-                          <span className="text-[10px] font-black">{agent.progress}%</span>
-                        </div>
-                        <div className="h-1 bg-[#F6F3EE] rounded-full overflow-hidden border border-[#B7C3B0]/10">
+                        <div className="w-24 h-2 bg-[#f0f0f0] rounded-full overflow-hidden">
                           <div 
-                            className={cn("h-full transition-all duration-1000", agent.color)} 
-                            style={{ width: `${agent.progress}%` }} 
+                            className="h-full bg-[#4A9B8C] rounded-full transition-all"
+                            style={{ width: `${agent.progress}%` }}
                           />
                         </div>
+                        <span className="text-sm text-[#666]">{agent.progress}%</span>
                       </div>
                     </TableCell>
-                    <TableCell className="py-5">
-                      <div className="flex items-center justify-center gap-4 bg-[#F6F3EE]/50 rounded-lg p-2 border border-[#B7C3B0]/10">
-                        {Object.entries(agent.metrics).map(([key, val]) => (
-                          <div key={key} className="text-center">
-                            <p className="text-[8px] font-black uppercase text-[#B7C3B0]">{key}</p>
-                            <p className="text-[10px] font-black text-[#2F2A26]">{val}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-right py-5">
+                    <TableCell className="py-5 pr-6 text-right">
                       <div className="flex items-center justify-end gap-1">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive">
-                          <Pause className="w-3.5 h-3.5" />
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-[#999] hover:text-[#666] hover:bg-[#f5f5f5]">
+                          <Pause className="w-4 h-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-[#B7C3B0]/10 text-[#2F2A26]/60">
-                          <SettingsIcon className="w-3.5 h-3.5" />
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-[#999] hover:text-[#666] hover:bg-[#f5f5f5]">
+                          <SettingsIcon className="w-4 h-4" />
                         </Button>
                       </div>
                     </TableCell>
@@ -206,7 +147,22 @@ export default function AgentActivity() {
               </TableBody>
             </Table>
           </div>
-        </section>
+
+          {/* Pagination */}
+          <div className="flex items-center gap-2 pt-4">
+            <button className="flex items-center gap-1 text-sm text-[#999] hover:text-[#1a1a1a] transition-colors" data-testid="button-previous">
+              <ChevronLeft className="w-4 h-4" /> Previous
+            </button>
+            <div className="flex items-center gap-1 ml-4">
+              <button className="w-8 h-8 rounded-md bg-[#1a1a1a] text-white text-sm font-medium">1</button>
+              <button className="w-8 h-8 rounded-md text-[#666] hover:bg-[#f0f0f0] text-sm transition-colors">2</button>
+              <button className="w-8 h-8 rounded-md text-[#666] hover:bg-[#f0f0f0] text-sm transition-colors">3</button>
+            </div>
+            <button className="flex items-center gap-1 text-sm text-[#666] hover:text-[#1a1a1a] transition-colors ml-4" data-testid="button-next">
+              Next <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       </div>
     </Shell>
   );

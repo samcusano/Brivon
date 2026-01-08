@@ -1,6 +1,5 @@
 import React from 'react';
 import { Shell } from '@/components/layout/Shell';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,250 +11,157 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { 
-  AlertCircle, 
-  CheckCircle2, 
-  Clock, 
-  ShieldAlert, 
-  ArrowRight, 
-  Users, 
-  LayoutGrid,
   ChevronDown,
-  Layers,
-  Filter
+  ChevronLeft,
+  ChevronRight,
+  ArrowRight
 } from 'lucide-react';
 import { Link } from 'wouter';
 import { cn } from '@/lib/utils';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
 
 export default function Dashboard() {
-  const quickFilters = [
-    { label: 'My Decisions', icon: Users, color: 'text-primary' },
-    { label: 'Urgent (< 24h)', icon: Clock, color: 'text-destructive' },
-    { label: 'Awaiting Input', icon: AlertCircle, color: 'text-amber-500' },
-    { label: 'Recent Completions', icon: CheckCircle2, color: 'text-green-500' },
+  const queueItems = [
+    { id: '0847', entity: 'Acme Corp', issue: 'SOC 2 cert expired', due: 'Today', priority: 'Urgent' },
+    { id: '5139', entity: 'Fintech solution', issue: 'New breach disclosed (CISA alert)', due: 'Today', priority: 'Urgent' },
+    { id: '65423', entity: 'GDRP Compliacne', issue: 'Abnormal API usage pattern', due: 'Today', priority: 'High' },
+    { id: '3826', entity: 'Cloudscale', issue: 'EU data retention rules changed', due: '3 days', priority: 'High' },
+    { id: '35427', entity: 'GDRP Compliance', issue: 'SOC 2 cert expired', due: '3 days', priority: 'Medium' },
+    { id: '42424', entity: 'Apollo Global Management', issue: 'New breach disclosed (CISA alert)', due: '14 days', priority: 'Medium' },
+    { id: '35423', entity: 'CloudScale', issue: 'Abnormal API usage pattern', due: '14 days', priority: 'Low' },
   ];
 
-  const riskFilters = [
-    { label: 'Vendor Risk' },
-    { label: 'Compliance' },
-    { label: 'Security' },
-    { label: 'Internal Controls' },
-  ];
+  const getPriorityStyle = (priority: string) => {
+    switch (priority) {
+      case 'Urgent':
+        return 'bg-[#1a1a1a] text-white';
+      case 'High':
+        return 'bg-[#E8F5A3] text-[#1a1a1a]';
+      case 'Medium':
+        return 'bg-[#C8E6B0] text-[#1a1a1a]';
+      case 'Low':
+        return 'bg-[#F0F4E8] text-[#666]';
+      default:
+        return 'bg-gray-100 text-gray-600';
+    }
+  };
 
   return (
     <Shell>
-      <div className="p-8 max-w-7xl mx-auto space-y-8">
-        {/* Statistics section remains same */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <Card className="bg-card/50 backdrop-blur-sm border-border/50">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-                <Users className="w-3.5 h-3.5" /> My Decisions
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex justify-between items-center py-4">
-              <div className="flex flex-col text-center">
-                <span className="text-3xl font-black text-destructive">2</span>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">🔴 Urgent</span>
+      <div className="p-10 max-w-6xl mx-auto space-y-12">
+        {/* Stats Section */}
+        <div className="flex gap-20">
+          {/* My Decision */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-[#1a1a1a]">My decision</h2>
+            <div className="flex gap-4">
+              <div className="w-32 h-28 bg-[#4A9B8C] rounded-xl flex flex-col items-center justify-center text-white" data-testid="card-urgent">
+                <span className="text-5xl font-bold">3</span>
+                <span className="text-sm mt-1">Urgent</span>
               </div>
-              <div className="flex flex-col text-center">
-                <span className="text-3xl font-black text-amber-600">8</span>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">🟡 This Week</span>
+              <div className="w-32 h-28 border border-[#e5e5e5] rounded-xl flex flex-col items-center justify-center" data-testid="card-this-week">
+                <span className="text-5xl font-bold text-[#1a1a1a]">2</span>
+                <span className="text-sm text-[#666] mt-1">This week</span>
               </div>
-              <div className="flex flex-col text-center">
-                <span className="text-3xl font-black text-green-600">15</span>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">🟢 Review</span>
+              <div className="w-32 h-28 border border-[#e5e5e5] rounded-xl flex flex-col items-center justify-center" data-testid="card-review">
+                <span className="text-5xl font-bold text-[#1a1a1a]">8</span>
+                <span className="text-sm text-[#666] mt-1">Review</span>
               </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/50 backdrop-blur-sm border-border/50 lg:col-span-2">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-                <LayoutGrid className="w-3.5 h-3.5" /> Agent Activity
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex justify-between items-center py-6 overflow-x-auto no-scrollbar">
-              <div className="flex items-center gap-10 min-w-max">
-                <div className="flex items-center gap-4 group cursor-help">
-                  <div className="relative">
-                    <div className="absolute -inset-1 bg-primary/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                    <span className="relative text-4xl font-black text-primary tracking-tighter">12</span>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-0.5">Active Agents</p>
-                    <div className="flex gap-1">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className="w-1 h-1 rounded-full bg-primary/40 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-px h-10 bg-gradient-to-b from-transparent via-border/60 to-transparent hidden sm:block" />
-
-                <div className="flex flex-col group cursor-help">
-                  <span className="text-3xl font-black text-foreground/40 group-hover:text-foreground transition-colors duration-300 tracking-tighter">3</span>
-                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Awaiting Data</p>
-                </div>
-
-                <div className="flex flex-col group cursor-help">
-                  <span className="text-3xl font-black text-emerald-500 group-hover:scale-110 transition-transform duration-300 tracking-tighter">8</span>
-                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Completed Today</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-heading font-bold text-foreground flex items-center gap-2">
-              Queue
-            </h2>
-
-            <div className="flex items-center gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="h-9 px-3 gap-2 border-border/50 bg-white/50 hover:bg-white transition-all shadow-sm">
-                    <Layers className="w-3.5 h-3.5 text-muted-foreground" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-foreground/80">My Decisions</span>
-                    <ChevronDown className="w-3.5 h-3.5 opacity-50" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2 py-1.5">Queue Filters</DropdownMenuLabel>
-                  {quickFilters.map((filter, i) => (
-                    <DropdownMenuItem key={i} className="gap-2 px-2 py-2 cursor-pointer">
-                      <filter.icon className={cn("w-4 h-4", filter.color)} />
-                      <span className="font-medium text-sm">{filter.label}</span>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="h-9 px-3 gap-2 border-border/50 bg-white/50 hover:bg-white transition-all shadow-sm">
-                    <Filter className="w-3.5 h-3.5 text-muted-foreground" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-foreground/80">Risk Type</span>
-                    <ChevronDown className="w-3.5 h-3.5 opacity-50" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 px-2 py-1.5">By Risk Type</DropdownMenuLabel>
-                  {riskFilters.map((filter, i) => (
-                    <DropdownMenuItem key={i} className="gap-2 px-2 py-2 cursor-pointer">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      <span className="font-medium text-sm">{filter.label}</span>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
             </div>
           </div>
-          
-          <div className="bg-white rounded-xl border border-border/50 shadow-sm overflow-hidden">
+
+          {/* Agents */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-[#1a1a1a]">Agents</h2>
+            <div className="flex gap-4">
+              <div className="w-32 h-28 border border-[#e5e5e5] rounded-xl flex flex-col items-center justify-center" data-testid="card-active">
+                <span className="text-5xl font-bold text-[#1a1a1a]">12</span>
+                <span className="text-sm text-[#666] mt-1">Active</span>
+              </div>
+              <div className="w-32 h-28 border border-[#e5e5e5] rounded-xl flex flex-col items-center justify-center" data-testid="card-waiting">
+                <span className="text-5xl font-bold text-[#1a1a1a]">2</span>
+                <span className="text-sm text-[#666] mt-1">Waiting</span>
+              </div>
+              <div className="w-32 h-28 border border-[#e5e5e5] rounded-xl flex flex-col items-center justify-center" data-testid="card-completed">
+                <span className="text-5xl font-bold text-[#1a1a1a]">8</span>
+                <span className="text-sm text-[#666] mt-1">Completed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Queue Section */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold text-[#1a1a1a]">Queue</h2>
+            <div className="flex items-center gap-4">
+              <button className="flex items-center gap-2 text-sm text-[#666] hover:text-[#1a1a1a] transition-colors" data-testid="filter-decision">
+                Decision <ChevronDown className="w-4 h-4" />
+              </button>
+              <button className="flex items-center gap-2 text-sm text-[#666] hover:text-[#1a1a1a] transition-colors" data-testid="filter-risks">
+                Risks <ChevronDown className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="border border-[#e5e5e5] rounded-xl overflow-hidden bg-white">
             <Table>
-              <TableHeader className="bg-muted/30">
-                <TableRow className="hover:bg-transparent border-b border-border/50">
-                  <TableHead className="w-[120px] text-[10px] font-black uppercase tracking-widest py-4">ID</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Entity / Issue</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">Priority</TableHead>
-                  <TableHead className="text-[10px] font-black uppercase tracking-widest py-4">SLA / Status</TableHead>
-                  <TableHead className="text-right text-[10px] font-black uppercase tracking-widest py-4">Action</TableHead>
+              <TableHeader>
+                <TableRow className="border-b border-[#e5e5e5] hover:bg-transparent">
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4 pl-6">ID</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4">Issue</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4">Issue</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4">Due</TableHead>
+                  <TableHead className="text-xs font-medium text-[#999] uppercase tracking-wider py-4 pr-6">Priority</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {[
-                  { id: 'VENDOR-0847', name: 'Acme Corp', issue: 'SOC 2 cert expired 14 days ago', rec: 'Recommend offboarding', conf: 92, sla: '6 hours remaining', priority: 'CRITICAL', color: 'destructive' },
-                  { id: 'VENDOR-0231', name: 'SecureData Inc', issue: 'New breach disclosed (CISA alert)', rec: 'Request incident report', conf: 78, sla: 'Due Tomorrow', priority: 'HIGH', color: 'amber-600' },
-                  { id: 'ENTITY-1142', name: 'FinTech Solutions', issue: 'Abnormal API usage pattern', rec: 'Verify identity', conf: 88, sla: '12 hours remaining', priority: 'HIGH', color: 'amber-600' },
-                  { id: 'POLICY-0092', name: 'GDPR Update', issue: 'EU data retention rules changed', rec: 'Update 12 policies', conf: 65, sla: 'Due Next week', priority: 'MEDIUM', color: 'green-600' },
-                  { id: 'VENDOR-0552', name: 'CloudScale', issue: 'Sub-processor change', rec: 'Review impact', conf: 72, sla: 'Due In 3 days', priority: 'LOW', color: 'slate-500' }
-                ].map((item, idx) => (
-                  <TableRow key={idx} className="group hover:bg-muted/20 transition-colors">
-                    <TableCell className="py-4">
-                      <Badge variant="outline" className="text-[10px] font-bold bg-background shadow-sm">{item.id}</Badge>
+                {queueItems.map((item, idx) => (
+                  <TableRow 
+                    key={idx} 
+                    className="border-b border-[#f0f0f0] hover:bg-[#fafafa] transition-colors cursor-pointer group"
+                    data-testid={`row-queue-${item.id}`}
+                  >
+                    <TableCell className="py-5 pl-6 text-[#999] text-sm">{item.id}</TableCell>
+                    <TableCell className="py-5">
+                      <span className="font-semibold text-[#1a1a1a]">{item.entity}</span>
                     </TableCell>
-                    <TableCell className="py-4">
-                      <div className="space-y-1">
-                        <div className="font-bold text-foreground">{item.name}</div>
-                        <div className="text-sm text-muted-foreground line-clamp-1">{item.issue}</div>
-                        <div className="flex items-center gap-1.5 text-[10px] text-primary/70 font-bold uppercase tracking-wider">
-                          <span className="w-1 h-1 rounded-full bg-primary/40" />
-                          {item.rec}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="py-4">
-                      <Badge className={cn(
-                        "text-[10px] font-black",
-                        item.priority === 'CRITICAL' ? 'bg-destructive/10 text-destructive border-destructive/20' : 
-                        item.priority === 'HIGH' ? 'bg-amber-100 text-amber-700 border-amber-200' : 
-                        item.priority === 'MEDIUM' ? 'bg-green-100 text-green-700 border-green-200' :
-                        'bg-slate-100 text-slate-700 border-slate-200'
-                      )}>
-                        {item.priority}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="py-4">
-                      <div className="flex flex-col gap-1">
-                        <span className="flex items-center gap-1.5 text-xs font-medium text-foreground/80">
-                          <Clock className="w-3 h-3 text-muted-foreground" /> {item.sla}
-                        </span>
-                        <div className="w-24 h-1 bg-muted rounded-full overflow-hidden">
-                          <div 
-                            className={cn(
-                              "h-full rounded-full transition-all",
-                              item.priority === 'CRITICAL' ? 'bg-destructive' : 'bg-primary'
-                            )} 
-                            style={{ width: `${item.conf}%` }} 
-                          />
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-right py-4">
+                    <TableCell className="py-5 text-[#666] text-sm">{item.issue}</TableCell>
+                    <TableCell className="py-5 text-[#666] text-sm">{item.due}</TableCell>
+                    <TableCell className="py-5 pr-6">
                       <Link href={`/finding/${item.id}`}>
-                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary hover:text-primary-foreground">
-                          <ArrowRight className="w-4 h-4" />
-                        </Button>
+                        <Badge className={cn(
+                          "font-medium text-xs px-3 py-1 rounded-full cursor-pointer hover:opacity-80 transition-opacity",
+                          getPriorityStyle(item.priority)
+                        )} data-testid={`badge-priority-${item.id}`}>
+                          {item.priority}
+                        </Badge>
                       </Link>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            
-            <div className="flex items-center justify-between px-6 py-4 bg-muted/10 border-t border-border/50">
-              <p className="text-xs text-muted-foreground font-medium">
-                Showing <span className="text-foreground font-bold">5</span> of <span className="text-foreground font-bold">42</span> findings
-              </p>
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="h-8 text-xs font-bold uppercase tracking-widest disabled:opacity-30" disabled>
-                  Prev
-                </Button>
-                <Button variant="outline" size="sm" className="h-8 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-colors">
-                  Next
-                </Button>
-              </div>
+          </div>
+
+          {/* Pagination */}
+          <div className="flex items-center gap-2 pt-4">
+            <button className="flex items-center gap-1 text-sm text-[#999] hover:text-[#1a1a1a] transition-colors" data-testid="button-previous">
+              <ChevronLeft className="w-4 h-4" /> Previous
+            </button>
+            <div className="flex items-center gap-1 ml-4">
+              <button className="w-8 h-8 rounded-md bg-[#1a1a1a] text-white text-sm font-medium" data-testid="page-1">1</button>
+              <button className="w-8 h-8 rounded-md text-[#666] hover:bg-[#f0f0f0] text-sm transition-colors" data-testid="page-2">2</button>
+              <button className="w-8 h-8 rounded-md text-[#666] hover:bg-[#f0f0f0] text-sm transition-colors" data-testid="page-3">3</button>
+              <span className="px-2 text-[#999]">...</span>
+              <button className="w-8 h-8 rounded-md text-[#666] hover:bg-[#f0f0f0] text-sm transition-colors" data-testid="page-67">67</button>
+              <button className="w-8 h-8 rounded-md text-[#666] hover:bg-[#f0f0f0] text-sm transition-colors" data-testid="page-68">68</button>
             </div>
+            <button className="flex items-center gap-1 text-sm text-[#666] hover:text-[#1a1a1a] transition-colors ml-4" data-testid="button-next">
+              Next <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>
     </Shell>
-  );
-}
-
-function UsersIcon(props: any) {
-  return (
-    <Users {...props} />
   );
 }
