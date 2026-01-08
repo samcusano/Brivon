@@ -321,6 +321,14 @@ export default function AdvocateDetail() {
               <Languages className="w-4 h-4" />
               <span className="text-sm">Speaks {advocate.languages.join(', ')}</span>
             </div>
+
+            {/* Sub Navigation */}
+            <nav className="flex gap-4 mt-6 pt-6 border-t border-gray-100">
+              <a href="#credentials" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">Credentials</a>
+              <a href="#how-i-work" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">How I work</a>
+              <a href="#real-wins" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">Real wins</a>
+              <a href="#reviews" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">Reviews</a>
+            </nav>
           </div>
         </div>
 
@@ -328,69 +336,83 @@ export default function AdvocateDetail() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
             {/* Credentials */}
-            <section>
+            <section id="credentials">
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Shield className="w-5 h-5" />
                 Verified credentials
               </h2>
-              <div className="space-y-3">
+              <div className="flex flex-wrap gap-2">
                 {advocate.credentials.map((cred: any, idx: number) => (
-                  <div key={idx} className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-                    {cred.type === 'certification' && <Award className="w-5 h-5 text-emerald-600 mt-0.5" />}
-                    {cred.type === 'education' && <GraduationCap className="w-5 h-5 text-emerald-600 mt-0.5" />}
-                    {cred.type === 'experience' && <Briefcase className="w-5 h-5 text-emerald-600 mt-0.5" />}
-                    <div className="flex-1">
-                      <div className="font-medium text-black">{cred.label}</div>
-                    </div>
-                    {cred.verified && (
-                      <CheckCircle className="w-5 h-5 text-emerald-600" />
-                    )}
-                  </div>
+                  <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm">
+                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-emerald-600" />}
+                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-emerald-600" />}
+                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-emerald-600" />}
+                    <span className="font-medium text-gray-800">{cred.label}</span>
+                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />}
+                  </span>
                 ))}
               </div>
             </section>
 
-            {/* Human Connection - Quick Scan Cards */}
-            <section>
+            {/* How I work - Combined section */}
+            <section id="how-i-work">
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <HeartHandshake className="w-5 h-5" />
-                Who I am when things get hard
+                <Flame className="w-5 h-5" />
+                How I work
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-xl p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <MessageCircle className="w-4 h-4 text-blue-600" />
-                    <span className="text-sm font-semibold text-blue-800">Communication</span>
+                    <MessageCircle className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-semibold text-gray-700">Communication</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.humanConnection?.communicationStyle?.label}</div>
                   <p className="text-sm text-gray-600">{advocate.humanConnection?.communicationStyle?.description}</p>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-xl p-4">
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Heart className="w-4 h-4 text-purple-600" />
-                    <span className="text-sm font-semibold text-purple-800">Emotional Style</span>
+                    <Heart className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-semibold text-gray-700">Emotional style</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.humanConnection?.emotionalApproach?.label}</div>
                   <p className="text-sm text-gray-600">{advocate.humanConnection?.emotionalApproach?.description}</p>
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-50 to-white border border-amber-100 rounded-xl p-4">
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-amber-600" />
-                    <span className="text-sm font-semibold text-amber-800">Crisis Hours</span>
+                    <Clock className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-semibold text-gray-700">Crisis hours</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.humanConnection?.crisisAvailability?.label}</div>
                   <p className="text-sm text-gray-600">{advocate.humanConnection?.crisisAvailability?.description}</p>
-                  <div className="mt-2 text-xs font-medium text-amber-700 bg-amber-100 px-2 py-1 rounded-full inline-block">
+                  <div className="mt-2 text-xs font-medium text-gray-600 bg-gray-200 px-2 py-1 rounded-full inline-block">
                     {advocate.humanConnection?.crisisAvailability?.responseWindow}
                   </div>
+                </div>
+
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Timer className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-semibold text-gray-700">Stamina level</span>
+                  </div>
+                  <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.stamina?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.stamina?.description}</p>
+                </div>
+
+                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Scale className="w-4 h-4 text-gray-600" />
+                    <span className="text-sm font-semibold text-gray-700">Conflict approach</span>
+                  </div>
+                  <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.conflictStyle?.label}</div>
+                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.conflictStyle?.description}</p>
                 </div>
               </div>
             </section>
 
-            {/* What I've Fought For and Won */}
-            <section>
+            {/* Real wins */}
+            <section id="real-wins">
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
                 <Sparkles className="w-5 h-5" />
                 Real wins (not just bullet points)
@@ -405,55 +427,38 @@ export default function AdvocateDetail() {
               </div>
             </section>
 
-            {/* Stamina & Conflict Style - Cards */}
+            {/* What I do */}
             <section>
               <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <Flame className="w-5 h-5" />
-                How I work
+                <Handshake className="w-5 h-5" />
+                What I do
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Timer className="w-4 h-4 text-gray-600" />
-                    <span className="text-sm font-semibold text-gray-700">Stamina Level</span>
+              <div className="space-y-2">
+                {advocate.fit?.bestFor?.map((item: string, idx: number) => (
+                  <div key={idx} className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                    <span>{item}</span>
                   </div>
-                  <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.stamina?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.stamina?.description}</p>
-                </div>
-
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Scale className="w-4 h-4 text-gray-600" />
-                    <span className="text-sm font-semibold text-gray-700">Conflict Approach</span>
-                  </div>
-                  <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.conflictStyle?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.conflictStyle?.description}</p>
-                </div>
+                ))}
               </div>
             </section>
 
-            {/* Personal Experience */}
-            {advocate.trustIndicators?.personalExperience?.hasExperience && (
-              <section>
-                <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                  <Heart className="w-5 h-5" />
-                  I've been there too
-                </h2>
-                <div className="bg-gradient-to-br from-rose-50 to-white border border-rose-100 rounded-xl p-5">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0">
-                      <Heart className="w-5 h-5 text-rose-600" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-black mb-1">
-                        {advocate.trustIndicators.personalExperience.type === 'patient' ? 'I was a patient' : 'I was a caregiver'}
-                      </div>
-                      <p className="text-gray-600">{advocate.trustIndicators.personalExperience.story}</p>
-                    </div>
+            {/* What I don't do */}
+            <section>
+              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                <Shield className="w-5 h-5" />
+                What I don't do
+              </h2>
+              <p className="text-gray-600 mb-4">Clear expectations help us both. No hard feelings if it doesn't work out. Here's where my role ends:</p>
+              <div className="space-y-2">
+                {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
+                  <div key={idx} className="flex items-start gap-2 text-gray-700">
+                    <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                    <span>{boundary}</span>
                   </div>
-                </div>
-              </section>
-            )}
+                ))}
+              </div>
+            </section>
 
             {/* Network */}
             <section>
@@ -489,40 +494,6 @@ export default function AdvocateDetail() {
                   <div className="font-semibold text-black mb-1">{advocate.decisionPhilosophy?.complexity?.label}</div>
                   <p className="text-sm text-gray-600">{advocate.decisionPhilosophy?.complexity?.description}</p>
                 </div>
-              </div>
-            </section>
-
-            {/* What I do */}
-            <section>
-              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <Handshake className="w-5 h-5" />
-                What I do
-              </h2>
-              
-              <div className="space-y-2">
-                {advocate.fit?.bestFor?.map((item: string, idx: number) => (
-                  <div key={idx} className="flex items-start gap-2 text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* What I don't do */}
-            <section>
-              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <Shield className="w-5 h-5" />
-                What I don't do
-              </h2>
-              <p className="text-gray-600 mb-4">Clear expectations help us both. No hard feelings if it doesn't work out. Here's where my role ends:</p>
-              <div className="space-y-2">
-                {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
-                  <div key={idx} className="flex items-start gap-2 text-gray-700">
-                    <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                    <span>{boundary}</span>
-                  </div>
-                ))}
               </div>
             </section>
 
@@ -570,7 +541,7 @@ export default function AdvocateDetail() {
             </section>
 
             {/* Reviews */}
-            <section>
+            <section id="reviews">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-black flex items-center gap-2">
                   <Star className="w-5 h-5 fill-black text-black" />
