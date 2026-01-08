@@ -379,27 +379,49 @@ export default function AdvocateDetail() {
                 <TrendingUp className="w-5 h-5" />
                 Results I've achieved
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
-                  <FileText className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.appealsApproved?.value}</div>
-                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.appealsApproved?.label}</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <div className="flex items-center gap-2 mb-1">
+                    <FileText className="w-4 h-4 text-emerald-600" />
+                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.appealsApproved?.value}</span>
+                  </div>
+                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.appealsApproved?.label}</div>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
-                  <Beaker className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.clinicalTrialsMatched?.value}</div>
-                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.clinicalTrialsMatched?.label}</div>
+                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Beaker className="w-4 h-4 text-emerald-600" />
+                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.clinicalTrialsMatched?.value}</span>
+                  </div>
+                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.clinicalTrialsMatched?.label}</div>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
-                  <Stethoscope className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.secondOpinions?.value}</div>
-                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.secondOpinions?.label}</div>
+                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Stethoscope className="w-4 h-4 text-emerald-600" />
+                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.secondOpinions?.value}</span>
+                  </div>
+                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.secondOpinions?.label}</div>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
-                  <Hourglass className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-emerald-700">{advocate.outcomeStats?.avgTimeSaved?.value}</div>
-                  <div className="text-sm text-gray-600 mt-1">{advocate.outcomeStats?.avgTimeSaved?.label}</div>
+                <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Hourglass className="w-4 h-4 text-emerald-600" />
+                    <span className="text-xl font-bold text-emerald-700">{advocate.outcomeStats?.avgTimeSaved?.value}</span>
+                  </div>
+                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.avgTimeSaved?.label}</div>
                 </div>
+              </div>
+
+              {/* Real wins */}
+              <h3 className="text-lg font-semibold text-black mb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                Real wins (not just bullet points)
+              </h3>
+              <div className="space-y-3">
+                {advocate.practicalStuff?.wins?.map((win: any, idx: number) => (
+                  <div key={idx} className="bg-emerald-50 border border-emerald-100 rounded-xl p-4">
+                    <div className="font-semibold text-black mb-1">{win.title}</div>
+                    <p className="text-sm text-gray-600">{win.description}</p>
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -476,22 +498,6 @@ export default function AdvocateDetail() {
                   <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.conflictStyle?.label}</div>
                   <p className="text-sm text-gray-600">{advocate.practicalStuff?.conflictStyle?.description}</p>
                 </div>
-              </div>
-            </section>
-
-            {/* Real wins */}
-            <section id="real-wins">
-              <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
-                <Sparkles className="w-5 h-5" />
-                Real wins (not just bullet points)
-              </h2>
-              <div className="space-y-4">
-                {advocate.practicalStuff?.wins?.map((win: any, idx: number) => (
-                  <div key={idx} className="bg-emerald-50 border border-emerald-100 rounded-xl p-4">
-                    <div className="font-semibold text-black mb-1">{win.title}</div>
-                    <p className="text-sm text-gray-600">{win.description}</p>
-                  </div>
-                ))}
               </div>
             </section>
 
