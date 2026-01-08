@@ -167,17 +167,17 @@ export default function Marketplace() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b border-gray-100">
+      <header className="border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <h1 className="text-2xl font-bold text-black" data-testid="logo">PatientAdvocate</h1>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#" className="text-sm text-gray-600 hover:text-black transition-colors" data-testid="nav-browse">Find Your Fighter</a>
-              <a href="#" className="text-sm text-gray-600 hover:text-black transition-colors" data-testid="nav-how">How It Works</a>
+              <a href="#" className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="nav-browse">Find Your Fighter</a>
+              <a href="#" className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="nav-how">How It Works</a>
             </nav>
           </div>
           <div className="flex items-center gap-4">
-            <button className="text-sm text-gray-600 hover:text-black transition-colors" data-testid="button-login">Log in</button>
+            <button className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="button-login">Log in</button>
             <button className="bg-black text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-gray-800 transition-colors" data-testid="button-signup">Sign up</button>
           </div>
         </div>
@@ -186,7 +186,7 @@ export default function Marketplace() {
       {/* Hero */}
       <section className="py-12 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Your health story deserves someone in your corner.</h2>
-        <p className="text-xl text-gray-500" data-testid="hero-subtitle">Find advocates who see you, hear you, and stand with you.</p>
+        <p className="text-xl text-stone-500" data-testid="hero-subtitle">Find advocates who see you, hear you, and stand with you.</p>
       </section>
 
       {/* Categories */}
@@ -200,7 +200,7 @@ export default function Marketplace() {
                 "flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all",
                 activeCategory === cat.id
                   ? "bg-black text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-stone-100 text-stone-600 hover:bg-stone-200"
               )}
               data-testid={`category-${cat.id}`}
             >
@@ -214,12 +214,12 @@ export default function Marketplace() {
       {/* Filters Bar */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
-          <p className="text-gray-600" data-testid="text-results">
+          <p className="text-stone-500" data-testid="text-results">
             Champions who have your back. Because you shouldn't do this alone.
           </p>
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-stone-200 rounded-lg text-sm font-medium hover:bg-stone-50 transition-colors"
             data-testid="button-filters"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -240,9 +240,9 @@ export default function Marketplace() {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-2xl font-bold text-black" data-testid="section-title">Proven Advocates</h3>
-            <p className="text-gray-500 text-sm mt-1">They've been where you are. Now they're ready to stand alongside you.</p>
+            <p className="text-stone-500 text-sm mt-1">They've been where you are. Now they're ready to stand alongside you.</p>
           </div>
-          <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors" data-testid="button-see-all">
+          <button className="flex items-center gap-2 text-sm font-medium text-stone-500 hover:text-black transition-colors" data-testid="button-see-all">
             See all
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -257,7 +257,7 @@ export default function Marketplace() {
           {advocates.map((advocate) => (
             <Link key={advocate.id} href={`/advocate/${advocate.id}`}>
               <div
-                className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
+                className="group relative bg-white border border-stone-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all cursor-pointer"
                 data-testid={`card-advocate-${advocate.id}`}
               >
               {/* Favorite Button */}
@@ -265,19 +265,19 @@ export default function Marketplace() {
                 className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
                 data-testid={`button-favorite-${advocate.id}`}
               >
-                <Heart className="w-4 h-4 text-gray-600" />
+                <Heart className="w-4 h-4 text-stone-500" />
               </button>
 
               {/* Top Advocate Badge */}
               {advocate.isTopExpert && (
                 <div className="absolute top-3 left-3 z-10 bg-stone-200 text-stone-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 text-teal-700" strokeWidth={1.5} />
+                  <Star className="w-3 h-3 text-amber-700" strokeWidth={1.5} />
                   Top Advocate
                 </div>
               )}
 
               {/* Image */}
-              <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+              <div className="aspect-[4/3] overflow-hidden bg-stone-100">
                 <img
                   src={advocate.image}
                   alt={advocate.name}
@@ -294,21 +294,21 @@ export default function Marketplace() {
                   )}
                 </div>
 
-                <p className="text-xs text-teal-700 font-medium mb-2">{advocate.specialty}</p>
+                <p className="text-xs text-amber-700 font-medium mb-2">{advocate.specialty}</p>
                 
                 <p className="text-lg font-bold text-black mb-2" data-testid={`text-price-${advocate.id}`}>
-                  ${advocate.price} <span className="text-sm font-normal text-gray-500">• Consultation</span>
+                  ${advocate.price} <span className="text-sm font-normal text-stone-500">• Consultation</span>
                 </p>
 
-                <p className="text-sm text-gray-600 line-clamp-2" data-testid={`text-title-${advocate.id}`}>
+                <p className="text-sm text-stone-500 line-clamp-2" data-testid={`text-title-${advocate.id}`}>
                   {advocate.title}
                 </p>
 
                 {/* Rating */}
-                <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-stone-200">
                   <Star className="w-3.5 h-3.5 fill-black text-black" />
                   <span className="text-sm font-medium text-black">{advocate.rating}</span>
-                  <span className="text-sm text-gray-400">({advocate.reviews} reviews)</span>
+                  <span className="text-sm text-stone-400">({advocate.reviews} reviews)</span>
                 </div>
               </div>
 
@@ -328,8 +328,8 @@ export default function Marketplace() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500">
+      <footer className="border-t border-stone-200 py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-stone-500">
           © 2026 PatientAdvocate. Your voice. Your advocate. Your health story.
         </div>
       </footer>

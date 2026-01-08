@@ -280,10 +280,10 @@ export default function AdvocateDetail() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
+      <header className="sticky top-0 z-50 bg-white border-b border-stone-200">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/">
-            <button className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors" data-testid="button-back">
+            <button className="flex items-center gap-2 text-stone-500 hover:text-black transition-colors" data-testid="button-back">
               <ArrowLeft className="w-5 h-5" />
               <span className="font-medium">Back to advocates</span>
             </button>
@@ -297,7 +297,7 @@ export default function AdvocateDetail() {
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
             {/* Large Circular Photo */}
             <div className="relative flex-shrink-0">
-              <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-200 border-4 border-white shadow-lg">
+              <div className="w-48 h-48 rounded-full overflow-hidden bg-stone-200 border-4 border-white shadow-lg">
                 <img 
                   src={advocate.image} 
                   alt={advocate.name}
@@ -306,7 +306,7 @@ export default function AdvocateDetail() {
               </div>
               {/* Verified Badge */}
               <div className="absolute bottom-2 right-2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md border-2 border-white">
-                <CheckCircle className="w-6 h-6 text-teal-700" />
+                <CheckCircle className="w-6 h-6 text-amber-700" />
               </div>
             </div>
 
@@ -319,31 +319,31 @@ export default function AdvocateDetail() {
 
               {/* Badges Row */}
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
-                <span className="inline-flex items-center gap-1.5 text-sm text-gray-700">
-                  <CheckCircle className="w-4 h-4 text-teal-700" />
+                <span className="inline-flex items-center gap-1.5 text-sm text-stone-600">
+                  <CheckCircle className="w-4 h-4 text-amber-700" />
                   Verified
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-700">
-                  <Star className="w-4 h-4 text-teal-700" />
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-stone-600">
+                  <Star className="w-4 h-4 text-amber-700" />
                   Top Advocate
                 </span>
               </div>
 
               {/* Specialty/Title */}
-              <p className="text-gray-600 mb-3">{advocate.specialty} • {advocate.credentials[0]?.label}</p>
+              <p className="text-stone-500 mb-3">{advocate.specialty} • {advocate.credentials[0]?.label}</p>
 
               {/* Location Row */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-gray-600 mb-4">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-stone-500 mb-4">
                 <span className="inline-flex items-center gap-1.5">
                   <MapPin className="w-4 h-4" />
                   {advocate.location}
                 </span>
-                <span className="text-gray-300">|</span>
+                <span className="text-stone-300">|</span>
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="w-4 h-4" />
                   {advocate.responseTime}
                 </span>
-                <span className="text-gray-300">|</span>
+                <span className="text-stone-300">|</span>
                 <span className="inline-flex items-center gap-1.5">
                   <Languages className="w-4 h-4" />
                   {advocate.languages.join(', ')}
@@ -357,12 +357,12 @@ export default function AdvocateDetail() {
                     <Star key={i} className="w-4 h-4 fill-black text-black" />
                   ))}
                   <span className="font-semibold text-black ml-1">{advocate.rating}</span>
-                  <span className="text-gray-500">| {advocate.reviews} Reviews</span>
+                  <span className="text-stone-500">| {advocate.reviews} Reviews</span>
                 </div>
-                <span className="text-gray-300">|</span>
-                <span className="text-gray-600">{advocate.stats.patientsHelped.toLocaleString()}+ Patients Helped</span>
-                <span className="text-gray-300">|</span>
-                <span className="text-gray-600">{advocate.stats.yearsExperience} Years Experience</span>
+                <span className="text-stone-300">|</span>
+                <span className="text-stone-500">{advocate.stats.patientsHelped.toLocaleString()}+ Patients Helped</span>
+                <span className="text-stone-300">|</span>
+                <span className="text-stone-500">{advocate.stats.yearsExperience} Years Experience</span>
               </div>
             </div>
           </div>
@@ -379,12 +379,12 @@ export default function AdvocateDetail() {
               </h2>
               <div className="flex flex-wrap gap-2">
                 {advocate.credentials.map((cred: any, idx: number) => (
-                  <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm">
-                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-teal-700" />}
-                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-teal-700" />}
-                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-teal-700" />}
-                    <span className="font-medium text-gray-800">{cred.label}</span>
-                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-teal-700" />}
+                  <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-full text-sm">
+                    {cred.type === 'certification' && <Award className="w-3.5 h-3.5 text-amber-700" />}
+                    {cred.type === 'education' && <GraduationCap className="w-3.5 h-3.5 text-amber-700" />}
+                    {cred.type === 'experience' && <Briefcase className="w-3.5 h-3.5 text-amber-700" />}
+                    <span className="font-medium text-stone-700">{cred.label}</span>
+                    {cred.verified && <CheckCircle className="w-3.5 h-3.5 text-amber-700" />}
                   </span>
                 ))}
               </div>
@@ -399,31 +399,31 @@ export default function AdvocateDetail() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <FileText className="w-4 h-4 text-teal-700" />
+                    <FileText className="w-4 h-4 text-amber-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.appealsApproved?.value}</span>
                   </div>
-                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.appealsApproved?.label}</div>
+                  <div className="text-sm text-stone-500">{advocate.outcomeStats?.appealsApproved?.label}</div>
                 </div>
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Beaker className="w-4 h-4 text-teal-700" />
+                    <Beaker className="w-4 h-4 text-amber-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.clinicalTrialsMatched?.value}</span>
                   </div>
-                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.clinicalTrialsMatched?.label}</div>
+                  <div className="text-sm text-stone-500">{advocate.outcomeStats?.clinicalTrialsMatched?.label}</div>
                 </div>
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Stethoscope className="w-4 h-4 text-teal-700" />
+                    <Stethoscope className="w-4 h-4 text-amber-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.secondOpinions?.value}</span>
                   </div>
-                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.secondOpinions?.label}</div>
+                  <div className="text-sm text-stone-500">{advocate.outcomeStats?.secondOpinions?.label}</div>
                 </div>
                 <div className="p-4 bg-stone-100 border border-stone-200 rounded-xl">
                   <div className="flex items-center gap-2 mb-1">
-                    <Hourglass className="w-4 h-4 text-teal-700" />
+                    <Hourglass className="w-4 h-4 text-amber-700" />
                     <span className="text-xl font-bold text-stone-700">{advocate.outcomeStats?.avgTimeSaved?.value}</span>
                   </div>
-                  <div className="text-sm text-gray-600">{advocate.outcomeStats?.avgTimeSaved?.label}</div>
+                  <div className="text-sm text-stone-500">{advocate.outcomeStats?.avgTimeSaved?.label}</div>
                 </div>
               </div>
 
@@ -436,7 +436,7 @@ export default function AdvocateDetail() {
                 {advocate.practicalStuff?.wins?.map((win: any, idx: number) => (
                   <div key={idx} className="bg-stone-100 border border-stone-200 rounded-xl p-4">
                     <div className="font-semibold text-black mb-1">{win.title}</div>
-                    <p className="text-sm text-gray-600">{win.description}</p>
+                    <p className="text-sm text-stone-500">{win.description}</p>
                   </div>
                 ))}
               </div>
@@ -452,10 +452,10 @@ export default function AdvocateDetail() {
                 {advocate.professionalMemberships?.map((membership: any, idx: number) => (
                   <span 
                     key={idx} 
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 border border-stone-200 rounded-full text-sm"
                   >
-                    <BadgeCheck className="w-3.5 h-3.5 text-teal-700" />
-                    <span className="font-medium text-gray-800">{membership.acronym} - {membership.name}</span>
+                    <BadgeCheck className="w-3.5 h-3.5 text-amber-700" />
+                    <span className="font-medium text-stone-700">{membership.acronym} - {membership.name}</span>
                   </span>
                 ))}
               </div>
@@ -468,52 +468,52 @@ export default function AdvocateDetail() {
                 How I work
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <div className="bg-stone-50 border border-stone-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <MessageCircle className="w-4 h-4 text-gray-600" />
-                    <span className="text-sm font-semibold text-gray-700">Communication</span>
+                    <MessageCircle className="w-4 h-4 text-stone-500" />
+                    <span className="text-sm font-semibold text-stone-600">Communication</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.humanConnection?.communicationStyle?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.humanConnection?.communicationStyle?.description}</p>
+                  <p className="text-sm text-stone-500">{advocate.humanConnection?.communicationStyle?.description}</p>
                 </div>
 
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <div className="bg-stone-50 border border-stone-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Heart className="w-4 h-4 text-gray-600" />
-                    <span className="text-sm font-semibold text-gray-700">Emotional style</span>
+                    <Heart className="w-4 h-4 text-stone-500" />
+                    <span className="text-sm font-semibold text-stone-600">Emotional style</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.humanConnection?.emotionalApproach?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.humanConnection?.emotionalApproach?.description}</p>
+                  <p className="text-sm text-stone-500">{advocate.humanConnection?.emotionalApproach?.description}</p>
                 </div>
 
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <div className="bg-stone-50 border border-stone-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-gray-600" />
-                    <span className="text-sm font-semibold text-gray-700">Crisis hours</span>
+                    <Clock className="w-4 h-4 text-stone-500" />
+                    <span className="text-sm font-semibold text-stone-600">Crisis hours</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.humanConnection?.crisisAvailability?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.humanConnection?.crisisAvailability?.description}</p>
-                  <div className="mt-2 text-xs font-medium text-gray-600 bg-gray-200 px-2 py-1 rounded-full inline-block">
+                  <p className="text-sm text-stone-500">{advocate.humanConnection?.crisisAvailability?.description}</p>
+                  <div className="mt-2 text-xs font-medium text-stone-500 bg-stone-200 px-2 py-1 rounded-full inline-block">
                     {advocate.humanConnection?.crisisAvailability?.responseWindow}
                   </div>
                 </div>
 
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <div className="bg-stone-50 border border-stone-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Timer className="w-4 h-4 text-gray-600" />
-                    <span className="text-sm font-semibold text-gray-700">Stamina level</span>
+                    <Timer className="w-4 h-4 text-stone-500" />
+                    <span className="text-sm font-semibold text-stone-600">Stamina level</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.stamina?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.stamina?.description}</p>
+                  <p className="text-sm text-stone-500">{advocate.practicalStuff?.stamina?.description}</p>
                 </div>
 
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <div className="bg-stone-50 border border-stone-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Scale className="w-4 h-4 text-gray-600" />
-                    <span className="text-sm font-semibold text-gray-700">Conflict approach</span>
+                    <Scale className="w-4 h-4 text-stone-500" />
+                    <span className="text-sm font-semibold text-stone-600">Conflict approach</span>
                   </div>
                   <div className="font-semibold text-black mb-1">{advocate.practicalStuff?.conflictStyle?.label}</div>
-                  <p className="text-sm text-gray-600">{advocate.practicalStuff?.conflictStyle?.description}</p>
+                  <p className="text-sm text-stone-500">{advocate.practicalStuff?.conflictStyle?.description}</p>
                 </div>
               </div>
             </section>
@@ -529,8 +529,8 @@ export default function AdvocateDetail() {
                   </h2>
                   <div className="space-y-2">
                     {advocate.fit?.bestFor?.map((item: string, idx: number) => (
-                      <div key={idx} className="flex items-start gap-2 text-gray-700">
-                        <CheckCircle className="w-4 h-4 text-teal-700 mt-0.5 flex-shrink-0" />
+                      <div key={idx} className="flex items-start gap-2 text-stone-600">
+                        <CheckCircle className="w-4 h-4 text-amber-700 mt-0.5 flex-shrink-0" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -545,15 +545,15 @@ export default function AdvocateDetail() {
                   </h2>
                   <div className="space-y-2">
                     {advocate.trustIndicators?.boundaries?.map((boundary: string, idx: number) => (
-                      <div key={idx} className="flex items-start gap-2 text-gray-700">
-                        <XCircle className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                      <div key={idx} className="flex items-start gap-2 text-stone-600">
+                        <XCircle className="w-4 h-4 text-stone-400 mt-0.5 flex-shrink-0" />
                         <span>{boundary}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 mt-6">Clear expectations help us both. No hard feelings if it doesn't work out.</p>
+              <p className="text-sm text-stone-500 mt-6">Clear expectations help us both. No hard feelings if it doesn't work out.</p>
             </section>
 
             {/* Network */}
@@ -562,7 +562,7 @@ export default function AdvocateDetail() {
                 <Network className="w-5 h-5" />
                 My network (these are people I know)
               </h2>
-              <p className="text-gray-600 mb-4">{advocate.trustIndicators?.network?.description}</p>
+              <p className="text-stone-500 mb-4">{advocate.trustIndicators?.network?.description}</p>
               <div className="flex flex-wrap gap-2">
                 {advocate.trustIndicators?.network?.highlights?.map((place: string, idx: number) => (
                   <span 
@@ -624,8 +624,8 @@ export default function AdvocateDetail() {
               <h2 className="text-xl font-bold text-black mb-4">How I stand with you</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {advocate.specializations.map((spec: string, idx: number) => (
-                  <div key={idx} className="flex items-center gap-2 text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-teal-700" />
+                  <div key={idx} className="flex items-center gap-2 text-stone-600">
+                    <CheckCircle className="w-4 h-4 text-amber-700" />
                     <span>{spec}</span>
                   </div>
                 ))}
@@ -639,7 +639,7 @@ export default function AdvocateDetail() {
                 {advocate.conditionsHandled.map((condition: string, idx: number) => (
                   <span 
                     key={idx}
-                    className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
+                    className="px-3 py-1.5 bg-stone-100 text-stone-600 rounded-full text-sm font-medium"
                   >
                     {condition}
                   </span>
@@ -655,9 +655,9 @@ export default function AdvocateDetail() {
               </h2>
               <div className="space-y-4">
                 {advocate.faq?.map((item: any, idx: number) => (
-                  <div key={idx} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                  <div key={idx} className="border-b border-stone-200 pb-4 last:border-0 last:pb-0">
                     <h3 className="font-semibold text-black mb-2">{item.question}</h3>
-                    <p className="text-gray-600">{item.answer}</p>
+                    <p className="text-stone-500">{item.answer}</p>
                   </div>
                 ))}
               </div>
@@ -671,64 +671,64 @@ export default function AdvocateDetail() {
                   <Star className="w-6 h-6 fill-black text-black" />
                   <span className="text-2xl font-semibold text-black">{advocate.rating}</span>
                 </div>
-                <span className="text-gray-400">·</span>
-                <span className="text-lg text-gray-600">{advocate.reviews} reviews</span>
+                <span className="text-stone-400">·</span>
+                <span className="text-lg text-stone-500">{advocate.reviews} reviews</span>
               </div>
 
               {/* Rating Breakdown - Patient Advocacy Categories */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-3 mb-10 pb-10 border-b border-gray-200">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-3 mb-10 pb-10 border-b border-stone-200">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-gray-700">Communication clarity</span>
+                  <span className="text-sm text-stone-600">Communication clarity</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="w-32 h-1 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
                     </div>
-                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                    <span className="text-xs font-medium text-stone-600 w-6">5.0</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-gray-700">Responsiveness</span>
+                  <span className="text-sm text-stone-600">Responsiveness</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="w-32 h-1 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-black rounded-full" style={{ width: '98%' }}></div>
                     </div>
-                    <span className="text-xs font-medium text-gray-700 w-6">4.9</span>
+                    <span className="text-xs font-medium text-stone-600 w-6">4.9</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-gray-700">Medical knowledge</span>
+                  <span className="text-sm text-stone-600">Medical knowledge</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="w-32 h-1 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
                     </div>
-                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                    <span className="text-xs font-medium text-stone-600 w-6">5.0</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-gray-700">Advocacy effectiveness</span>
+                  <span className="text-sm text-stone-600">Advocacy effectiveness</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="w-32 h-1 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
                     </div>
-                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                    <span className="text-xs font-medium text-stone-600 w-6">5.0</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-gray-700">Emotional support</span>
+                  <span className="text-sm text-stone-600">Emotional support</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="w-32 h-1 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-black rounded-full" style={{ width: '96%' }}></div>
                     </div>
-                    <span className="text-xs font-medium text-gray-700 w-6">4.8</span>
+                    <span className="text-xs font-medium text-stone-600 w-6">4.8</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-gray-700">Value for cost</span>
+                  <span className="text-sm text-stone-600">Value for cost</span>
                   <div className="flex items-center gap-2">
-                    <div className="w-32 h-1 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="w-32 h-1 bg-stone-200 rounded-full overflow-hidden">
                       <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
                     </div>
-                    <span className="text-xs font-medium text-gray-700 w-6">5.0</span>
+                    <span className="text-xs font-medium text-stone-600 w-6">5.0</span>
                   </div>
                 </div>
               </div>
@@ -744,7 +744,7 @@ export default function AdvocateDetail() {
                       </div>
                       <div>
                         <div className="font-semibold text-black">{review.name}</div>
-                        <div className="text-sm text-gray-500">{review.condition}</div>
+                        <div className="text-sm text-stone-500">{review.condition}</div>
                       </div>
                     </div>
 
@@ -755,12 +755,12 @@ export default function AdvocateDetail() {
                           <Star key={i} className={cn("w-3 h-3", i < review.rating ? "fill-black text-black" : "fill-gray-200 text-gray-200")} />
                         ))}
                       </div>
-                      <span className="text-gray-400">·</span>
-                      <span className="text-sm text-gray-500">{review.date}</span>
+                      <span className="text-stone-400">·</span>
+                      <span className="text-sm text-stone-500">{review.date}</span>
                     </div>
 
                     {/* Review Text */}
-                    <p className="text-gray-700 leading-relaxed line-clamp-4">{review.text}</p>
+                    <p className="text-stone-600 leading-relaxed line-clamp-4">{review.text}</p>
                     
                     <button className="text-sm font-semibold text-black underline hover:no-underline">
                       Show more
@@ -771,7 +771,7 @@ export default function AdvocateDetail() {
 
               {/* Show All Button */}
               <button 
-                className="mt-8 px-6 py-3 border border-black rounded-lg font-semibold text-black hover:bg-gray-50 transition-colors"
+                className="mt-8 px-6 py-3 border border-black rounded-lg font-semibold text-black hover:bg-stone-50 transition-colors"
                 data-testid="button-show-all-reviews"
               >
                 Show all {advocate.reviews} reviews
@@ -782,7 +782,7 @@ export default function AdvocateDetail() {
 
           {/* Booking Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 bg-white border border-gray-200 rounded-2xl p-6 shadow-lg">
+            <div className="sticky top-24 bg-white border border-stone-200 rounded-2xl p-6 shadow-lg">
               {/* Booking Options */}
               <div className="space-y-3 mb-6">
                 <button
@@ -790,16 +790,16 @@ export default function AdvocateDetail() {
                   className={cn(
                     "w-full p-4 rounded-xl border-2 text-left transition-all",
                     selectedOption === 'intro'
-                      ? "border-black bg-gray-50"
-                      : "border-gray-200 hover:border-gray-300"
+                      ? "border-black bg-stone-50"
+                      : "border-stone-200 hover:border-gray-300"
                   )}
                   data-testid="option-intro-call"
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-semibold text-black">Free Intro Call</span>
-                    <span className="text-teal-700 font-semibold">Free</span>
+                    <span className="text-amber-700 font-semibold">Free</span>
                   </div>
-                  <p className="text-sm text-gray-500">15 minutes to share your story and see if I'm the right champion for you</p>
+                  <p className="text-sm text-stone-500">15 minutes to share your story and see if I'm the right champion for you</p>
                 </button>
 
                 <button
@@ -807,8 +807,8 @@ export default function AdvocateDetail() {
                   className={cn(
                     "w-full p-4 rounded-xl border-2 text-left transition-all",
                     selectedOption === 'consultation'
-                      ? "border-black bg-gray-50"
-                      : "border-gray-200 hover:border-gray-300"
+                      ? "border-black bg-stone-50"
+                      : "border-stone-200 hover:border-gray-300"
                   )}
                   data-testid="option-consultation"
                 >
@@ -816,13 +816,13 @@ export default function AdvocateDetail() {
                     <span className="font-semibold text-black">Full Consultation</span>
                     <span className="font-semibold text-black">${advocate.price}</span>
                   </div>
-                  <p className="text-sm text-gray-500">60 minutes focused entirely on you—your questions, your options, your path forward</p>
+                  <p className="text-sm text-stone-500">60 minutes focused entirely on you—your questions, your options, your path forward</p>
                 </button>
               </div>
 
               {/* Next Available */}
               <div className="mb-6">
-                <div className="text-sm text-gray-500 mb-2">Next available</div>
+                <div className="text-sm text-stone-500 mb-2">Next available</div>
                 <div className="font-semibold text-black">{advocate.availability.nextAvailable}</div>
               </div>
 
@@ -834,7 +834,7 @@ export default function AdvocateDetail() {
                 {selectedOption === 'intro' ? 'Schedule Free Intro Call' : `Book for $${advocate.price}`}
               </Button>
 
-              <p className="text-center text-sm text-gray-500 mb-6">
+              <p className="text-center text-sm text-stone-500 mb-6">
                 {selectedOption === 'intro' 
                   ? 'No payment required for intro call'
                   : 'You won\'t be charged until after your session'
@@ -842,21 +842,21 @@ export default function AdvocateDetail() {
               </p>
 
               {/* Trust Signals */}
-              <div className="space-y-3 pt-6 border-t border-gray-100">
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <Shield className="w-4 h-4 text-teal-700" />
+              <div className="space-y-3 pt-6 border-t border-stone-200">
+                <div className="flex items-center gap-3 text-sm text-stone-500">
+                  <Shield className="w-4 h-4 text-amber-700" />
                   <span>Your satisfaction, guaranteed</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <Video className="w-4 h-4 text-teal-700" />
+                <div className="flex items-center gap-3 text-sm text-stone-500">
+                  <Video className="w-4 h-4 text-amber-700" />
                   <span>Private, secure video—just you and your advocate</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <FileCheck className="w-4 h-4 text-teal-700" />
+                <div className="flex items-center gap-3 text-sm text-stone-500">
+                  <FileCheck className="w-4 h-4 text-amber-700" />
                   <span>Written summary so nothing gets lost</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600">
-                  <MessageCircle className="w-4 h-4 text-teal-700" />
+                <div className="flex items-center gap-3 text-sm text-stone-500">
+                  <MessageCircle className="w-4 h-4 text-amber-700" />
                   <span>7 days of support—I'm in your corner</span>
                 </div>
               </div>
@@ -867,8 +867,8 @@ export default function AdvocateDetail() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 py-8 mt-16">
-        <div className="max-w-6xl mx-auto px-6 text-center text-sm text-gray-500">
+      <footer className="border-t border-stone-200 py-8 mt-16">
+        <div className="max-w-6xl mx-auto px-6 text-center text-sm text-stone-500">
           © 2026 PatientAdvocate. Your voice. Your advocate. Your health story.
         </div>
       </footer>
