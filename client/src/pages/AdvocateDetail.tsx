@@ -276,7 +276,7 @@ export default function AdvocateDetail() {
   const advocate = advocatesData[advocateId] || defaultAdvocate;
   
   const [selectedOption, setSelectedOption] = useState<'intro' | 'consultation'>('consultation');
-  const [quoteStyle, setQuoteStyle] = useState<1 | 2 | 3 | 4>(1);
+  const [headerDesign, setHeaderDesign] = useState<1 | 2 | 3 | 4>(1);
 
   return (
     <div className="min-h-screen bg-white">
@@ -293,29 +293,90 @@ export default function AdvocateDetail() {
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {/* Quote Style Switcher */}
+        {/* Design Switcher - Remove this after choosing */}
         <div className="mb-6 p-4 bg-stone-100 rounded-xl">
-          <p className="text-sm font-medium text-stone-600 mb-3">Preview quote box styles:</p>
+          <p className="text-sm font-medium text-stone-600 mb-3">Preview header designs:</p>
           <div className="flex gap-2">
             {[1, 2, 3, 4].map((num) => (
               <button
                 key={num}
-                onClick={() => setQuoteStyle(num as 1 | 2 | 3 | 4)}
+                onClick={() => setHeaderDesign(num as 1 | 2 | 3 | 4)}
                 className={cn(
                   "px-4 py-2 rounded-lg text-sm font-medium transition-all",
-                  quoteStyle === num
+                  headerDesign === num
                     ? "bg-orange-800 text-white"
                     : "bg-white text-stone-600 hover:bg-stone-50 border border-stone-200"
                 )}
               >
-                Style {num}
+                Design {num}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Profile Header - Design 3 */}
-        {(
+        {/* DESIGN 1: Clean Horizontal - LinkedIn-style professional */}
+        {headerDesign === 1 && (
+          <div className="border-b border-stone-200 pb-8 mb-10">
+            <div className="flex items-start gap-6">
+              <div className="w-24 h-24 rounded-full overflow-hidden bg-stone-200 border-2 border-white shadow-md flex-shrink-0">
+                <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-1">
+                  <h1 className="text-2xl font-bold text-black" data-testid="text-advocate-name">{advocate.name}</h1>
+                  <CheckCircle className="w-5 h-5 text-orange-800" />
+                </div>
+                <p className="text-stone-600 mb-2">{advocate.specialty} • {advocate.credentials[0]?.label}</p>
+                <p className="text-sm text-stone-500 mb-3">{advocate.location} • Responds {advocate.responseTime}</p>
+                <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-black text-black" />
+                    <span className="font-semibold">{advocate.rating}</span>
+                    <span className="text-stone-500">({advocate.reviews})</span>
+                  </div>
+                  <span className="text-stone-300">•</span>
+                  <span className="text-stone-500">{advocate.stats.patientsHelped.toLocaleString()}+ helped</span>
+                  <span className="text-stone-300">•</span>
+                  <span className="text-stone-500">{advocate.stats.yearsExperience} years</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* DESIGN 2: Centered Card - Warm & Approachable */}
+        {headerDesign === 2 && (
+          <div className="text-center mb-10">
+            <div className="w-20 h-20 rounded-full overflow-hidden bg-stone-200 border-3 border-orange-100 shadow-lg mx-auto mb-4">
+              <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
+            </div>
+            <h1 className="text-2xl font-bold text-black mb-1" data-testid="text-advocate-name">{advocate.name}</h1>
+            <p className="text-orange-800 font-medium text-sm mb-2">{advocate.specialty}</p>
+            <p className="text-stone-500 text-sm mb-4">{advocate.credentials[0]?.label} • {advocate.location}</p>
+            <div className="flex items-center justify-center gap-6 text-sm">
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1 mb-1">
+                  <Star className="w-4 h-4 fill-black text-black" />
+                  <span className="font-bold text-black">{advocate.rating}</span>
+                </div>
+                <span className="text-stone-500 text-xs">{advocate.reviews} reviews</span>
+              </div>
+              <div className="w-px h-8 bg-stone-200"></div>
+              <div className="text-center">
+                <div className="font-bold text-black mb-1">{advocate.stats.patientsHelped.toLocaleString()}+</div>
+                <span className="text-stone-500 text-xs">patients helped</span>
+              </div>
+              <div className="w-px h-8 bg-stone-200"></div>
+              <div className="text-center">
+                <div className="font-bold text-black mb-1">{advocate.stats.yearsExperience}</div>
+                <span className="text-stone-500 text-xs">years exp.</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* DESIGN 3: Two-Column Split - Quote-Forward */}
+        {headerDesign === 3 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 pb-10 border-b border-stone-200">
             <div>
               <div className="flex items-center gap-4 mb-4">
@@ -327,79 +388,9 @@ export default function AdvocateDetail() {
                   <p className="text-sm text-stone-500">{advocate.specialty}</p>
                 </div>
               </div>
-              {/* STYLE 1: Gelt-inspired — Bold quote marks, warm background */}
-              {quoteStyle === 1 && (
-                <div className="bg-gradient-to-br from-orange-50 via-orange-50 to-amber-50 rounded-2xl p-6 relative overflow-hidden">
-                  <div className="absolute -top-4 -left-2 text-[80px] text-orange-200 font-serif leading-none select-none">"</div>
-                  <p className="text-lg text-stone-800 leading-relaxed relative z-10 pl-8">
-                    I've been where you are. Let me help you navigate this—you don't have to figure it out alone.
-                  </p>
-                  <div className="absolute -bottom-6 -right-2 text-[80px] text-orange-200 font-serif leading-none rotate-180 select-none">"</div>
-                </div>
-              )}
-
-              {/* STYLE 2: Untitled UI-inspired — Clean card with avatar row */}
-              {quoteStyle === 2 && (
-                <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-stone-200">
-                      <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-stone-900 text-sm">{advocate.name}</p>
-                      <p className="text-xs text-stone-500">{advocate.specialty}</p>
-                    </div>
-                  </div>
-                  <p className="text-lg text-stone-700 leading-relaxed">
-                    "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
-                  </p>
-                  <div className="mt-4 pt-4 border-t border-stone-100 flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-orange-400 text-orange-400" />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* STYLE 3: Quotly-inspired — Literary, earthy, elegant */}
-              {quoteStyle === 3 && (
-                <div className="bg-stone-50 rounded-xl p-6 relative">
-                  <div className="absolute top-4 left-4 w-8 h-8 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-orange-700" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                    </svg>
-                  </div>
-                  <div className="pl-12 pr-4">
-                    <p className="text-xl text-stone-800 leading-relaxed font-light">
-                      I've been where you are. Let me help you navigate this—you don't have to figure it out alone.
-                    </p>
-                    <div className="mt-6 flex items-center gap-3">
-                      <div className="h-px flex-1 bg-gradient-to-r from-orange-200 to-transparent"></div>
-                      <span className="text-sm text-orange-800 font-medium tracking-wide uppercase">{advocate.name.split(' ')[0]}</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* STYLE 4: Testimonial Card — Polished with photo accent */}
-              {quoteStyle === 4 && (
-                <div className="relative">
-                  <div className="bg-stone-900 rounded-2xl p-6 text-white">
-                    <p className="text-lg leading-relaxed">
-                      "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 mt-4 ml-2">
-                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-orange-200 shadow-md">
-                      <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-stone-900">{advocate.name}</p>
-                      <p className="text-sm text-orange-800">{advocate.specialty}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <blockquote className="text-lg text-stone-700 italic leading-relaxed">
+                "I've been where you are. Let me help you navigate this—you don't have to figure it out alone."
+              </blockquote>
             </div>
             <div className="flex flex-col justify-center">
               <div className="grid grid-cols-2 gap-4 text-sm">
@@ -421,6 +412,43 @@ export default function AdvocateDetail() {
                 <div className="bg-stone-50 rounded-lg p-3">
                   <div className="text-stone-500 text-xs mb-1">Location</div>
                   <div className="font-semibold text-black">{advocate.location}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* DESIGN 4: Compact Inline - Directory Style */}
+        {headerDesign === 4 && (
+          <div className="bg-stone-50 rounded-xl p-6 mb-10">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full overflow-hidden bg-stone-200 flex-shrink-0 ring-2 ring-white shadow">
+                <img src={advocate.image} alt={advocate.name} className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <h1 className="text-lg font-bold text-black truncate" data-testid="text-advocate-name">{advocate.name}</h1>
+                  <span className="inline-flex items-center gap-1 text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full font-medium">
+                    <CheckCircle className="w-3 h-3" /> Verified
+                  </span>
+                </div>
+                <p className="text-sm text-stone-600 truncate">{advocate.specialty} • {advocate.credentials[0]?.label}</p>
+              </div>
+              <div className="hidden md:flex items-center gap-6 text-sm">
+                <div className="text-center">
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-black text-black" />
+                    <span className="font-bold">{advocate.rating}</span>
+                  </div>
+                  <span className="text-xs text-stone-500">{advocate.reviews} reviews</span>
+                </div>
+                <div className="text-center">
+                  <div className="font-bold text-black">{advocate.stats.patientsHelped.toLocaleString()}+</div>
+                  <span className="text-xs text-stone-500">helped</span>
+                </div>
+                <div className="text-center">
+                  <div className="font-bold text-black">{advocate.stats.yearsExperience} yrs</div>
+                  <span className="text-xs text-stone-500">experience</span>
                 </div>
               </div>
             </div>
