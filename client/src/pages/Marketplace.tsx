@@ -170,7 +170,7 @@ export default function Marketplace() {
       <header className="border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold text-black" data-testid="logo">PatientAdvocate</h1>
+            <h1 className="text-2xl font-bold text-black" data-testid="logo">Brivon</h1>
             <nav className="hidden md:flex items-center gap-6">
               <a href="#" className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="nav-browse">Find an Advocate</a>
               <a href="#" className="text-sm text-stone-500 hover:text-black transition-colors" data-testid="nav-how">How It Works</a>
@@ -182,13 +182,11 @@ export default function Marketplace() {
           </div>
         </div>
       </header>
-
       {/* Hero */}
       <section className="py-12 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-black mb-3" data-testid="hero-title">Don't fight the healthcare system alone.</h2>
-        <p className="text-xl text-stone-500" data-testid="hero-subtitle">We make the calls, cut through the red tape, and get you the care you deserve.</p>
+        <p className="text-xl text-stone-500" data-testid="hero-subtitle">Complex care is easier when you’ve fearless, focused, and relentless people by your side.</p>
       </section>
-
       {/* Filters Bar */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
@@ -212,7 +210,6 @@ export default function Marketplace() {
           </button>
         </div>
       </div>
-
       {/* Section Header */}
       <div className="max-w-7xl mx-auto px-6 pb-4">
         <div className="flex items-center justify-between">
@@ -228,7 +225,6 @@ export default function Marketplace() {
           </button>
         </div>
       </div>
-
       {/* Advocate Cards Grid */}
       <div className="max-w-7xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -296,12 +292,9 @@ export default function Marketplace() {
           ))}
         </div>
       </div>
-
       {/* Footer */}
       <footer className="border-t border-stone-200 py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-stone-500">
-          © 2026 PatientAdvocate. We fight for you.
-        </div>
+        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-stone-500">© 2026 Brivon. We fight for you.</div>
       </footer>
     </div>
   );
