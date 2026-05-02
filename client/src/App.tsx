@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import DesignLab from "./pages/__design_lab/index";
 import Marketplace from "./pages/Marketplace";
 import AdvocateDetail from "./pages/AdvocateDetail";
 import MatchIntake from "./pages/MatchIntake";
@@ -20,10 +21,14 @@ import TermsPage from "./pages/TermsPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import PatientCases from "./pages/PatientCases";
 import PatientCaseDashboard from "./pages/PatientCaseDashboard";
+import AppealIntake from "./pages/AppealIntake";
+import AdvocatePortal from "./pages/AdvocatePortal";
+import PatientCase from "./pages/PatientCase";
 
 function Router() {
   return (
     <Switch>
+      <Route path="/__design_lab" component={DesignLab} />
       <Route path="/" component={Marketplace} />
       <Route path="/marketplace" component={Marketplace} />
       <Route path="/advocate/:id" component={AdvocateDetail} />
@@ -42,6 +47,11 @@ function Router() {
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/my-cases" component={PatientCases} />
       <Route path="/my-cases/:id" component={PatientCaseDashboard} />
+      <Route path="/appeal-intake" component={AppealIntake} />
+      <Route path="/advocate" component={AdvocatePortal} />
+      <Route path="/case/:id">
+        {(params) => <PatientCase caseId={params.id!} />}
+      </Route>
       <Route component={Marketplace} />
     </Switch>
   );

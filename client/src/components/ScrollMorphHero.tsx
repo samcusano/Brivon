@@ -1,9 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { easeInOutCubic } from '@/lib/morphCanvas';
 
+type HeadshotSrc = string | { src: string; objectPosition?: string };
+
+function headshotUrl(h: HeadshotSrc): string {
+  return typeof h === 'string' ? h : h.src;
+}
+function headshotPos(h: HeadshotSrc): string {
+  return typeof h === 'string' ? 'center' : (h.objectPosition ?? 'center');
+}
+
 type Props = {
   heroImageSrc: string;
-  headshotSrcs: string[];
+  headshotSrcs: HeadshotSrc[];
   heightVh?: number;
 };
 
@@ -120,7 +129,7 @@ export function ScrollMorphHero({
               const size = `${(spot.r * 200).toFixed(2)}vmin`;
               return (
                 <div
-                  key={`${src}-face-${i}`}
+                  key={`${headshotUrl(src)}-face-${i}`}
                   className="morph-hero__face"
                   style={{
                     left: `${spot.cx * 100}%`,
@@ -131,7 +140,7 @@ export function ScrollMorphHero({
                     transform: `translate(-50%, -50%) scale(${facesScale})`,
                   }}
                 >
-                  <img src={src} alt="" loading="lazy" decoding="async" />
+                  <img src={headshotUrl(src)} alt="" loading="lazy" decoding="async" style={{ objectPosition: headshotPos(src) }} />
                 </div>
               );
             })}

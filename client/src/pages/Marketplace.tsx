@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'wouter';
 import {
   CheckCircle, Star, ShieldCheck, Clock,
@@ -7,7 +7,6 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { ScrollMorphHero } from '@/components/ScrollMorphHero';
 import { HalfCircleCaregivers } from '@/components/HalfCircleCaregivers';
 
 const advocates = [
@@ -220,10 +219,53 @@ const trustCards = [
   },
 ];
 
+// Face crop coordinates: [cx, cy] as fractions of image width/height.
+// 5 people in the park scene (left to right).
+const PARK_CROPS: Array<[number, number]> = [
+  [0.16, 0.12], // teenager standing far left
+  [0.24, 0.25], // girl kicking ball (head bent low)
+  [0.40, 0.36], // boy running center
+  [0.76, 0.20], // woman striped shirt right
+  [0.83, 0.18], // man teal polo far right
+];
+
+function extractFaces(src: string): Promise<string[]> {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.onload = () => {
+      const iw = img.naturalWidth;
+      const ih = img.naturalHeight;
+      const cropPx = iw * 0.08;
+      const urls = PARK_CROPS.map(([cx, cy]) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 200;
+        canvas.height = 200;
+        const ctx = canvas.getContext('2d')!;
+        ctx.drawImage(
+          img,
+          cx * iw - cropPx / 2,
+          cy * ih - cropPx / 2,
+          cropPx, cropPx,
+          0, 0, 200, 200,
+        );
+        return canvas.toDataURL('image/jpeg', 0.9);
+      });
+      resolve(urls);
+    };
+    img.onerror = () => resolve([]);
+    img.src = src;
+  });
+}
+
 export default function Marketplace() {
   const [activeSpecialty, setActiveSpecialty] = useState('All');
   const [sortBy, setSortBy] = useState('default');
   const [expandedTrust, setExpandedTrust] = useState<number | null>(null);
+  const [parkFaces, setParkFaces] = useState<string[]>([]);
+
+  useEffect(() => {
+    extractFaces('/park-scene.png').then(setParkFaces);
+  }, []);
 
   const filteredAdvocates = useMemo(() => {
     let result = activeSpecialty === 'All'
@@ -286,22 +328,6 @@ export default function Marketplace() {
       {/* How It Works */}
       <section id="how-it-works" className="bg-muted border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-14">
-          <HalfCircleCaregivers
-            // Use headshots arc layout.
-            headshotSrcs={[
-              'assets/avatar1.png',
-              'assets/avatar2.png',
-              'assets/avatar3.png',
-              'assets/avatar4.png',
-              'assets/avatar5.png',
-              'assets/avatar6.png',
-            ]}
-            // heroImageSrc="https://cdn.prod.website-files.com/696604acc25b997c8d38dea0/69708de8432ffca3dd034ce3_hero-background.avif"
-            heroImageSrc="assets/hero_background.avif"
-            title="For the caregivers who do it all"
-            subtitle="You’re already doing everything. The bills, the calls, the appointments. You shouldn’t have to fight the system too."
-          />
-
           <div className="text-center mb-10">
             <h3 className="font-display text-3xl text-foreground mb-3">From overwhelmed to in-control</h3>
             <p className="text-muted-foreground">Three steps. Clear guidance. Real accountability.</p>
@@ -338,6 +364,14 @@ export default function Marketplace() {
           <p className="text-center mt-8 text-xs text-muted-foreground">No charge until after your session. Cancel anytime.</p>
         </div>
       </section>
+
+      {/* Caregiver arc — faces form a half-circle, title reveals */}
+      <HalfCircleCaregivers
+        heroImageSrc="/park-scene.png"
+        headshotSrcs={parkFaces}
+        title="For the caregivers who do it all"
+        subtitle="You're already doing everything. The bills, the calls, the appointments. You shouldn't have to fight the system too."
+      />
 
       {/* Advocate Cards — #2 filters + sort, #5 differentiation */}
       <div id="advocates" className="max-w-7xl mx-auto px-6 py-12">

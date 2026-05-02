@@ -8,41 +8,41 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  
+
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-  
+
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
-  
+
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-  
+
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-  
+
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-  
+
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-  
+
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-  
+
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-  
+
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  
+
   --color-chart-1: hsl(var(--chart-1));
   --color-chart-2: hsl(var(--chart-2));
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
-  
+
   --color-sidebar: hsl(var(--sidebar));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
   --color-sidebar-primary: hsl(var(--sidebar-primary));
@@ -52,97 +52,97 @@
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Source Serif 4", ui-serif, serif;
-  --font-display: "Source Serif 4", ui-serif, serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Cormorant Garamond", ui-serif, serif;
+  --font-display: "Cormorant Garamond", ui-serif, serif;
 }
 
 :root {
-  /* Warm Earth Palette — Terracotta & Cream */
-  --background: 35 40% 97%;           /* Warm parchment cream */
-  --foreground: 20 20% 18%;           /* Warm near-black */
+  /* Parchment & Amber — civic advocacy palette */
+  --background: 42 30% 97%;
+  --foreground: 28 14% 12%;
 
-  --card: 35 40% 97%;
-  --card-foreground: 20 20% 18%;
+  --card: 42 28% 96%;
+  --card-foreground: 28 14% 12%;
 
-  --popover: 35 40% 97%;
-  --popover-foreground: 20 20% 18%;
+  --popover: 42 28% 96%;
+  --popover-foreground: 28 14% 12%;
 
-  --primary: 14 55% 38%;              /* Deep terracotta */
-  --primary-foreground: 35 40% 97%;
+  --primary: 38 82% 44%;
+  --primary-foreground: 28 14% 9%;
 
-  --secondary: 28 18% 42%;            /* Warm umber */
-  --secondary-foreground: 35 40% 97%;
+  --secondary: 215 18% 36%;
+  --secondary-foreground: 42 20% 96%;
 
-  --muted: 30 25% 92%;                /* Soft warm beige */
-  --muted-foreground: 20 14% 38%;     /* Warm medium gray */
+  --muted: 40 16% 92%;
+  --muted-foreground: 30 8% 44%;
 
-  --accent: 85 20% 40%;               /* Muted olive green */
-  --accent-foreground: 35 40% 97%;
+  --accent: 150 32% 36%;
+  --accent-foreground: 0 0% 98%;
 
-  --destructive: 0 65% 50%;
+  --destructive: 2 68% 48%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 30 18% 84%;               /* Warm sand */
-  --input: 30 18% 84%;
-  --ring: 14 55% 38%;
+  --border: 38 12% 87%;
+  --input: 38 12% 87%;
+  --ring: 38 82% 44%;
 
-  --radius: 8px;
+  --radius: 4px;
 
-  --chart-1: 14 55% 45%;
-  --chart-2: 28 35% 50%;
-  --chart-3: 85 20% 45%;
-  --chart-4: 42 50% 55%;
-  --chart-5: 0 45% 55%;
+  --chart-1: 38 82% 44%;
+  --chart-2: 215 28% 42%;
+  --chart-3: 150 32% 38%;
+  --chart-4: 42 60% 52%;
+  --chart-5: 2 62% 48%;
 
-  --sidebar: 35 40% 97%;
-  --sidebar-foreground: 20 20% 18%;
-  --sidebar-primary: 14 55% 38%;
-  --sidebar-primary-foreground: 35 40% 97%;
-  --sidebar-accent: 30 25% 92%;
-  --sidebar-accent-foreground: 20 20% 18%;
-  --sidebar-border: 30 18% 84%;
-  --sidebar-ring: 14 55% 38%;
+  /* Dark sidebar */
+  --sidebar: 222 18% 15%;
+  --sidebar-foreground: 40 12% 88%;
+  --sidebar-primary: 38 82% 50%;
+  --sidebar-primary-foreground: 222 18% 10%;
+  --sidebar-accent: 222 15% 21%;
+  --sidebar-accent-foreground: 40 14% 90%;
+  --sidebar-border: 222 12% 22%;
+  --sidebar-ring: 38 82% 50%;
 }
 
 .dark {
-  /* Warm Dark — charcoal with earthy undertones */
-  --background: 20 18% 10%;
-  --foreground: 30 20% 90%;
+  --background: 28 12% 10%;
+  --foreground: 40 16% 90%;
 
-  --card: 20 16% 13%;
-  --card-foreground: 30 20% 90%;
+  --card: 28 10% 13%;
+  --card-foreground: 40 16% 90%;
 
-  --popover: 20 16% 13%;
-  --popover-foreground: 30 20% 90%;
+  --popover: 28 10% 13%;
+  --popover-foreground: 40 16% 90%;
 
-  --primary: 14 50% 55%;              /* Lighter terracotta for dark bg */
-  --primary-foreground: 20 18% 10%;
+  --primary: 38 78% 52%;
+  --primary-foreground: 28 14% 9%;
 
-  --secondary: 28 20% 28%;
-  --secondary-foreground: 30 20% 90%;
+  --secondary: 215 16% 28%;
+  --secondary-foreground: 40 14% 90%;
 
-  --muted: 20 14% 18%;
-  --muted-foreground: 25 12% 55%;
+  --muted: 28 10% 17%;
+  --muted-foreground: 30 8% 54%;
 
-  --accent: 85 18% 45%;
-  --accent-foreground: 20 18% 10%;
+  --accent: 150 28% 42%;
+  --accent-foreground: 0 0% 98%;
 
-  --destructive: 0 62% 35%;
+  --destructive: 2 58% 42%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 20 12% 22%;
-  --input: 20 12% 22%;
-  --ring: 14 50% 55%;
+  --border: 28 10% 22%;
+  --input: 28 10% 22%;
+  --ring: 38 78% 52%;
 
-  --sidebar: 20 18% 10%;
-  --sidebar-foreground: 30 20% 90%;
-  --sidebar-primary: 14 50% 55%;
-  --sidebar-primary-foreground: 20 18% 10%;
-  --sidebar-accent: 20 14% 18%;
-  --sidebar-accent-foreground: 30 20% 90%;
-  --sidebar-border: 20 12% 22%;
-  --sidebar-ring: 14 50% 55%;
+  --sidebar: 222 18% 11%;
+  --sidebar-foreground: 40 12% 85%;
+  --sidebar-primary: 38 78% 50%;
+  --sidebar-primary-foreground: 222 18% 8%;
+  --sidebar-accent: 222 15% 17%;
+  --sidebar-accent-foreground: 40 12% 88%;
+  --sidebar-border: 222 12% 18%;
+  --sidebar-ring: 38 78% 50%;
 }
 
 @layer base {
@@ -151,11 +151,11 @@
   }
   body {
     @apply font-sans antialiased text-foreground;
-    background: linear-gradient(to bottom, #f6e1ca, #fbf3eb);
+    background: linear-gradient(160deg, hsl(42 30% 97%) 0%, hsl(38 22% 95%) 100%);
     min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold tracking-tight;
+    @apply font-heading tracking-tight;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -173,752 +173,156 @@
     @apply transition-all duration-300 ease-in-out;
   }
 
-  .hover-scale {
-    @apply hover:scale-105 transition-transform duration-200;
-  }
-
-  .accordion-wrapper {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .accordion-wrapper[data-open="true"] {
-    grid-template-rows: 1fr;
-  }
-
-  .accordion-inner {
-    overflow: hidden;
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    .accordion-wrapper {
-      transition-duration: 0.01ms;
-    }
-  }
-
-  .background-grid {
-    background-color: hsl(var(--background));
-    background-image:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" result="noise"/></filter><rect width="100%" height="100%" fill="%23666" filter="url(%23noise)" opacity="0.02"/></svg>');
-    background-size: 100% 100%;
-    background-position: 0 0;
-    background-attachment: fixed;
-  }
-
-  /* ——— Delight: Availability pulse ——— */
-  /* A gentle breathing glow on "Available now" / "Today" badges */
-  @keyframes availability-breathe {
-    0%, 100% { box-shadow: 0 0 0 0 hsla(38, 80%, 50%, 0); }
-    50% { box-shadow: 0 0 8px 2px hsla(38, 80%, 50%, 0.25); }
-  }
-
-  .badge-available {
-    animation: availability-breathe 3s ease-in-out infinite;
-  }
-
-  /* ——— Delight: Warm card hover ——— */
-  /* Border warms from neutral to terracotta as you reach toward an advocate */
-  .advocate-card {
-    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1),
-                box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1),
-                border-color 0.3s ease;
-  }
-
-  .advocate-card:hover {
-    border-color: hsl(var(--primary) / 0.35);
-    box-shadow: 0 8px 24px -4px hsl(var(--primary) / 0.1),
-                0 2px 8px -2px hsl(var(--primary) / 0.06);
-    transform: translateY(-4px);
-  }
-
-  .advocate-card:active {
-    transform: translateY(-2px);
-    transition-duration: 0.1s;
-  }
-
-  /* ——— Delight: Booking button press + warm ripple ——— */
-  .btn-book {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1),
-                box-shadow 0.15s ease,
-                background-color 0.2s ease;
-    box-shadow: 0 2px 8px hsl(var(--primary) / 0.2);
-  }
-
-  .btn-book::after {
-    content: '';
-    position: absolute;
-    inset: -50%;
-    background: radial-gradient(
-      circle at 50% 50%,
-      hsl(var(--primary-foreground) / 0.2) 0%,
-      hsl(var(--primary-foreground) / 0.08) 30%,
-      transparent 60%
-    );
-    transform: scale(0);
-    opacity: 0;
-    border-radius: 50%;
-    pointer-events: none;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.5s ease;
-  }
-
-  .btn-book:active::after {
-    transform: scale(2);
-    opacity: 1;
-    transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.08s ease;
-  }
-
-  .btn-book:hover {
-    box-shadow: 0 4px 16px hsl(var(--primary) / 0.3);
-    transform: translateY(-1px);
-  }
-
-  .btn-book:active {
-    transform: translateY(1px) scale(0.98);
-    box-shadow: 0 1px 4px hsl(var(--primary) / 0.15);
-    transition-duration: 0.08s;
-  }
-
-  /* ——— Delight: Scroll-triggered fade-up ——— */
-  /* Timeline steps, trust cards, how-it-works steps reveal on scroll */
-  @keyframes fade-up-in {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .reveal-on-scroll {
-    opacity: 0;
-    animation: fade-up-in 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-play-state: paused;
-    animation-timeline: view();
-    animation-range: entry 0% entry 30%;
-  }
-
-  /* Fallback for browsers without scroll-driven animations */
-  @supports not (animation-timeline: view()) {
-    .reveal-on-scroll {
-      opacity: 1;
-      animation: none;
-    }
-  }
-
-  /* ——— Delight: Savings number shimmer ——— */
-  /* A warm shimmer over the big savings number to draw attention */
-  @keyframes warm-shimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-
-  .savings-highlight {
-    background: linear-gradient(
-      90deg,
-      hsl(var(--foreground)) 0%,
-      hsl(var(--foreground)) 40%,
-      hsl(var(--primary)) 50%,
-      hsl(var(--foreground)) 60%,
-      hsl(var(--foreground)) 100%
-    );
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: warm-shimmer 4s ease-in-out infinite;
-    animation-delay: 1s;
-  }
-
-  /* ——— Delight: Pull quote border extend ——— */
-  @keyframes border-extend {
-    from { clip-path: inset(0 0 100% 0); }
-    to { clip-path: inset(0 0 0 0); }
-  }
-
-  .pull-quote-border {
-    animation: border-extend 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-play-state: paused;
-    animation-timeline: view();
-    animation-range: entry 0% entry 25%;
-  }
-
-  @supports not (animation-timeline: view()) {
-    .pull-quote-border {
-      animation: none;
-      clip-path: none;
-    }
-  }
-
-  /* ——— Delight: Resolution checkpoint glow ——— */
-  @keyframes resolution-glow {
-    0%, 100% { box-shadow: 0 0 0 0 hsla(30, 70%, 35%, 0); }
-    50% { box-shadow: 0 0 12px 3px hsla(30, 70%, 35%, 0.2); }
-  }
-
-  .checkpoint-resolved {
-    animation: resolution-glow 2.5s ease-in-out infinite;
-    animation-delay: 0.5s;
-  }
-
-  /* ——— Delight: Booking option selection ——— */
-  .booking-option {
-    transition: border-color 0.2s ease,
-                background-color 0.2s ease,
-                box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1),
-                transform 0.15s ease;
-  }
-
-  .booking-option:active {
-    transform: scale(0.985);
-    transition-duration: 0.08s;
-  }
-
-  .booking-option[data-selected="true"] {
-    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.3),
-                0 2px 8px hsl(var(--primary) / 0.08);
-  }
-
-  /* ——— Delight: Filter chip snap with overshoot ——— */
-  @keyframes chip-snap {
-    0% { transform: scale(0.92); }
-    60% { transform: scale(1.06); }
-    100% { transform: scale(1); }
-  }
-
-  .filter-chip {
-    transition: background-color 0.2s ease,
-                color 0.2s ease,
-                box-shadow 0.2s ease,
-                transform 0.15s ease;
-  }
-
-  .filter-chip:active {
-    transform: scale(0.92);
-    transition-duration: 0.06s;
-  }
-
-  .filter-chip[data-active="true"] {
-    animation: chip-snap 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  /* ——— Delight: Accordion chevron spring overshoot ——— */
-  /* Overshoots past 180deg then settles back — feels like a physical toggle */
-  .chevron-spring {
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  /* ——— Delight: Advocate photo "coming closer" spring scale ——— */
-  .advocate-card .photo-spring {
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .advocate-card:hover .photo-spring {
-    transform: scale(1.03);
-  }
-
-  /* ——— Delight: Savings strikethrough reveal ——— */
-  /* The old amount gets a line drawn through it, then the new amount appears */
-  @keyframes strikethrough-draw {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
-  }
-
-  @keyframes saved-amount-appear {
-    from {
-      opacity: 0;
-      transform: translateX(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .savings-original {
-    position: relative;
-    display: inline;
-    color: hsl(var(--muted-foreground));
-  }
-
-  .savings-original::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    height: 2px;
-    background: hsl(var(--primary));
-    transform-origin: left;
-    transform: scaleX(0);
-    animation: strikethrough-draw 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
-  }
-
-  .savings-result {
-    display: inline;
-    opacity: 0;
-    animation: saved-amount-appear 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.7s forwards;
-  }
-
-  /* ——— Delight: Hero entrance ——— */
-  @keyframes hero-fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero-entrance > * {
-    opacity: 0;
-    animation: hero-fade-in 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  }
-
-  .hero-entrance > *:nth-child(1) { animation-delay: 0.1s; }
-  .hero-entrance > *:nth-child(2) { animation-delay: 0.2s; }
-  .hero-entrance > *:nth-child(3) { animation-delay: 0.3s; }
-  .hero-entrance > *:nth-child(4) { animation-delay: 0.4s; }
-
-  /* ——— Delight: Staggered reveal for grid children ——— */
-  .stagger-children > * {
-    opacity: 0;
-    animation: fade-up-in 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    animation-play-state: paused;
-    animation-timeline: view();
-    animation-range: entry 0% entry 25%;
-  }
-
-  .stagger-children > *:nth-child(1) { animation-delay: 0s; }
-  .stagger-children > *:nth-child(2) { animation-delay: 0.06s; }
-  .stagger-children > *:nth-child(3) { animation-delay: 0.12s; }
-
-  @supports not (animation-timeline: view()) {
-    .stagger-children > * {
-      opacity: 1;
-      animation: none;
-    }
-  }
-
-  /* ── Scroll Morph Hero (Marketplace) ── */
-  .morph-hero {
-    position: relative;
-    border-bottom: 1px solid hsl(var(--border));
-    background: hsl(var(--background));
-  }
-
-  .morph-hero__sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  .morph-hero__bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(1200px 700px at 50% 25%, hsl(var(--primary) / 0.12), transparent 60%),
-      radial-gradient(900px 600px at 10% 70%, hsl(var(--accent) / 0.10), transparent 55%),
-      radial-gradient(800px 600px at 90% 75%, hsl(var(--secondary) / 0.10), transparent 55%),
-      linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)));
-    filter: saturate(1.05);
-    z-index: 0;
-  }
-
-  .morph-hero__heroImage {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-  }
-
-  .morph-hero__scene {
-    position: absolute;
-    inset: 0;
-    transition: opacity 260ms ease, transform 300ms cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  .morph-hero__scene--hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      hsl(var(--foreground) / 0.2) 0%,
-      hsl(var(--foreground) / 0.08) 30%,
-      transparent 60%
-    );
-    pointer-events: none;
-  }
-
-  .morph-hero__scene--faces {
-    background:
-      radial-gradient(1000px 600px at 50% 50%, hsl(var(--primary) / 0.12), transparent 65%),
-      hsl(var(--background));
-  }
-
-  .morph-hero__canvas {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    transition: opacity 280ms ease;
-  }
-
-  .morph-hero__faceLayer {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .morph-hero__face {
-    position: absolute;
-    border-radius: 999px;
-    overflow: hidden;
-    border: 2px solid hsl(var(--background) / 0.9);
-    min-width: 96px;
-    min-height: 96px;
-    max-width: 320px;
-    max-height: 320px;
-    box-shadow:
-      0 16px 30px -20px hsl(var(--foreground) / 0.28),
-      0 0 0 1px hsl(var(--foreground) / 0.06);
-    transition: opacity 220ms ease, transform 280ms cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  .morph-hero__face img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .morph-hero__overlay {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 2.5rem 1.5rem;
-    z-index: 4;
-    pointer-events: none;
-  }
-
-  .morph-hero__copy {
-    pointer-events: auto;
-    width: min(56rem, 100%);
-    text-align: center;
-    padding: 1.5rem 1.25rem;
-    border-radius: 1.25rem;
-    background: hsl(var(--background) / 0.72);
-    backdrop-filter: blur(10px);
-    border: 1px solid hsl(var(--border) / 0.65);
-    box-shadow:
-      0 18px 50px -22px hsl(var(--foreground) / 0.18),
-      0 3px 10px -6px hsl(var(--foreground) / 0.12);
-  }
-
-  .morph-hero__kicker {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: hsl(var(--muted-foreground));
-    margin-bottom: 0.6rem;
-  }
-
-  .morph-hero__title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    line-height: 1.07;
-    letter-spacing: -0.02em;
-    color: hsl(var(--foreground));
-    margin-bottom: 0.8rem;
-  }
-
-  .morph-hero__subtitle {
-    font-size: 1.05rem;
-    line-height: 1.55;
-    color: hsl(var(--muted-foreground));
-    max-width: 44rem;
-    margin: 0 auto 1.25rem;
-  }
-
-  .morph-hero__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 0.9rem;
-  }
-
-  .morph-hero__ctaPrimary,
-  .morph-hero__ctaSecondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.1rem;
-    border-radius: 999px;
-    font-weight: 650;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: transform 160ms cubic-bezier(0.25, 1, 0.5, 1),
-      background-color 160ms ease,
-      border-color 160ms ease,
-      color 160ms ease;
-  }
-
-  .morph-hero__ctaPrimary {
-    background-color: transparent;
-    background-image: conic-gradient(#FF9C31, #FFD8B0, #FFD233, #E64000, #FF9C31);
-    color: #3d1505;
-  }
-
-  .morph-hero__ctaPrimary:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-
-  .morph-hero__ctaSecondary {
-    border: 1px solid transparent;
-    background-color: #face9f;
-    background-image: none;
-    color: #3d1505;
-  }
-
-  .morph-hero__ctaSecondary:hover {
-    background-color: #f9c07a;
-    transform: translateY(-1px);
-  }
-
-  .morph-hero__hint {
-    font-size: 0.85rem;
-    color: hsl(var(--muted-foreground));
-    margin: 0;
-  }
-
-  /* Reduced-motion static collage */
-  .morph-hero__static {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    padding: 2rem;
-  }
-
-  .morph-hero__staticFace {
-    position: absolute;
-    width: min(18vw, 110px);
-    aspect-ratio: 1 / 1;
-    border-radius: 999px;
-    overflow: hidden;
-    border: 1px solid hsl(var(--border));
-    box-shadow: 0 10px 25px -18px hsl(var(--foreground) / 0.25);
-  }
-
-  .morph-hero__staticFace img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .morph-hero__staticFace:nth-child(1) { transform: translate(-200%, -80%) scale(0.95); }
-  .morph-hero__staticFace:nth-child(2) { transform: translate(-120%, 110%) scale(1.05); }
-  .morph-hero__staticFace:nth-child(3) { transform: translate(-10%, -95%) scale(1.0); }
-  .morph-hero__staticFace:nth-child(4) { transform: translate(120%, 105%) scale(1.12); }
-  .morph-hero__staticFace:nth-child(5) { transform: translate(210%, -85%) scale(1.0); }
-  .morph-hero__staticFace:nth-child(6) { transform: translate(250%, 35%) scale(0.9); }
-  .morph-hero__staticFace:nth-child(7) { transform: translate(0%, 10%) scale(1.22); }
-  .morph-hero__staticFace:nth-child(8) { transform: translate(-250%, 35%) scale(0.85); }
-
-  /* ── Half-circle caregivers headshots ── */
-  .halfCircle-caregivers {
-    position: relative;
-    height: 220vh;
-  }
-
-  .halfCircle-caregivers__sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  .halfCircle-caregivers__bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(900px 520px at 50% 25%, hsl(var(--primary) / 0.14), transparent 60%),
-      radial-gradient(650px 460px at 20% 60%, hsl(var(--accent) / 0.10), transparent 60%),
-      radial-gradient(680px 480px at 90% 70%, hsl(var(--secondary) / 0.10), transparent 65%),
-      linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)));
-    z-index: 0;
-  }
-
-  .halfCircle-caregivers__heroImage {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    filter: saturate(1.05);
-  }
-
-  .halfCircle-caregivers__head {
-    position: relative;
-    z-index: 3;
-    padding: 4.5rem 1.25rem 1rem;
-    text-align: center;
-  }
-
-  .halfCircle-caregivers__thanks {
-    position: absolute;
-    left: 50%;
-    bottom: 6%;
-    max-width: 42rem;
-    width: calc(100% - 2rem);
-    font-size: 1rem;
-    color: hsl(var(--foreground));
-    font-weight: 650;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 220ms ease;
-  }
-
-  .halfCircle-caregivers__faces {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .halfCircle-caregivers__face {
-    position: absolute;
-    border-radius: 999px;
-    overflow: hidden;
-    border: 2px solid hsl(var(--background) / 0.85);
-    width: min(15vmin, 130px);
-    aspect-ratio: 1 / 1;
-    box-shadow:
-      0 16px 30px -22px hsl(var(--foreground) / 0.35),
-      0 0 0 1px hsl(var(--foreground) / 0.08) inset;
-    transform-origin: center;
-  }
-
-  .halfCircle-caregivers__face img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  @media (max-width: 480px) {
-    .halfCircle-caregivers__head {
-      padding-top: 3.6rem;
-    }
-
-    .halfCircle-caregivers__face {
-      width: min(18vmin, 110px);
-    }
-  }
-
-  /* ——— Dawn-style button colors ——— */
-  button.bg-primary,
-  a.bg-primary,
-  .btn-book,
-  .morph-hero__ctaPrimary {
-    background-color: transparent;
-    background-image: radial-gradient(circle at 50% 40%, #FFD233 0%, #FF9C31 55%, #FF8A1F 100%), linear-gradient(135deg, #FFB347, #FF8A1F);
-    color: #3d1505 !important;
-    
-  }
-
-  button.bg-primary:hover,
-  a.bg-primary:hover,
-  .btn-book:hover,
-  .morph-hero__ctaPrimary:hover {
-    background-image: radial-gradient(circle at 50% 50%, #FFD233 0%, #FF9C31 85%), linear-gradient(135deg, #FFB347, #FF8A1F);
-    opacity: 0.9;
-    box-shadow: 0 6px 16px rgba(255, 156, 49, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  }
-
-  button.bg-secondary,
-  a.bg-secondary,
-  .morph-hero__ctaSecondary {
-    background-color: #face9f;
-    background-image: none;
-    color: #3d1505 !important;
-    border-color: transparent;
-  }
-
-  button.bg-secondary:hover,
-  a.bg-secondary:hover,
-  .morph-hero__ctaSecondary:hover {
-    background-color: #f9c07a;
-  }
-
-  /* ——— Delight: Steps entrance (on-load stagger, no scroll dependency) ——— */
-  .steps-entrance > * {
-    opacity: 0;
-    animation: fade-up-in 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  }
-
-  .steps-entrance > *:nth-child(1) { animation-delay: 0.15s; }
-  .steps-entrance > *:nth-child(2) { animation-delay: 0.3s; }
-  .steps-entrance > *:nth-child(3) { animation-delay: 0.45s; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .badge-available,
-    .checkpoint-resolved,
-    .savings-highlight,
-    .filter-chip[data-active="true"] {
-      animation: none;
-    }
-    .savings-highlight {
-      background: none;
-      -webkit-text-fill-color: unset;
-    }
-    .advocate-card,
-    .chevron-spring,
-    .advocate-card .photo-spring {
-      transition-duration: 0.01ms;
-    }
-    .btn-book::after {
-      display: none;
-    }
-    .savings-original::after {
-      animation: none;
-      transform: scaleX(1);
-    }
-    .savings-result {
-      animation: none;
-      opacity: 1;
-    }
-    .reveal-on-scroll,
-    .stagger-children > *,
-    .steps-entrance > *,
-    .pull-quote-border,
-    .hero-entrance > * {
-      opacity: 1;
-      animation: none;
-      clip-path: none;
-    }
-  }
+  .hover-lift {
+    @apply hover:-translate-y-px transition-transform duration-200;
+  }
+}
+
+/* ─── ScrollMorphHero ─────────────────────────────────────────── */
+.morph-hero {
+  position: relative;
+  width: 100%;
+}
+
+.morph-hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.morph-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: hsl(42 30% 97%);
+  z-index: 0;
+  transition: opacity 0.1s linear;
+}
+
+.morph-hero__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.morph-hero__scene--faces {
+  z-index: 2;
+}
+
+.morph-hero__heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.morph-hero__faceLayer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.morph-hero__face {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.12);
+  border: 3px solid hsl(42 30% 97% / 0.8);
+}
+
+.morph-hero__face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── HalfCircleCaregivers ────────────────────────────────────── */
+.halfCircle-caregivers {
+  position: relative;
+  width: 100%;
+  /* height is set via inline style on the element — default 250vh */
+  height: 280vh;
+}
+
+.halfCircle-caregivers__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 6vh;
+}
+
+.halfCircle-caregivers__heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  z-index: 0;
+}
+
+.halfCircle-caregivers__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 100% 80% at 50% 50%,
+    hsl(42 34% 98%) 0%,
+    hsl(42 30% 97%) 45%,
+    hsl(38 22% 95%) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.halfCircle-caregivers__head {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+.halfCircle-caregivers__faces {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.halfCircle-caregivers__face {
+  position: absolute;
+  width: clamp(72px, 11vw, 116px);
+  height: clamp(72px, 11vw, 116px);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1),
+              inset 0 0 22px hsl(42 30% 97% / 0.5);
+  will-change: transform, left, top;
+}
+
+.halfCircle-caregivers__face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.halfCircle-caregivers__thanks {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  z-index: 10;
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+  pointer-events: none;
 }

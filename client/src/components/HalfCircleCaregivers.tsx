@@ -48,12 +48,11 @@ export function HalfCircleCaregivers({
   const startPositions = useMemo(() => {
     // index 0.5 (left->right)
     return [
-      { x: 0.08, y: 0.30, s: 0.86 },
-      { x: 0.20, y: 0.82, s: 0.92 },
-      { x: 0.40, y: 0.28, s: 0.98 },
-      { x: 0.60, y: 0.14, s: 0.94 },
-      { x: 0.80, y: 0.26, s: 0.90 },
-      { x: 0.92, y: 0.38, s: 0.86 },
+      { x: 0.16, y: 0.04, s: 0.93 }, // teenager standing far left
+      { x: 0.239, y: 0.22, s: 1 }, // girl kicking ball (head bent low)
+      { x: 0.40, y: 0.375, s: 1 }, // boy running center
+      { x: 0.60, y: 0.14, s: 0.94 }, // woman striped shirt right
+      { x: 0.825, y: 0.13, s: 1 }, // man teal polo far right
     ];
   }, []);
 
@@ -127,7 +126,7 @@ export function HalfCircleCaregivers({
           decoding="async"
           style={{ opacity: heroFade }}
         />
-        <div className="halfCircle-caregivers__bg" aria-hidden="true" style={{ opacity: heroFade }} />
+        <div className="halfCircle-caregivers__bg" aria-hidden="true" style={{ opacity: 1 - heroFade }} />
 
         <div className="halfCircle-caregivers__head">
           <h3 className="font-display text-3xl text-foreground">{title}</h3>
@@ -168,7 +167,7 @@ export function HalfCircleCaregivers({
             transform: `translate(-50%, ${20 - thanksReveal * 20}px)`,
           }}
         >
-          Thanks for trusting us.
+          Your mind is brimming with questions, concerns, and an ever changing list of who-needs-what-when. Brivon's advocates learn your rhythms and stays on top of it all, so you can focus on being in the moment.
         </p>
       </div>
     </div>
