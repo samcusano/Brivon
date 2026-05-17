@@ -5,7 +5,7 @@ type Props = {
   headshotSrcs: string[];
   heroImageSrc: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
 };
 
 function clamp01(v: number) {
@@ -28,6 +28,15 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
+const QUOTES = [
+  "Finally got my claim approved",
+  "Saved us over $12,000",
+  "She fought like family",
+  "Didn't know I could appeal",
+  "Worth every penny",
+  "Like having a doctor friend",
+];
+
 export function HalfCircleCaregivers({
   headshotSrcs,
   heroImageSrc,
@@ -48,11 +57,11 @@ export function HalfCircleCaregivers({
   const startPositions = useMemo(() => {
     // index 0.5 (left->right)
     return [
-      { x: 0.16, y: 0.04, s: 0.93 }, // teenager standing far left
-      { x: 0.239, y: 0.22, s: 1 }, // girl kicking ball (head bent low)
-      { x: 0.40, y: 0.375, s: 1 }, // boy running center
-      { x: 0.60, y: 0.14, s: 0.94 }, // woman striped shirt right
-      { x: 0.825, y: 0.13, s: 1 }, // man teal polo far right
+      { x: 0.16, y: 0.12, s: 0.8 }, // teenager standing far left
+      { x: 0.239, y: 0.295, s: 0.8 }, // girl kicking ball (head bent low)
+      { x: 0.40, y: 0.44, s: 0.85 }, // boy running center
+      { x: 0.76, y: 0.22, s: 0.9 }, // woman striped shirt right
+      { x: 0.835, y: 0.19, s: 0.85 }, // man teal polo far right
     ];
   }, []);
 
@@ -61,7 +70,7 @@ export function HalfCircleCaregivers({
     // Tuned for a full-viewport sticky container.
     const n = 6;
     const cx = 0.50;
-    const cy = 0.76;
+    const cy = 0.66;
     const rx = 0.40;
     const ry = 0.24;
 
@@ -114,6 +123,12 @@ export function HalfCircleCaregivers({
 
   const thanksReveal = reducedMotion ? 1 : easeInOutCubic(clamp01((progress - 0.33) / 0.22));
 
+  // Quote bubbles appear after arc settles.
+  const quoteReveal = reducedMotion ? 1 : easeInOutCubic(clamp01((progress - 0.60) / 0.12));
+
+  // Faces + quotes converge to center and fade out.
+  const convergeT = reducedMotion ? 0 : easeInOutCubic(clamp01((progress - 0.74) / 0.18));
+
   return (
     <div ref={sectionRef} className="halfCircle-caregivers" aria-label="Caregivers who do it all">
       <div className="halfCircle-caregivers__sticky">
@@ -124,11 +139,16 @@ export function HalfCircleCaregivers({
           className="halfCircle-caregivers__heroImage"
           loading="eager"
           decoding="async"
-          style={{ opacity: heroFade }}
         />
         <div className="halfCircle-caregivers__bg" aria-hidden="true" style={{ opacity: 1 - heroFade }} />
 
-        <div className="halfCircle-caregivers__head">
+        <div
+          className="halfCircle-caregivers__head"
+          style={{
+            opacity: thanksReveal * (1 - convergeT),
+            transform: `translateY(${20 - thanksReveal * 20}px)`,
+          }}
+        >
           <h3 className="font-display text-3xl text-foreground">{title}</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
         </div>
@@ -139,21 +159,35 @@ export function HalfCircleCaregivers({
             const s = startPositions[i];
             if (!a || !s) return null;
 
-            const x = s.x + (a.x - s.x) * t;
-            const y = s.y + (a.y - s.y) * t;
+            const arcX = s.x + (a.x - s.x) * t;
+            const arcY = s.y + (a.y - s.y) * t;
+            const x = arcX + (0.50 - a.x) * convergeT;
+            const y = arcY + (0.90 - a.y) * convergeT;
             const scale = s.s + (a.s - s.s) * t;
+            const faceOpacity = 1 - convergeT;
+            const quotePlacement = i === 2 || i === 3 ? 'above' : i >= faces.length / 2 ? 'left' : 'right';
+            const quoteOpacity = quoteReveal * (1 - convergeT);
 
             return (
               <div
                 key={`${src}-${i}`}
-                className="halfCircle-caregivers__face"
+                className="halfCircle-caregivers__faceWrap"
                 style={{
                   left: `${x * 100}%`,
                   top: `${y * 100}%`,
-                  transform: `translate(-50%, -50%) scale(${scale})`,
+                  transform: `translate(-50%, -80%) scale(${scale})`,
+                  opacity: faceOpacity,
                 }}
               >
-                <img src={src} alt="" loading="lazy" decoding="async" />
+                <div className="halfCircle-caregivers__face">
+                  <img src={src} alt="" loading="lazy" decoding="async" />
+                </div>
+                <div
+                  className={`halfCircle-caregivers__quote halfCircle-caregivers__quote--${quotePlacement}`}
+                  style={{ opacity: quoteOpacity }}
+                >
+                  {QUOTES[i]}
+                </div>
               </div>
             );
           })}
@@ -163,7 +197,7 @@ export function HalfCircleCaregivers({
           className="halfCircle-caregivers__thanks"
           aria-live="polite"
           style={{
-            opacity: thanksReveal,
+            opacity: thanksReveal * (1 - convergeT),
             transform: `translate(-50%, ${20 - thanksReveal * 20}px)`,
           }}
         >

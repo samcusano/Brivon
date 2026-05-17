@@ -370,7 +370,6 @@ export default function Marketplace() {
         heroImageSrc="/park-scene.png"
         headshotSrcs={parkFaces}
         title="For the caregivers who do it all"
-        subtitle="You're already doing everything. The bills, the calls, the appointments. You shouldn't have to fight the system too."
       />
 
       {/* Advocate Cards — #2 filters + sort, #5 differentiation */}
