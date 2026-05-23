@@ -220,12 +220,12 @@ const trustCards = [
 ];
 
 // Face crop coordinates: [cx, cy] as fractions of image width/height.
-// 5 people in the park scene (left to right).
+// 5 people in the park scene (left to right). cx/cy = face center.
 const PARK_CROPS: Array<[number, number]> = [
-  [0.16, 0.12], // teenager standing far left
-  [0.24, 0.25], // girl kicking ball (head bent low)
-  [0.40, 0.36], // boy running center
-  [0.76, 0.20], // woman striped shirt right
+  [0.14, 0.13], // man standing far left (near pole)
+  [0.20, 0.22], // girl kicking ball
+  [0.405, 0.38], // boy running center
+  [0.76, 0.20], // woman right
   [0.83, 0.18], // man teal polo far right
 ];
 
@@ -235,7 +235,7 @@ function extractFaces(src: string): Promise<string[]> {
     img.onload = () => {
       const iw = img.naturalWidth;
       const ih = img.naturalHeight;
-      const cropPx = iw * 0.08;
+      const cropPx = iw * 0.07; //
       const urls = PARK_CROPS.map(([cx, cy]) => {
         const canvas = document.createElement('canvas');
         canvas.width = 200;
@@ -300,31 +300,33 @@ export default function Marketplace() {
           </div>
         </div>
       </header>
-
-      {/* Hero — #3 CTAs, #7 typography, #8 warm bg */}
-      <section className="bg-gradient-to-b from-primary/5 to-background py-16 text-center">
-        <div className="max-w-4xl mx-auto px-6 hero-entrance">
-          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-4 leading-tight" data-testid="hero-title">
-          Confused by a medical bill? Claim denied? You're not imagining it — the system IS broken.
+    {/* Caregiver arc — faces form a half-circle, title reveals */}
+      <HalfCircleCaregivers
+        heroImageSrc="/park-scene.png"
+        headshotSrcs={parkFaces}
+        headPositions={PARK_CROPS}
+        heroTitle={
+          <h2 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight" data-testid="hero-title">
+            This moment shouldn't cost you $40,000.
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6" data-testid="hero-subtitle">
-          We connect you with verified advocates who know the system's tricks — and use them against it.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-8">
-            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-muted-foreground" /> All advocates verified & background-checked</span>
-            <span className="inline-flex items-center gap-1.5"><RefreshCw className="w-4 h-4 text-muted-foreground" /> 100% refund if we can't help</span>
-            <span className="inline-flex items-center gap-1.5"><Lock className="w-4 h-4 text-muted-foreground" /> HIPAA compliant</span>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <a href="#advocates" className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-              Find your advocate
-            </a>
-            <a href="#how-it-works" className="border border-border text-foreground/80 px-6 py-3 rounded-full font-medium hover:bg-muted/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-              Take the 2-min assessment
-            </a>
-          </div>
+        }
+        title="For the caregivers who do it all"
+        subtitle="We connect you with verified advocates who know the system's tricks — and use them against it."
+      >
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground mt-4 mb-6">
+          <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-muted-foreground" /> All advocates verified & background-checked</span>
+          <span className="inline-flex items-center gap-1.5"><RefreshCw className="w-4 h-4 text-muted-foreground" /> 100% refund if we can't help</span>
+          <span className="inline-flex items-center gap-1.5"><Lock className="w-4 h-4 text-muted-foreground" /> HIPAA compliant</span>
         </div>
-      </section>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <a href="#advocates" className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            Find your advocate
+          </a>
+          <a href="#how-it-works" className="border border-border text-foreground/80 px-6 py-3 rounded-full font-medium hover:bg-muted/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            Take the 2-min assessment
+          </a>
+        </div>
+      </HalfCircleCaregivers>
       {/* How It Works */}
       <section id="how-it-works" className="bg-muted border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-14">
@@ -364,13 +366,6 @@ export default function Marketplace() {
           <p className="text-center mt-8 text-xs text-muted-foreground">No charge until after your session. Cancel anytime.</p>
         </div>
       </section>
-
-      {/* Caregiver arc — faces form a half-circle, title reveals */}
-      <HalfCircleCaregivers
-        heroImageSrc="/park-scene.png"
-        headshotSrcs={parkFaces}
-        title="For the caregivers who do it all"
-      />
 
       {/* Advocate Cards — #2 filters + sort, #5 differentiation */}
       <div id="advocates" className="max-w-7xl mx-auto px-6 py-12">
