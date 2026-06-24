@@ -56,7 +56,7 @@ function StepIndicator({ current }: { current: number }) {
       {/* Progress bar */}
       <div className="h-1.5 bg-muted rounded-full overflow-hidden mb-4">
         <div
-          className="h-full bg-primary rounded-full transition-all duration-300"
+          className="h-full bg-primary rounded-full transition-[width] duration-300"
           style={{ width: `${((current + 1) / STEPS.length) * 100}%` }}
         />
       </div>
@@ -202,7 +202,7 @@ export default function SecondOpinion() {
                 <Stethoscope className="w-4 h-4" />
                 <span>Second Opinion Request</span>
               </div>
-              <h1 className="font-display text-2xl sm:text-3xl font-bold text-foreground">
+              <h1 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-balance">
                 Get an expert second opinion
               </h1>
             </div>

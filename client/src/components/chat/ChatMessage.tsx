@@ -94,7 +94,7 @@ function CitationPill({ citation, index }: { citation: Citation, index: number }
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <sup className="inline-flex items-center justify-center w-5 h-5 ml-1 rounded text-[10px] font-semibold cursor-help transition-all duration-200 align-top mt-0.5 bg-muted/50 text-muted-foreground border border-border/50 hover:bg-muted/70 hover:scale-110 hover:shadow-sm">
+        <sup className="inline-flex items-center justify-center w-5 h-5 ml-1 rounded text-[10px] font-semibold cursor-help transition-[background-color,box-shadow,transform] duration-200 align-top mt-0.5 bg-muted/50 text-muted-foreground border border-border/50 hover:bg-muted/70 hover:scale-110 hover:shadow-sm">
           {index}
         </sup>
       </HoverCardTrigger>

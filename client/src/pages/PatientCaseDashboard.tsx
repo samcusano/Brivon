@@ -379,7 +379,7 @@ export default function PatientCaseDashboard() {
           <img
             src={c.advocate.image}
             alt={c.advocate.name}
-            className="w-10 h-10 rounded-full object-cover border border-border flex-shrink-0"
+            className="w-10 h-10 rounded-full object-cover outline outline-1 -outline-offset-1 outline-black/10 flex-shrink-0"
           />
           <div>
             <p className="text-sm font-semibold text-foreground">{c.advocate.name}</p>

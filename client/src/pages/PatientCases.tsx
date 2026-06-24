@@ -42,7 +42,7 @@ function NeedsAttentionStrip() {
       <div className="flex flex-wrap gap-2">
         {urgent.map(c => (
           <Link key={c.id} href={`/my-cases/${c.id}`}>
-            <a className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-sm hover:border-amber-400 hover:shadow-sm transition-all group">
+            <a className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-sm hover:border-amber-400 hover:shadow-sm transition-[border-color,box-shadow] group">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" />
               <span className="text-foreground">{c.urgentAction}</span>
               <span className="text-amber-600/60 text-xs font-medium">· {c.title}</span>
@@ -63,7 +63,7 @@ function CaseCard({ c }: { c: PatientCase }) {
   return (
     <Link href={`/my-cases/${c.id}`}>
       <a className={cn(
-        "block border rounded-2xl overflow-hidden hover:shadow-md transition-all group",
+        "block border rounded-2xl overflow-hidden hover:shadow-md transition-[box-shadow,opacity] group",
         isResolved ? "border-border bg-card opacity-75 hover:opacity-100" : "border-border bg-card",
       )}>
         {/* Top: advocate + status */}
@@ -71,7 +71,7 @@ function CaseCard({ c }: { c: PatientCase }) {
           <img
             src={c.advocate.image}
             alt={c.advocate.name}
-            className="w-11 h-11 rounded-full object-cover flex-shrink-0 border border-border"
+            className="w-11 h-11 rounded-full object-cover flex-shrink-0 outline outline-1 -outline-offset-1 outline-black/10"
           />
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2">

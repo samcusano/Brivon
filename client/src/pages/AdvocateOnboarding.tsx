@@ -282,7 +282,7 @@ function SectionBasics({ form, setField, toggle, showErrors }: {
             )}>
               {photoState === 'uploading' && <Loader2 className="w-5 h-5 text-muted-foreground animate-spin" />}
               {photoState === 'done' && (
-                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop&crop=face" alt="Profile" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop&crop=face" alt="Profile" className="w-full h-full object-cover rounded-full outline outline-1 -outline-offset-1 outline-black/10" />
               )}
               {photoState === 'idle' && <Upload className="w-5 h-5 text-muted-foreground" />}
             </div>
@@ -1258,11 +1258,11 @@ export default function AdvocateOnboarding() {
           <div className="flex-1 flex items-center gap-3">
             <div className="flex-1 h-1.5 bg-border rounded-full overflow-hidden max-w-xs">
               <div
-                className="h-full bg-primary rounded-full transition-all duration-500"
+                className="h-full bg-primary rounded-full transition-[width] duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <span className="text-xs text-muted-foreground whitespace-nowrap">{progress}% complete</span>
+            <span className="text-xs text-muted-foreground whitespace-nowrap tabular-nums">{progress}% complete</span>
           </div>
           <Button onClick={handleSubmit} disabled={!form.tosAccepted || progress < 30}>
             Submit application <ChevronRight className="w-4 h-4 ml-1" />

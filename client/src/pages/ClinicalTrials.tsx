@@ -416,7 +416,7 @@ export default function ClinicalTrials() {
       {/* Search form */}
       <div className="bg-muted/50 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 py-6 space-y-4">
-          <h1 className="font-display text-2xl sm:text-3xl font-bold text-foreground">Find clinical trials</h1>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-balance">Find clinical trials</h1>
           <p className="text-sm text-muted-foreground max-w-2xl">
             Search thousands of active trials matched to your diagnosis and location. All trials are sourced from ClinicalTrials.gov and updated weekly.
           </p>

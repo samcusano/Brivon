@@ -306,7 +306,7 @@ export default function Marketplace() {
         headshotSrcs={parkFaces}
         headPositions={PARK_CROPS}
         heroTitle={
-          <h2 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight" data-testid="hero-title">
+          <h2 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight text-balance" data-testid="hero-title">
             This moment shouldn't cost you $40,000.
           </h2>
         }
@@ -472,7 +472,7 @@ export default function Marketplace() {
                       alt={advocate.name}
                       loading="lazy"
                       decoding="async"
-                      className="photo-spring w-full h-full object-cover"
+                      className="photo-spring w-full h-full object-cover outline outline-1 -outline-offset-1 outline-black/10"
                     />
                   </div>
 

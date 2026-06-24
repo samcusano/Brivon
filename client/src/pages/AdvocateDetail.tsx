@@ -316,7 +316,7 @@ export default function AdvocateDetail() {
                   alt={advocate.name}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-full outline outline-1 -outline-offset-1 outline-black/10"
                 />
               </div>
               <div className="absolute bottom-2 right-2 w-10 h-10 bg-background rounded-full flex items-center justify-center shadow-md border-2 border-background">
@@ -325,7 +325,7 @@ export default function AdvocateDetail() {
             </div>
 
             <div className="flex-1 text-center md:text-left hero-entrance">
-              <h1 className="font-display text-3xl md:text-4xl text-foreground mb-2" data-testid="text-advocate-name">
+              <h1 className="font-display text-3xl md:text-4xl text-foreground mb-2 text-balance" data-testid="text-advocate-name">
                 {advocate.name}
               </h1>
 

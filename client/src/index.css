@@ -170,7 +170,7 @@
 
 @layer utilities {
   .smooth-transition {
-    @apply transition-all duration-300 ease-in-out;
+    @apply transition-[color,background-color,border-color,box-shadow,transform,opacity] duration-300 ease-in-out;
   }
 
   .hover-lift {
@@ -299,7 +299,7 @@
   position: absolute;
   width: clamp(72px, 11vw, 116px);
   height: clamp(72px, 11vw, 116px);
-  will-change: transform, left, top;
+  will-change: transform;
 }
 
 .halfCircle-caregivers__face {

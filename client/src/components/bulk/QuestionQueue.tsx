@@ -91,7 +91,7 @@ export function QuestionQueue() {
               layout
               key={item.id}
               className={cn(
-                "p-4 rounded-xl border border-border/50 bg-card transition-all hover:shadow-md",
+                "p-4 rounded-xl border border-border/50 bg-card transition-[box-shadow,background-color] hover:shadow-md",
                 item.status === 'processing' && "ring-1 ring-primary/50 bg-primary/5"
               )}
             >

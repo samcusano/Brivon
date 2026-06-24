@@ -120,7 +120,7 @@ export default function AdvocatePortal() {
           <button
             onClick={() => { setView("cases"); setSelectedId(null); }}
             className={cn(
-              "w-full flex items-center justify-between px-3 py-2 rounded-md text-sm transition-all",
+              "w-full flex items-center justify-between px-3 py-2 rounded-md text-sm transition-colors",
               view === "cases"
                 ? "bg-sidebar-accent text-sidebar-foreground font-semibold"
                 : "text-sidebar-foreground/50 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
@@ -143,7 +143,7 @@ export default function AdvocatePortal() {
           <button
             onClick={() => { setView("analytics"); setSelectedId(null); }}
             className={cn(
-              "w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-all",
+              "w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
               view === "analytics"
                 ? "bg-sidebar-accent text-sidebar-foreground font-semibold"
                 : "text-sidebar-foreground/50 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
@@ -231,7 +231,7 @@ export default function AdvocatePortal() {
                           key={f.key}
                           onClick={() => setCaseFilter(f.key)}
                           className={cn(
-                            "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all",
+                            "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors",
                             active
                               ? "bg-foreground/8 text-foreground"
                               : "text-foreground/45 hover:text-foreground hover:bg-foreground/5"
@@ -298,7 +298,7 @@ function CaseRow({ appealCase, onClick }: { appealCase: AppealCase; onClick: () 
   return (
     <button
       onClick={onClick}
-      className="w-full text-left rounded-lg hover:bg-foreground/4 border border-transparent hover:border-border transition-all group"
+      className="w-full text-left rounded-lg hover:bg-foreground/4 border border-transparent hover:border-border transition-colors group"
     >
       <div className="flex items-center gap-4 px-4 py-3.5">
         <div className="w-9 h-9 rounded-full bg-muted text-foreground/60 text-xs font-bold flex items-center justify-center shrink-0 font-sans">

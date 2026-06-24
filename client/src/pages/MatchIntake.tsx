@@ -254,7 +254,7 @@ export default function MatchIntake() {
           </div>
           <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <div
-              className="h-full bg-primary rounded-full transition-all duration-500"
+              className="h-full bg-primary rounded-full transition-[width] duration-500"
               style={{ width: `${(step / 3) * 100}%` }}
             />
           </div>
@@ -279,7 +279,7 @@ export default function MatchIntake() {
         {step === 1 && (
           <div className="space-y-6">
             <div>
-              <h1 className="font-display text-3xl text-foreground mb-2">What brings you here today?</h1>
+              <h1 className="font-display text-3xl text-foreground mb-2 text-balance">What brings you here today?</h1>
               <p className="text-base text-muted-foreground">
                 Choose everything that applies. We'll match you with advocates who've handled cases like yours.
               </p>
@@ -294,7 +294,7 @@ export default function MatchIntake() {
                     onClick={() => toggleCondition(cond.id)}
                     aria-pressed={selected}
                     className={cn(
-                      "text-left p-4 rounded-xl border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                      "text-left p-4 rounded-xl border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                       selected
                         ? "border-primary bg-primary/5"
                         : "border-border bg-background hover:border-primary/40"
@@ -345,7 +345,7 @@ export default function MatchIntake() {
                 onClick={() => setStep(2)}
                 disabled={!canProceedStep1}
                 className={cn(
-                  "btn-book w-full sm:w-auto px-8 py-3 rounded-full font-semibold text-base transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center gap-2",
+                  "btn-book w-full sm:w-auto px-8 py-3 rounded-full font-semibold text-base transition-[color,background-color,transform] active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center gap-2",
                   canProceedStep1
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"
                     : "bg-muted text-muted-foreground cursor-not-allowed"
@@ -370,7 +370,7 @@ export default function MatchIntake() {
         {step === 2 && (
           <div className="space-y-6">
             <div>
-              <h1 className="font-display text-3xl text-foreground mb-2">Tell us a bit more</h1>
+              <h1 className="font-display text-3xl text-foreground mb-2 text-balance">Tell us a bit more</h1>
               <p className="text-base text-muted-foreground">
                 This helps us surface advocates who are available and experienced with your specific timeline.
               </p>
@@ -404,7 +404,7 @@ export default function MatchIntake() {
                   <label
                     key={opt.value}
                     className={cn(
-                      "flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all",
+                      "flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-colors",
                       urgency === opt.value
                         ? "border-primary bg-primary/5"
                         : "border-border hover:border-primary/40"
@@ -473,7 +473,7 @@ export default function MatchIntake() {
                 onClick={() => setStep(3)}
                 disabled={!canProceedStep2}
                 className={cn(
-                  "btn-book flex-1 sm:flex-none px-8 py-3 rounded-full font-semibold text-base transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center gap-2",
+                  "btn-book flex-1 sm:flex-none px-8 py-3 rounded-full font-semibold text-base transition-[color,background-color,transform] active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 flex items-center justify-center gap-2",
                   canProceedStep2
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"
                     : "bg-muted text-muted-foreground cursor-not-allowed"
@@ -489,7 +489,7 @@ export default function MatchIntake() {
         {step === 3 && (
           <div className="space-y-6">
             <div>
-              <h1 className="font-display text-3xl text-foreground mb-2">
+              <h1 className="font-display text-3xl text-foreground mb-2 text-balance">
                 {matchedAdvocates.length > 0
                   ? `${matchedAdvocates.length} advocates matched`
                   : 'All advocates'}
@@ -565,7 +565,7 @@ export default function MatchIntake() {
                           alt={advocate.name}
                           loading="lazy"
                           decoding="async"
-                          className="photo-spring w-20 h-20 rounded-full object-cover"
+                          className="photo-spring w-20 h-20 rounded-full object-cover outline outline-1 -outline-offset-1 outline-black/10"
                         />
                         {advocate.nextAvailable === 'Today' || advocate.nextAvailable === 'Now' ? (
                           <span className="badge-available absolute -bottom-1 -right-1 bg-amber-100 text-amber-800 text-xs font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-0.5">

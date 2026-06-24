@@ -104,7 +104,7 @@ function UnderReviewBanner() {
       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
         <Clock className="w-6 h-6 text-primary" />
       </div>
-      <h1 className="font-display text-2xl font-semibold text-foreground mb-2">Application received</h1>
+      <h1 className="font-display text-2xl font-semibold text-foreground mb-2 text-balance">Application received</h1>
       <p className="text-sm text-muted-foreground">Submitted {APPLICANT.submittedAt} · Estimated review: 1–2 business days</p>
       <p className="text-sm text-muted-foreground mt-1">We'll email you at every step. Your profile stays hidden until approved.</p>
     </div>

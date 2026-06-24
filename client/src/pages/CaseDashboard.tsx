@@ -171,7 +171,7 @@ export default function CaseDashboard() {
               </span>
               <span className="text-xs text-muted-foreground">Case #{CASE.id}</span>
             </div>
-            <h1 className="font-display text-2xl md:text-3xl text-foreground">{CASE.title}</h1>
+            <h1 className="font-display text-2xl md:text-3xl text-foreground text-balance">{CASE.title}</h1>
             <p className="text-sm text-muted-foreground mt-1">Started {CASE.startedAt}</p>
           </div>
           <div className="flex items-center gap-3">
@@ -194,7 +194,7 @@ export default function CaseDashboard() {
                 <img
                   src={CASE.advocate.image}
                   alt={CASE.advocate.name}
-                  className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+                  className="w-12 h-12 rounded-full object-cover flex-shrink-0 outline outline-1 -outline-offset-1 outline-black/10"
                 />
                 <div>
                   <p className="font-semibold text-foreground text-sm">{CASE.advocate.name}</p>
@@ -355,7 +355,7 @@ export default function CaseDashboard() {
             {activeTab === 'documents' && (
               <div role="tabpanel" className="space-y-4">
                 {/* Upload zone */}
-                <button className="w-full border-2 border-dashed border-border rounded-xl py-6 flex flex-col items-center gap-2 hover:border-primary/40 hover:bg-primary/5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group">
+                <button className="w-full border-2 border-dashed border-border rounded-xl py-6 flex flex-col items-center gap-2 hover:border-primary/40 hover:bg-primary/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group">
                   <Upload className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
                   <div className="text-center">
                     <p className="text-sm font-medium text-foreground">Upload a document</p>

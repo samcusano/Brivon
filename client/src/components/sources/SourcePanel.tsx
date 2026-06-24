@@ -131,7 +131,7 @@ export function SourcePanel() {
                     </button>
                     <button
                       onClick={() => removeSource(source.id)}
-                      className="opacity-0 group-hover:opacity-100 transition-all duration-200 flex-shrink-0 ml-auto hover:scale-110"
+                      className="opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-200 flex-shrink-0 ml-auto hover:scale-110"
                     >
                       <X className="w-3.5 h-3.5 text-muted-foreground hover:text-foreground transition-colors duration-200" />
                     </button>

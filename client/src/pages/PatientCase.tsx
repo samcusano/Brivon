@@ -93,7 +93,7 @@ export default function PatientCase({ caseId }: PatientCaseProps) {
       <main className="flex-1 max-w-2xl mx-auto w-full px-6 py-10 space-y-8">
         {/* Patient info */}
         <div>
-          <h1 className="font-heading font-semibold leading-tight mb-1" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}>
+          <h1 className="font-heading font-semibold leading-tight mb-1 text-balance" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}>
             {appealCase.patientName}
           </h1>
           <p className="text-sm text-muted-foreground">
@@ -120,7 +120,7 @@ export default function PatientCase({ caseId }: PatientCaseProps) {
                 <div key={s.label} className="flex-1 flex flex-col">
                   <div className="flex items-center">
                     <div className={cn(
-                      "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all",
+                      "w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors",
                       isDone && "bg-primary border-primary",
                       isCurrent && isGenerating && "border-primary bg-background",
                       isCurrent && !isGenerating && "bg-primary border-primary",
@@ -134,7 +134,7 @@ export default function PatientCase({ caseId }: PatientCaseProps) {
                       )}
                     </div>
                     {i < TIMELINE_STEPS.length - 1 && (
-                      <div className={cn("flex-1 h-px transition-all", isDone ? "bg-primary" : "bg-border")} />
+                      <div className={cn("flex-1 h-px transition-colors", isDone ? "bg-primary" : "bg-border")} />
                     )}
                   </div>
                   <div className={cn("mt-2 pr-3", isFuture && "opacity-40")}>

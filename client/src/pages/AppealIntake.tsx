@@ -164,11 +164,11 @@ export default function AppealIntake() {
               transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
             >
               <div className="mb-10">
-                <h1 className="font-heading font-semibold leading-[1.08] mb-5" style={{ fontSize: "clamp(2.5rem, 6vw, 3.5rem)" }}>
+                <h1 className="font-heading font-semibold leading-[1.08] mb-5 text-balance" style={{ fontSize: "clamp(2.5rem, 6vw, 3.5rem)" }}>
                   Your claim was denied.{" "}
                   <em className="text-primary not-italic">Let's fight back.</em>
                 </h1>
-                <p className="text-muted-foreground text-base leading-relaxed max-w-sm">
+                <p className="text-muted-foreground text-base leading-relaxed max-w-sm text-pretty">
                   A nurse advocate reviews every AI-drafted appeal letter. Delivered in under 24 hours.
                 </p>
               </div>
@@ -266,10 +266,10 @@ export default function AppealIntake() {
               transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
             >
               <div className="mb-8">
-                <h2 className="font-heading font-semibold mb-2" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}>
+                <h2 className="font-heading font-semibold mb-2 text-balance" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}>
                   What was denied?
                 </h2>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed text-pretty">
                   Describe the specific treatment, drug, or procedure your insurer refused to cover.
                 </p>
               </div>
@@ -368,10 +368,10 @@ export default function AppealIntake() {
               transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
             >
               <div className="mb-8">
-                <h2 className="font-heading font-semibold mb-2" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}>
+                <h2 className="font-heading font-semibold mb-2 text-balance" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}>
                   Any other context?
                 </h2>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed text-pretty">
                   The more clinical detail you share, the stronger your appeal will be. Entirely optional.
                 </p>
               </div>
@@ -496,10 +496,10 @@ function GeneratingState() {
             <Loader2 className="w-5 h-5 text-primary animate-spin" strokeWidth={1.5} />
             <span className="text-xs font-semibold text-primary/70 uppercase tracking-widest">Drafting</span>
           </div>
-          <h2 className="font-heading font-semibold leading-tight mb-3" style={{ fontSize: "clamp(2rem, 5vw, 2.75rem)" }}>
+          <h2 className="font-heading font-semibold leading-tight mb-3 text-balance" style={{ fontSize: "clamp(2rem, 5vw, 2.75rem)" }}>
             Writing your appeal…
           </h2>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p className="text-muted-foreground text-sm leading-relaxed text-pretty">
             Reviewing clinical guidelines and evidence to build the strongest possible case. About 30 seconds.
           </p>
         </div>
