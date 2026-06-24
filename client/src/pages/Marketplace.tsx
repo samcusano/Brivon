@@ -292,6 +292,12 @@ export default function Marketplace() {
               <a href="#advocates" className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm" data-testid="nav-browse">Find an advocate</a>
               <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm" data-testid="nav-how">How it works</a>
               <a href="#trust" className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm">Why Brivon</a>
+              <Link href="/my-cases">
+                <a className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm" data-testid="nav-my-cases">My cases</a>
+              </Link>
+              <Link href="/advocate">
+                <a className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm" data-testid="nav-advocate-portal">Advocate portal</a>
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-4">
