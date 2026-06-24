@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link, useParams } from 'wouter';
 import {
   ArrowLeft,
+  ArrowRight,
   Star,
   CheckCircle,
   Shield,
+  ShieldCheck,
   Clock,
   MessageCircle,
   Video,
   Calendar,
-  Award,
+  BadgeCheck,
   HelpCircle,
   TrendingUp,
   MapPin,
@@ -26,10 +28,10 @@ import {
   ExternalLink,
   Scale,
   BookOpen,
-  FileText
+  FileText,
+  Quote,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
 
 const advocatesData: Record<string, any> = {
   '1': {
@@ -272,6 +274,19 @@ const advocateImages: Record<string, string> = {
 
 const defaultAdvocate = advocatesData['1'];
 
+// Pill — the shared verified-badge style used across the profile.
+function Pill({ icon: Icon, children }: { icon: any; children: ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-card border border-primary/20 px-2.5 py-1 text-xs font-semibold text-primary">
+      <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+      {children}
+    </span>
+  );
+}
+
+const credentialIcon = (type: string) =>
+  type === 'certification' ? BadgeCheck : type === 'education' ? GraduationCap : Briefcase;
+
 export default function AdvocateDetail() {
   const params = useParams();
   const advocateId = params.id || '1';
@@ -283,6 +298,11 @@ export default function AdvocateDetail() {
   const [selectedOption, setSelectedOption] = useState<'intro' | 'consultation'>('consultation');
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [outcomeCondition, setOutcomeCondition] = useState<string>('All');
+
+  const conditions = ['All', ...Array.from(new Set<string>(advocate.verifiedOutcomes.map((o: any) => o.condition as string)))];
+  const filteredOutcomes = outcomeCondition === 'All'
+    ? advocate.verifiedOutcomes
+    : advocate.verifiedOutcomes.filter((o: any) => o.condition === outcomeCondition);
 
   return (
     <div className="min-h-screen bg-background">
@@ -306,64 +326,44 @@ export default function AdvocateDetail() {
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8 pb-28 lg:pb-8">
-        {/* Hero Section — warm accent */}
-        <div className="bg-gradient-to-b from-primary/5 to-muted rounded-2xl p-8 mb-10">
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-            <div className="relative flex-shrink-0">
-              <div className="w-48 h-48 rounded-full overflow-hidden bg-muted border-4 border-background shadow-lg">
-                <img
-                  src={advocate.image}
-                  alt={advocate.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover rounded-full outline outline-1 -outline-offset-1 outline-black/10"
-                />
-              </div>
-              <div className="absolute bottom-2 right-2 w-10 h-10 bg-background rounded-full flex items-center justify-center shadow-md border-2 border-background">
-                <CheckCircle className="w-6 h-6 text-primary" />
-              </div>
-            </div>
-
-            <div className="flex-1 text-center md:text-left hero-entrance">
-              <h1 className="font-display text-3xl md:text-4xl text-foreground mb-2 text-balance" data-testid="text-advocate-name">
+        {/* ── Warm editorial hero ───────────────────────────── */}
+        <div className="relative bg-gradient-to-br from-primary/[0.10] via-primary/[0.05] to-card rounded-3xl border border-border px-6 sm:px-10 pt-10 pb-8 mb-10">
+          <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6">
+            <img
+              src={advocate.image}
+              alt={advocate.name}
+              loading="lazy"
+              decoding="async"
+              className="w-32 h-32 rounded-full object-cover outline outline-1 -outline-offset-1 outline-black/10 ring-4 ring-card shadow-sm flex-shrink-0"
+            />
+            <div className="text-center sm:text-left hero-entrance">
+              <Pill icon={ShieldCheck}>Verified advocate</Pill>
+              <h1 className="font-display text-4xl sm:text-5xl leading-[1.04] text-foreground text-balance mt-3" data-testid="text-advocate-name">
                 {advocate.name}
               </h1>
+              <p className="text-muted-foreground mt-1.5">{advocate.specialty} · {advocate.stats.yearsExperience} years on your side</p>
 
-              <p className="text-sm text-muted-foreground mb-3">{advocate.specialty} · {advocate.credentials[0]?.label}</p>
-
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-muted-foreground mb-4">
-                <span className="inline-flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4" />
-                  {advocate.location}
+              <div className="mt-3 flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1 text-sm">
+                <span className="inline-flex items-center gap-1 font-semibold text-foreground" aria-label={`${advocate.rating} out of 5 stars, ${advocate.reviews} reviews`}>
+                  <Star className="w-4 h-4 fill-primary text-primary" aria-hidden="true" />
+                  <span className="tabular-nums">{advocate.rating}</span>
+                  <span className="text-muted-foreground font-normal">({advocate.reviews} reviews)</span>
                 </span>
                 <span className="text-border">|</span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock className="w-4 h-4" />
-                  {advocate.responseTime}
-                </span>
+                <span className="inline-flex items-center gap-1 text-muted-foreground"><MapPin className="w-4 h-4" />{advocate.location}</span>
                 <span className="text-border">|</span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Languages className="w-4 h-4" />
-                  {advocate.languages.join(', ')}
-                </span>
+                <span className="inline-flex items-center gap-1 text-muted-foreground"><Clock className="w-4 h-4" />{advocate.responseTime}</span>
+                <span className="text-border">|</span>
+                <span className="inline-flex items-center gap-1 text-muted-foreground"><Languages className="w-4 h-4" />{advocate.languages.join(', ')}</span>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm">
-                <div className="flex items-center gap-1.5" aria-label={`${advocate.rating} out of 5 stars, ${advocate.reviews} reviews`}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-primary text-primary" aria-hidden="true" />
-                  ))}
-                  <span className="font-semibold text-foreground ml-1">{advocate.rating}</span>
-                  <span className="text-muted-foreground">({advocate.reviews} reviews)</span>
-                </div>
-                <span className="text-border">|</span>
-                <span className="text-muted-foreground">{advocate.stats.patientsHelped.toLocaleString()}+ patients helped</span>
-                <span className="text-border">|</span>
-                <span className="text-muted-foreground">{advocate.stats.yearsExperience} years experience</span>
-              </div>
-
-              <div className="mt-3 text-xs text-muted-foreground">
-                On Brivon since {advocate.vetting?.onPlatformSince} · {advocate.vetting?.complaintsReceived} complaints
+              {/* Trust bar — pills aligned to the name */}
+              <div className="mt-5 flex flex-wrap justify-center sm:justify-start gap-2">
+                <Pill icon={BadgeCheck}>BCPA verified</Pill>
+                <Pill icon={GraduationCap}>Licensed RN, MSN</Pill>
+                <Pill icon={ShieldCheck}>E&O insured</Pill>
+                <Pill icon={CheckCircle}>{advocate.vetting?.complaintsReceived} complaints since {advocate.vetting?.onPlatformSince}</Pill>
+                <Pill icon={TrendingUp}>{advocate.stats.patientsHelped.toLocaleString()}+ patients helped</Pill>
               </div>
             </div>
           </div>
@@ -371,28 +371,27 @@ export default function AdvocateDetail() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="lg:col-span-2 space-y-14">
 
-            {/* About — restructured with pull quote + blocks */}
+            {/* About */}
             <section>
               <h2 className="font-display text-2xl text-foreground mb-5">About me</h2>
 
-              {/* Pull quote */}
-              <blockquote className="pull-quote-border border-l-4 border-primary pl-5 mb-6">
-                <p className="text-lg text-foreground/80 leading-relaxed">
-                  "{advocate.pullQuote}"
-                </p>
-              </blockquote>
+              {/* Pull quote — centered tinted card */}
+              <figure className="rounded-2xl bg-primary/5 border border-primary/15 px-6 py-8 text-center mb-6">
+                <Quote className="w-7 h-7 text-primary/40 mx-auto" />
+                <blockquote className="font-display text-2xl leading-snug text-foreground text-balance mt-2">
+                  {advocate.pullQuote}
+                </blockquote>
+              </figure>
 
               {/* Structured blocks */}
               <div className="space-y-5 max-w-prose">
                 {advocate.about.map((block: any, idx: number) => (
-                  <div key={idx}>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                      <span className="font-semibold text-foreground">{block.heading}. </span>
-                      {block.text}
-                    </p>
-                  </div>
+                  <p key={idx} className="text-[15px] text-muted-foreground leading-relaxed text-pretty">
+                    <span className="font-semibold text-foreground">{block.heading}. </span>
+                    {block.text}
+                  </p>
                 ))}
               </div>
             </section>
@@ -400,77 +399,52 @@ export default function AdvocateDetail() {
             {/* What happens after you book */}
             <section>
               <h2 className="font-display text-2xl text-foreground mb-4 flex items-center gap-2">
-                <Calendar className="w-5 h-5" />
+                <Calendar className="w-5 h-5 text-primary" />
                 What happens after you book
               </h2>
-              <div className="space-y-0">
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0">1</div>
-                    <div className="w-px h-full bg-border my-1"></div>
-                  </div>
-                  <div className="pb-5">
-                    <p className="text-sm font-semibold text-foreground">Engagement agreement + HIPAA authorization</p>
-                    <p className="text-base text-muted-foreground">You'll receive a clear written agreement defining scope, fees, and duration — plus a HIPAA authorization form so I can communicate with your providers on your behalf. You control exactly who I can contact.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0">2</div>
-                    <div className="w-px h-full bg-border my-1"></div>
-                  </div>
-                  <div className="pb-5">
-                    <p className="text-sm font-semibold text-foreground">Intake questionnaire + document review</p>
-                    <p className="text-base text-muted-foreground">A brief questionnaire so I understand your story before we meet. Upload any documents you have — I'll review everything before our first call so we don't waste a minute.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0">3</div>
-                    <div className="w-px h-full bg-border my-1"></div>
-                  </div>
-                  <div className="pb-5">
-                    <p className="text-sm font-semibold text-foreground">Our session (video, phone, or in-person)</p>
-                    <p className="text-base text-muted-foreground">We talk through your situation at your pace. I'll explain options and start building your action plan.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="w-8 h-8 rounded-full bg-amber-600 text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0">
-                      <CheckCircle className="w-4 h-4" />
+              <div>
+                {[
+                  { title: 'Engagement agreement + HIPAA authorization', text: 'You\'ll receive a clear written agreement defining scope, fees, and duration — plus a HIPAA authorization form so I can communicate with your providers on your behalf. You control exactly who I can contact.' },
+                  { title: 'Intake questionnaire + document review', text: 'A brief questionnaire so I understand your story before we meet. Upload any documents you have — I\'ll review everything before our first call so we don\'t waste a minute.' },
+                  { title: 'Our session (video, phone, or in-person)', text: 'We talk through your situation at your pace. I\'ll explain options and start building your action plan.' },
+                  { title: 'Written summary + 7 days of follow-up (included)', text: 'Clear action plan within 24 hours. Message me anytime for 7 days after.', done: true },
+                ].map((step, i, arr) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className={cn(
+                        'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0',
+                        step.done ? 'bg-accent text-accent-foreground' : 'bg-primary text-primary-foreground'
+                      )}>
+                        {step.done ? <CheckCircle className="w-4 h-4" /> : i + 1}
+                      </div>
+                      {i < arr.length - 1 && <div className="w-px flex-1 bg-border my-1" />}
+                    </div>
+                    <div className="pb-5">
+                      <p className="text-sm font-semibold text-foreground">{step.title}</p>
+                      <p className="text-base text-muted-foreground text-pretty">{step.text}</p>
                     </div>
                   </div>
-                  <div className="pb-2">
-                    <p className="text-sm font-semibold text-foreground">Written summary + 7 days of follow-up (included)</p>
-                    <p className="text-base text-muted-foreground">Clear action plan within 24 hours. Message me anytime for 7 days after.</p>
-                  </div>
-                </div>
+                ))}
               </div>
-              <p className="text-sm text-muted-foreground mt-4">Not satisfied? Full refund within 7 days, no questions asked. <a href="#" className="underline hover:text-foreground transition-colors">View refund policy</a>.</p>
+              <p className="text-sm text-muted-foreground mt-1">Not satisfied? Full refund within 7 days, no questions asked. <a href="#" className="underline hover:text-foreground transition-colors">View refund policy</a>.</p>
             </section>
 
-            {/* Credentials */}
+            {/* Verified credentials */}
             <section>
               <h2 className="font-display text-2xl text-foreground mb-4 flex items-center gap-2">
-                <Shield className="w-5 h-5" />
+                <ShieldCheck className="w-5 h-5 text-primary" />
                 Verified credentials
               </h2>
-              <div className="flex flex-col gap-2 mb-4">
-                {advocate.credentials.map((cred: any, idx: number) => (
-                  cred.verified ? (
-                    <div key={idx} className="flex items-start gap-3 p-3 bg-primary/5 border border-primary/20 rounded-lg">
-                      <div className="mt-0.5 flex-shrink-0">
-                        {cred.type === 'certification' && <Award className="w-4 h-4 text-primary" />}
-                        {cred.type === 'education' && <GraduationCap className="w-4 h-4 text-primary" />}
-                        {cred.type === 'experience' && <Briefcase className="w-4 h-4 text-primary" />}
-                      </div>
+              <div className="space-y-2 mb-4">
+                {advocate.credentials.map((cred: any, idx: number) => {
+                  const Icon = credentialIcon(cred.type);
+                  return cred.verified ? (
+                    <div key={idx} className="flex items-start gap-3 p-4 bg-primary/5 border border-primary/15 rounded-xl">
+                      <Icon className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-sm font-medium text-foreground">{cred.label}</span>
-                          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-primary text-primary-foreground rounded text-xs font-semibold">
-                            <Shield className="w-3 h-3" />
-                            Verified by Brivon
-                          </span>
+                          <Pill icon={ShieldCheck}>Verified by Brivon</Pill>
                         </div>
                         {(cred.certNumber || cred.expiry) && (
                           <p className="text-xs text-muted-foreground mt-0.5">
@@ -482,22 +456,17 @@ export default function AdvocateDetail() {
                       </div>
                     </div>
                   ) : (
-                    <div key={idx} className="flex items-center gap-3 px-3 py-2.5 bg-muted border border-border rounded-lg">
-                      <div className="flex-shrink-0">
-                        {cred.type === 'certification' && <Award className="w-4 h-4 text-muted-foreground" />}
-                        {cred.type === 'education' && <GraduationCap className="w-4 h-4 text-muted-foreground" />}
-                        {cred.type === 'experience' && <Briefcase className="w-4 h-4 text-muted-foreground" />}
-                      </div>
+                    <div key={idx} className="flex items-center gap-3 px-4 py-3 bg-muted border border-border rounded-xl">
+                      <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                       <span className="text-sm text-foreground/70">{cred.label}</span>
                     </div>
-                  )
-                ))}
+                  );
+                })}
               </div>
 
-              {/* Verify independently + CE + E&O */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="p-3 bg-muted border border-border rounded-lg">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1.5">
                     <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
                     <p className="text-xs font-semibold text-foreground/80">Verify independently</p>
                   </div>
@@ -512,7 +481,7 @@ export default function AdvocateDetail() {
                 </div>
                 {advocate.continuingEducation && (
                   <div className="p-3 bg-muted border border-border rounded-lg">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 mb-1.5">
                       <BookOpen className="w-3.5 h-3.5 text-muted-foreground" />
                       <p className="text-xs font-semibold text-foreground/80">Continuing education</p>
                     </div>
@@ -522,7 +491,7 @@ export default function AdvocateDetail() {
                 )}
                 {advocate.eoInsurance && (
                   <div className="p-3 bg-muted border border-border rounded-lg">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 mb-1.5">
                       <Shield className="w-3.5 h-3.5 text-muted-foreground" />
                       <p className="text-xs font-semibold text-foreground/80">E&O insurance</p>
                     </div>
@@ -536,217 +505,185 @@ export default function AdvocateDetail() {
             {/* Results */}
             <section>
               <h2 className="font-display text-2xl text-foreground mb-4 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5" />
+                <TrendingUp className="w-5 h-5 text-primary" />
                 Results
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 steps-entrance">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {Object.values(advocate.outcomeStats).map((stat: any, idx: number) => (
-                  <div key={idx} className="p-4 bg-primary/5 border border-primary/15 rounded-xl text-center">
-                    <div className="text-xl font-bold text-foreground/80 mb-1">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div key={idx} className="p-4 bg-primary/5 border border-primary/15 rounded-2xl text-center">
+                    <div className="font-display text-2xl sm:text-3xl text-foreground tabular-nums">{stat.value}</div>
+                    <div className="text-xs text-muted-foreground mt-1 leading-tight">{stat.label}</div>
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-muted-foreground mt-3">Stats are self-reported by the advocate and audited by Brivon quarterly. 13% of insurance appeals were denied on final review — not every case can be won, and I'll tell you upfront if yours is unlikely to succeed.</p>
+              <p className="text-sm text-muted-foreground mt-3 text-pretty">Stats are self-reported by the advocate and audited by Brivon quarterly. 13% of insurance appeals were denied on final review — not every case can be won, and I'll tell you upfront if yours is unlikely to succeed.</p>
             </section>
 
             {/* Verified Outcomes */}
             {advocate.verifiedOutcomes && (
               <section>
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-between mb-1 flex-wrap gap-2">
                   <h2 className="font-display text-2xl text-foreground flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5" />
+                    <CheckCircle className="w-5 h-5 text-primary" />
                     Verified outcomes
                   </h2>
-                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground bg-muted border border-border px-2.5 py-1 rounded-full">
-                    <Shield className="w-3 h-3" />
-                    Brivon-audited quarterly
-                  </span>
+                  <Pill icon={ShieldCheck}>Brivon-audited quarterly</Pill>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Real results from verified patients. Identities anonymized with written consent.
                 </p>
 
-                {/* Condition filter chips */}
-                {(() => {
-                  const conditions = ['All', ...Array.from(new Set<string>(advocate.verifiedOutcomes.map((o: any) => o.condition as string)))];
-                  const filtered = outcomeCondition === 'All'
-                    ? advocate.verifiedOutcomes
-                    : advocate.verifiedOutcomes.filter((o: any) => o.condition === outcomeCondition);
-                  return (
-                    <>
-                      <div className="flex flex-wrap gap-2 mb-5">
-                        {conditions.map((c: string) => (
-                          <button
-                            key={c}
-                            onClick={() => setOutcomeCondition(c)}
-                            className={cn(
-                              "filter-chip px-3 py-1.5 rounded-full text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                              outcomeCondition === c
-                                ? "bg-primary text-primary-foreground font-semibold ring-2 ring-primary ring-offset-2"
-                                : "bg-muted text-muted-foreground hover:bg-muted/80"
-                            )}
-                          >
-                            {c}
-                          </button>
-                        ))}
-                      </div>
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {conditions.map((c: string) => (
+                    <button
+                      key={c}
+                      onClick={() => setOutcomeCondition(c)}
+                      aria-pressed={outcomeCondition === c}
+                      className={cn(
+                        'px-3 py-1.5 rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                        outcomeCondition === c
+                          ? 'bg-primary text-primary-foreground font-semibold'
+                          : 'bg-muted text-muted-foreground hover:bg-muted/70'
+                      )}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        {filtered.map((outcome: any) => (
-                          <div
-                            key={outcome.id}
-                            className="bg-background border border-border rounded-xl p-5 space-y-3"
-                          >
-                            {/* Header */}
-                            <div className="flex items-start justify-between gap-2">
-                              <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-sm flex-shrink-0">
-                                  {outcome.patient.charAt(0)}
-                                </div>
-                                <div>
-                                  <div className="flex items-center gap-1.5 flex-wrap">
-                                    <span className="font-semibold text-sm text-foreground">{outcome.patient}</span>
-                                    <span className="inline-flex items-center gap-1 text-xs text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded-full">
-                                      <CheckCircle className="w-3 h-3" />
-                                      Verified
-                                    </span>
-                                  </div>
-                                  <div className="text-xs text-muted-foreground">{outcome.condition} · {outcome.date}</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Stars */}
-                            <div className="flex items-center gap-0.5" role="img" aria-label={`${outcome.rating} out of 5 stars`}>
-                              {[...Array(5)].map((_, i) => (
-                                <Star key={i} className={cn("w-3.5 h-3.5", i < outcome.rating ? "fill-primary text-primary" : "fill-muted text-muted")} aria-hidden="true" />
-                              ))}
-                            </div>
-
-                            {/* Review text */}
-                            <p className="text-sm text-muted-foreground leading-relaxed">"{outcome.text}"</p>
-
-                            {/* Outcome + savings */}
-                            <div className="flex items-center justify-between pt-3 border-t border-border">
-                              <div className="flex items-center gap-1.5 text-xs text-foreground/80">
-                                <CheckCircle className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                                <span className="font-medium">{outcome.outcome}</span>
-                              </div>
-                              <div className="text-right flex-shrink-0 ml-3">
-                                <div className="text-xs text-muted-foreground">Saved</div>
-                                <div className="text-sm font-bold text-foreground">{outcome.savedAmount}</div>
-                              </div>
-                            </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {filteredOutcomes.map((outcome: any) => (
+                    <div key={outcome.id} className="bg-background border border-border rounded-2xl p-5 space-y-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-sm flex-shrink-0">
+                          {outcome.patient.charAt(0)}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="font-semibold text-sm text-foreground">{outcome.patient}</span>
+                            <Pill icon={CheckCircle}>Verified</Pill>
                           </div>
+                          <div className="text-xs text-muted-foreground">{outcome.condition} · {outcome.date}</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-0.5" role="img" aria-label={`${outcome.rating} out of 5 stars`}>
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className={cn('w-3.5 h-3.5', i < outcome.rating ? 'fill-primary text-primary' : 'fill-muted text-muted')} aria-hidden="true" />
                         ))}
                       </div>
-                    </>
-                  );
-                })()}
+
+                      <p className="text-sm text-muted-foreground leading-relaxed italic">"{outcome.text}"</p>
+
+                      <div className="flex items-center justify-between pt-3 border-t border-border">
+                        <div className="flex items-center gap-1.5 text-xs text-foreground/80">
+                          <CheckCircle className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                          <span className="font-medium">{outcome.outcome}</span>
+                        </div>
+                        <div className="text-right flex-shrink-0 ml-3">
+                          <div className="text-xs text-muted-foreground">Saved</div>
+                          <div className="text-sm font-bold text-foreground tabular-nums">{outcome.savedAmount}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </section>
             )}
 
             {/* What I handle / Outside my scope */}
-            <section>
+            <section className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h2 className="font-display text-2xl text-foreground mb-4 flex items-center gap-2">
-                    <Handshake className="w-5 h-5" />
+                  <h2 className="font-display text-xl text-foreground mb-3 flex items-center gap-2">
+                    <Handshake className="w-5 h-5 text-primary" />
                     I'll handle this for you
                   </h2>
                   <div className="space-y-2">
                     {advocate.fit?.bestFor?.map((item: string, idx: number) => (
                       <div key={idx} className="flex items-start gap-2 text-muted-foreground">
                         <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span>{item}</span>
+                        <span className="text-sm">{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <h2 className="font-display text-2xl text-foreground mb-4 flex items-center gap-2">
-                    <Shield className="w-5 h-5" />
+                  <h2 className="font-display text-xl text-foreground mb-3 flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-muted-foreground" />
                     Outside my scope
                   </h2>
                   <div className="space-y-2">
                     {advocate.fit?.boundaries?.map((boundary: string, idx: number) => (
                       <div key={idx} className="flex items-start gap-2 text-muted-foreground">
                         <XCircle className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                        <span>{boundary}</span>
+                        <span className="text-sm">{boundary}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-              <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-xl">
-                <div className="flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-amber-800 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-amber-800">Advocacy is powerful—but it's not magic. I can navigate, negotiate, and fight for you, but I can't guarantee specific medical outcomes or legal results. I'll always be upfront about what's realistic.</p>
-                </div>
+              <div className="flex items-start gap-3 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+                <AlertCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-foreground/80 text-pretty">Advocacy is powerful—but it's not magic. I can navigate, negotiate, and fight for you, but I can't guarantee specific medical outcomes or legal results. I'll always be upfront about what's realistic.</p>
               </div>
-
-              {/* Conflict of interest disclosure */}
-              <div className="mt-4 p-4 bg-muted border border-border rounded-xl">
-                <div className="flex items-start gap-3">
-                  <Scale className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm font-semibold text-foreground/80 mb-1">Conflict of interest disclosure</p>
-                    <p className="text-sm text-muted-foreground">I do not receive referral fees, commissions, or incentives from any provider, specialist, hospital, or clinical trial I recommend. Every recommendation is based solely on what I believe is best for you. <a href="#" className="underline hover:text-foreground transition-colors">Read Brivon's conflict of interest policy</a>.</p>
-                  </div>
+              <div className="flex items-start gap-3 p-4 bg-muted border border-border rounded-xl">
+                <Scale className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground/80 mb-1">Conflict of interest disclosure</p>
+                  <p className="text-sm text-muted-foreground text-pretty">I do not receive referral fees, commissions, or incentives from any provider, specialist, hospital, or clinical trial I recommend. Every recommendation is based solely on what I believe is best for you. <a href="#" className="underline hover:text-foreground transition-colors">Read Brivon's conflict of interest policy</a>.</p>
                 </div>
               </div>
             </section>
 
-            {/* Case Study — warm background */}
+            {/* Case Study */}
             {advocate.caseStudy && (
               <section>
                 <h2 className="font-display text-2xl text-foreground mb-4 flex items-center gap-2">
-                  <FileCheck className="w-5 h-5" />
+                  <FileCheck className="w-5 h-5 text-primary" />
                   Case walkthrough (anonymized)
                 </h2>
-                <div className="bg-primary/5 border border-primary/15 rounded-xl p-6">
+                <div className="bg-primary/5 border border-primary/15 rounded-2xl p-6">
                   <div className="flex items-start gap-3 mb-5">
                     <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0">
                       <span className="text-sm font-bold text-muted-foreground">{advocate.caseStudy.patient.charAt(0)}</span>
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">{advocate.caseStudy.patient} — {advocate.caseStudy.condition}</p>
-                      <p className="text-sm text-muted-foreground">{advocate.caseStudy.challenge}</p>
+                      <p className="text-sm text-muted-foreground text-pretty">{advocate.caseStudy.challenge}</p>
                     </div>
                   </div>
 
-                  <div className="space-y-0">
+                  <div>
                     {advocate.caseStudy.timeline.map((step: any, idx: number) => (
                       <div key={idx} className="flex gap-4">
                         <div className="flex flex-col items-center">
                           <div className={cn(
-                            "w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0",
+                            'w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0',
                             idx === advocate.caseStudy.timeline.length - 1
-                              ? "bg-amber-800 text-primary-foreground"
-                              : "bg-primary text-primary-foreground"
+                              ? 'bg-accent text-accent-foreground'
+                              : 'bg-primary text-primary-foreground'
                           )}>
                             {idx === advocate.caseStudy.timeline.length - 1
-                              ? <CheckCircle className="w-3.5 h-3.5 checkpoint-resolved" />
-                              : step.day.replace('Day ', '')
-                            }
+                              ? <CheckCircle className="w-3.5 h-3.5" />
+                              : step.day.replace('Day ', '')}
                           </div>
                           {idx < advocate.caseStudy.timeline.length - 1 && (
-                            <div className="w-px h-full bg-border my-1"></div>
+                            <div className="w-px flex-1 bg-border my-1" />
                           )}
                         </div>
                         <div className="pb-5">
                           <p className="text-sm font-semibold text-foreground">{step.day} — {step.title}</p>
-                          <p className="text-sm text-muted-foreground">{step.description}</p>
+                          <p className="text-sm text-muted-foreground text-pretty">{step.description}</p>
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 pt-4 border-t border-primary/15 flex items-center justify-between">
+                  <div className="mt-2 pt-4 border-t border-primary/15 flex items-center justify-between flex-wrap gap-2">
                     <p className="text-lg font-bold text-foreground">
-                      Patient saved: <span className="savings-result savings-highlight">{advocate.caseStudy.savedAmount}</span>
+                      Patient saved: <span className="text-primary tabular-nums">{advocate.caseStudy.savedAmount}</span>
                     </p>
                     <div className="text-right">
                       <p className="text-xs text-muted-foreground">Cost of advocacy</p>
@@ -759,13 +696,13 @@ export default function AdvocateDetail() {
 
             {/* FAQ */}
             <section>
-              <h2 className="font-display text-2xl text-foreground mb-4 flex items-center gap-2">
-                <HelpCircle className="w-5 h-5" />
+              <h2 className="font-display text-2xl text-foreground mb-3 flex items-center gap-2">
+                <HelpCircle className="w-5 h-5 text-primary" />
                 Frequently asked questions
               </h2>
-              <div className="space-y-0">
+              <div className="divide-y divide-border border-t border-border">
                 {advocate.faq?.map((item: any, idx: number) => (
-                  <div key={idx} className="border-b border-border">
+                  <div key={idx}>
                     <button
                       onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
                       aria-expanded={expandedFaq === idx}
@@ -773,13 +710,11 @@ export default function AdvocateDetail() {
                       className="w-full flex items-center justify-between py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
                     >
                       <h3 className="font-semibold text-foreground pr-4">{item.question}</h3>
-                      <ChevronDown className={cn("w-5 h-5 text-muted-foreground flex-shrink-0 chevron-spring", expandedFaq === idx && "rotate-180")} />
+                      <ChevronDown className={cn('w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform', expandedFaq === idx && 'rotate-180')} />
                     </button>
-                    <div id={`faq-panel-${idx}`} className="accordion-wrapper" data-open={expandedFaq === idx}>
-                      <div className="accordion-inner">
-                        <p className="text-base text-muted-foreground pb-4">{item.answer}</p>
-                      </div>
-                    </div>
+                    {expandedFaq === idx && (
+                      <p id={`faq-panel-${idx}`} className="text-base text-muted-foreground pb-4 text-pretty">{item.answer}</p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -788,17 +723,17 @@ export default function AdvocateDetail() {
             {/* Reviews */}
             <section id="reviews">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex items-center gap-1">
+                <span className="inline-flex items-center gap-1 font-display text-2xl text-foreground">
                   <Star className="w-6 h-6 fill-primary text-primary" />
-                  <span className="font-display text-2xl text-foreground">{advocate.rating}</span>
-                </div>
+                  {advocate.rating}
+                </span>
                 <span className="text-muted-foreground">·</span>
                 <span className="text-lg text-muted-foreground">{advocate.reviews} reviews</span>
               </div>
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground mb-6 pb-6 border-b border-border">
                 <span className="inline-flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-amber-800" />
+                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
                   All reviews are from verified patients who completed at least one session through Brivon.
                 </span>
                 <a href="#" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors underline">
@@ -808,20 +743,15 @@ export default function AdvocateDetail() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {advocate.reviewsList.map((review: any) => (
-                  <div key={review.id} className="space-y-3">
+                  <div key={review.id} className="space-y-2.5">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
                         {review.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5">
                           <span className="font-semibold text-foreground">{review.name}</span>
-                          {review.verified && (
-                            <span className="inline-flex items-center gap-1 text-xs text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded-full">
-                              <CheckCircle className="w-3 h-3" />
-                              Verified
-                            </span>
-                          )}
+                          {review.verified && <Pill icon={CheckCircle}>Verified</Pill>}
                         </div>
                         <div className="text-sm text-muted-foreground">{review.condition} · {review.date}</div>
                       </div>
@@ -829,17 +759,17 @@ export default function AdvocateDetail() {
 
                     <div className="flex items-center gap-0.5" role="img" aria-label={`${review.rating} out of 5 stars`}>
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={cn("w-3 h-3", i < review.rating ? "fill-primary text-primary" : "fill-muted text-muted")} aria-hidden="true" />
+                        <Star key={i} className={cn('w-3 h-3', i < review.rating ? 'fill-primary text-primary' : 'fill-muted text-muted')} aria-hidden="true" />
                       ))}
                     </div>
 
-                    <p className="text-base text-muted-foreground leading-relaxed">{review.text}</p>
+                    <p className="text-base text-muted-foreground leading-relaxed text-pretty">{review.text}</p>
                   </div>
                 ))}
               </div>
 
               <button
-                className="mt-8 px-6 py-3 border border-border rounded-lg font-semibold text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="mt-8 px-6 py-3 border border-border rounded-xl font-semibold text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 data-testid="button-show-all-reviews"
               >
                 Show all {advocate.reviews} reviews
@@ -850,98 +780,74 @@ export default function AdvocateDetail() {
 
           {/* Booking Sidebar — desktop only */}
           <div className="hidden lg:block lg:col-span-1">
-            <div className="sticky top-24 bg-background border border-border rounded-2xl p-6 shadow-lg">
-              {/* Booking Options */}
-              <div className="space-y-3 mb-6">
-                <button
-                  onClick={() => setSelectedOption('intro')}
-                  data-selected={selectedOption === 'intro'}
-                  className={cn(
-                    "booking-option w-full p-4 rounded-xl border-2 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    selectedOption === 'intro'
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-border"
-                  )}
-                  data-testid="option-intro-call"
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-semibold text-foreground">Intro call</span>
-                    <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1">Free</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">30 min to tell me what's going on</p>
-                </button>
+            <div className="sticky top-24 bg-card border border-border rounded-2xl p-5 shadow-lg space-y-3">
+              <button
+                onClick={() => setSelectedOption('intro')}
+                data-selected={selectedOption === 'intro'}
+                className={cn(
+                  'w-full p-4 rounded-xl border-2 text-left cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                  selectedOption === 'intro' ? 'border-primary bg-primary/5' : 'border-border hover:bg-muted/50'
+                )}
+                data-testid="option-intro-call"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-foreground">Intro call</span>
+                  <span className="bg-primary/10 text-primary text-xs font-semibold px-2 py-0.5 rounded-full">Free</span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-0.5">30 min to tell me what's going on</p>
+              </button>
 
-                <button
-                  onClick={() => setSelectedOption('consultation')}
-                  data-selected={selectedOption === 'consultation'}
-                  className={cn(
-                    "booking-option w-full p-4 rounded-xl border-2 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    selectedOption === 'consultation'
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-border"
-                  )}
-                  data-testid="option-consultation"
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-semibold text-foreground">Full consultation</span>
-                    <span className="font-semibold text-foreground">${advocate.price}</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">60 min + written plan + 7 days follow-up</p>
-                </button>
+              <button
+                onClick={() => setSelectedOption('consultation')}
+                data-selected={selectedOption === 'consultation'}
+                className={cn(
+                  'w-full p-4 rounded-xl border-2 text-left cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                  selectedOption === 'consultation' ? 'border-primary bg-primary/5' : 'border-border hover:bg-muted/50'
+                )}
+                data-testid="option-consultation"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-foreground">Full consultation</span>
+                  <span className="font-semibold text-foreground tabular-nums">${advocate.price}</span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-0.5">60 min + written plan + 7 days follow-up</p>
+              </button>
+
+              <div className="rounded-xl bg-muted/50 px-3 py-2.5">
+                <div className="text-xs text-muted-foreground">Next available</div>
+                <div className="text-sm font-semibold text-foreground">{advocate.availability.nextAvailable}</div>
               </div>
 
-              {/* Next Available */}
-              <div className="mb-6">
-                <div className="text-sm text-muted-foreground mb-1">Next available</div>
-                <div className="font-semibold text-foreground">{advocate.availability.nextAvailable}</div>
-              </div>
-
-              {/* Book Button */}
-              <Button
-                className="btn-book w-full bg-primary text-primary-foreground py-3 rounded-full text-lg font-semibold hover:bg-primary/90 mb-4"
+              <button
+                className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold inline-flex items-center justify-center gap-2 transition-transform active:scale-[0.98] hover:bg-primary/90"
                 data-testid="button-book-now"
               >
                 {selectedOption === 'intro' ? 'Schedule free intro call' : `Book for $${advocate.price}`}
-              </Button>
+                <ArrowRight className="w-4 h-4" />
+              </button>
 
-              <p className="text-center text-sm text-muted-foreground mb-2">
-                {selectedOption === 'intro'
-                  ? 'No payment required'
-                  : 'Not charged until after your session'
-                }
+              <p className="text-center text-xs text-muted-foreground">
+                {selectedOption === 'intro' ? 'No payment required' : "You won't be charged until after your session"} · HSA / FSA eligible
               </p>
-              <p className="text-center text-xs text-muted-foreground mb-6">HSA / FSA eligible</p>
 
-              {/* Trust Signals */}
-              <div className="space-y-2.5 pt-5 border-t border-border">
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <RefreshCw className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>100% money-back guarantee (7 days)</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <FileText className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>Written engagement agreement upfront</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <Lock className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>HIPAA compliant & end-to-end encrypted</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <Shield className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>E&O (malpractice) insured</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <Video className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>Private, secure video calls</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <MessageCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span>7 days of follow-up included</span>
-                </div>
+              <div className="pt-4 border-t border-border space-y-2.5">
+                {[
+                  { icon: RefreshCw, t: '100% money-back guarantee (7 days)' },
+                  { icon: FileText, t: 'Written engagement agreement upfront' },
+                  { icon: Lock, t: 'HIPAA compliant & end-to-end encrypted' },
+                  { icon: Shield, t: 'E&O (malpractice) insured' },
+                  { icon: Video, t: 'Private, secure video calls' },
+                  { icon: MessageCircle, t: '7 days of follow-up included' },
+                ].map(({ icon: Icon, t }) => (
+                  <div key={t} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                    <Icon className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span>{t}</span>
+                  </div>
+                ))}
               </div>
 
-              <div className="mt-4 pt-4 border-t border-border">
-                <p className="text-xs text-muted-foreground text-center">Financial hardship? Ask about sliding scale pricing during your free intro call.</p>
+              <div className="pt-3 border-t border-border">
+                <p className="text-xs text-muted-foreground text-center text-pretty">Financial hardship? Ask about sliding scale pricing during your free intro call.</p>
               </div>
             </div>
           </div>
@@ -957,24 +863,23 @@ export default function AdvocateDetail() {
             <p className="text-lg font-bold text-foreground">${advocate.price}<span className="text-sm font-normal text-muted-foreground"> / session</span></p>
           </div>
           <div className="flex gap-2">
-            <Button
-              variant="outline"
+            <button
               aria-label="Schedule free intro call"
-              className="border-border text-foreground/80 px-4 py-2.5 text-sm font-semibold rounded-lg hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="border border-border text-foreground/80 px-4 py-2.5 text-sm font-semibold rounded-lg hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               Free intro
-            </Button>
-            <Button
+            </button>
+            <button
               aria-label={`Book full consultation for $${advocate.price}`}
               className="bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               Book now
-            </Button>
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Footer — simplified inline links */}
+      {/* Footer */}
       <footer className="border-t border-border py-8 mt-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground mb-3">

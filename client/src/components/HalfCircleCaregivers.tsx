@@ -46,6 +46,14 @@ const QUOTES = [
 // Per-face avatar scale factors — aesthetic, not geometric.
 const FACE_SCALES = [0.8, 0.8, 0.85, 0.9, 0.85, 0.85];
 
+// Avatar diameter as a fraction of the cover-rendered hero image width.
+// Calibrated so a face renders at 116px on a ~1280px-wide desktop (the
+// previous capped size), then scales up/down with the image on every other
+// viewport so each avatar stays the same size relative to the photo head it
+// sits on.
+const HEAD_DIAMETER_FRACTION = 116 / 1280; // ≈ 0.0906
+const FACE_DIAMETER_FALLBACK = 116; // used before the hero image reports its size
+
 // Fallback start positions used when headPositions prop is absent.
 const FALLBACK_START: Array<{ x: number; y: number; s: number }> = [
   { x: 0.16,  y: 0.12,  s: 0.8  },
@@ -94,6 +102,19 @@ export function HalfCircleCaregivers({
     return headshotSrcs.filter(Boolean).slice(0, 6);
   }, [headshotSrcs]);
 
+  // Diameter the avatar circles render at, in px. Tracks the hero image's
+  // cover-render scale (max of the width/height ratios) so the avatars stay
+  // locked to the photo heads at any viewport size.
+  const faceDiameterPx = useMemo(() => {
+    if (!imageNatSize) return FACE_DIAMETER_FALLBACK;
+    const coverScale = Math.max(
+      containerSize.w / imageNatSize.w,
+      containerSize.h / imageNatSize.h,
+    );
+    const renderW = imageNatSize.w * coverScale;
+    return Math.max(64, HEAD_DIAMETER_FRACTION * renderW);
+  }, [imageNatSize, containerSize]);
+
   const startPositions = useMemo(() => {
     if (!headPositions || !imageNatSize) return FALLBACK_START;
 
@@ -101,8 +122,7 @@ export function HalfCircleCaregivers({
     // element height) appears 30% of face-diameter above the positioning point.
     // Shift the positioning point down by that amount so the face center lands
     // exactly on the image face center.
-    const facePx = Math.min(116, Math.max(72, containerSize.w * 0.11));
-    const yShift = (0.3 * facePx) / containerSize.h;
+    const yShift = (0.3 * faceDiameterPx) / containerSize.h;
 
     return headPositions.map(([fx, fy], i) => {
       const { x, y } = imageToViewport(
@@ -112,7 +132,7 @@ export function HalfCircleCaregivers({
       );
       return { x, y: y + yShift, s: FACE_SCALES[i] ?? 0.85 };
     });
-  }, [headPositions, imageNatSize, containerSize]);
+  }, [headPositions, imageNatSize, containerSize, faceDiameterPx]);
 
   const arcPositions = useMemo(() => {
     const n = 6;
@@ -242,6 +262,8 @@ export function HalfCircleCaregivers({
                 style={{
                   left: `${x * 100}%`,
                   top: `${y * 100}%`,
+                  width: `${faceDiameterPx}px`,
+                  height: `${faceDiameterPx}px`,
                   transform: `translate(-50%, -80%) scale(${scale})`,
                   opacity: faceOpacity,
                 }}

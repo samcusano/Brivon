@@ -222,8 +222,8 @@ const trustCards = [
 // Face crop coordinates: [cx, cy] as fractions of image width/height.
 // 5 people in the park scene (left to right). cx/cy = face center.
 const PARK_CROPS: Array<[number, number]> = [
-  [0.14, 0.13], // man standing far left (near pole)
-  [0.20, 0.22], // girl kicking ball
+  [0.15, 0.13], // man standing far left (near pole)
+  [0.23, 0.25], // girl kicking ball
   [0.405, 0.38], // boy running center
   [0.76, 0.20], // woman right
   [0.83, 0.18], // man teal polo far right

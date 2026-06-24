@@ -297,8 +297,10 @@
 
 .halfCircle-caregivers__faceWrap {
   position: absolute;
-  width: clamp(72px, 11vw, 116px);
-  height: clamp(72px, 11vw, 116px);
+  /* Fallback only — JS sets width/height inline so the avatars scale with the
+     cover-rendered hero image. */
+  width: 116px;
+  height: 116px;
   will-change: transform;
 }
 
@@ -307,8 +309,6 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1),
-              inset 0 0 22px hsl(42 30% 97% / 0.5);
 }
 
 .halfCircle-caregivers__face img {
